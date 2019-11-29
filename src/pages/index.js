@@ -1,26 +1,16 @@
-import React from 'react';
-import firebase from '../services/firebase';
-import SEO from '../components/seo';
+import React from "react"
+import SEO from "../components/Seo"
+import FactoryList from "../components/FactoryList"
 
 const IndexPage = () => {
-  let db = firebase.firestore();
-
-  console.log(db);
-  console.log(db.collection('factories'));
-  db.collection('factories')
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data().name}`);
-      });
-    });
   return (
     <div>
       <SEO title="Home" />
 
       <h1>This is sourceful</h1>
+      <FactoryList />
     </div>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
