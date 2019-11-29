@@ -3,7 +3,7 @@ import useFactories from "../utils/useFactories"
 import FactorySummary from "../components/FactorySummary"
 
 const FactoryList = () => {
-  const factories = useFactories()
+  const { factories } = useFactories()
   console.log(factories)
   return (
     <div>

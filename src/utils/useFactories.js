@@ -2,20 +2,31 @@ import { useState, useEffect } from "react"
 import firebase from "../services/firebase"
 
 export default function useFactories() {
-  const [factory, setFactory] = useState([])
+  const [factories, setFactories] = useState([])
+  const [error, setError] = useState(false)
 
   useEffect(() => {
-    //we need an unsuscribe callback to unmount collection
     const db = firebase.firestore()
-    const unsubscripe = db.collection("factories").onSnapshot(snapshot => {
-      const newFactories = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      }))
-      setFactory(newFactories)
-    })
-    return () => unsubscripe()
+    const unsubscribe = db
+      .collection("factories")
+      //add some sorting logic
+      // .where("continent", "==", "asia")
+      .get()
+      .then(function(querySnapshot) {
+        const newFactories = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        err => {
+          setError(err)
+        }
+        setFactories(newFactories)
+      })
+
+    // returning the unsubscribe function will ensure that
+    // we unsubscribe from document changes when we leave component
+    return () => nsubscribe()
   }, [])
 
-  return factory
+  return { factories, error }
 }
