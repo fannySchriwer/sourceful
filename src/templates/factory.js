@@ -18,7 +18,7 @@ const Factory = ({ data: { factory } }) => {
   const {
  city, country, street, postalcode_ 
 } = address;
-  const { image, title } = certification.bsig;
+  const { image, title } = certification.bsci;
   return (
     <div>
       <h1>{name}</h1>
@@ -57,7 +57,7 @@ Factory.propTypes = {
       description: PropTypes.string.isRequired,
       employee: PropTypes.number.isRequired,
       certification: PropTypes.shape({
-        bsig: PropTypes.shape({
+        bsci: PropTypes.shape({
           image: PropTypes.string.isRequired,
           title: PropTypes.string.isRequired,
         }),
@@ -82,15 +82,22 @@ export const pageQuery = graphql`
   query($id: String!) {
     factory(id: { eq: $id }) {
       category
-      contact {
-        email
-        website
-      }
       address {
         city
         country
-        street
         postalcode_
+        street
+      }
+      certification {
+        bsci {
+          image
+          title
+        }
+      }
+      contact {
+        email
+        phone
+        website
       }
       continent
       description
@@ -98,12 +105,6 @@ export const pageQuery = graphql`
       id
       name
       summary
-      certification {
-        bsig {
-          image
-          title
-        }
-      }
     }
   }
 `;
