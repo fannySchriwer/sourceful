@@ -4,4 +4,46 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    query {
+      allFactory {
+        edges {
+          node {
+            name
+            id
+          }
+        }
+      }
+    }
+  `);
+
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild('Error while running GraphQL query');
+    return;
+  }
+
+  result.data.allFactory.edges.forEach(({ node }) => {
+    const { id, name } = node;
+    if (id) {
+      createPage({
+        path: `factories/${id}`,
+        component: require.resolve('./src/templates/factory.js'),
+        context: {
+          id,
+        },
+      });
+    } else {
+      reporter.warn('###');
+      if (name) {
+        reporter.warn(`Node with title "${name}" is missing id.`);
+      } else {
+        reporter.warn(`Node with ID "${id}" is missing name and id`);
+      }
+      reporter.warn('###');
+    }
+  });
+};
