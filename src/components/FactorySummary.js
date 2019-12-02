@@ -1,7 +1,6 @@
 import React from 'react';
 
 const FactorySummary = ({ factory }) => {
-  console.log(factory);
   return (
     <div key={factory.id}>
       <div>
