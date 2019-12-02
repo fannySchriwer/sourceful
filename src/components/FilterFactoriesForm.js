@@ -1,7 +1,7 @@
 import React from 'react';
 import InputField from '../components/InputField';
-import RadioButtonsGroup from '../components/RadioButtonsGroup';
-import CheckboxesGroup from '../components/Checkboxes';
+import RadioButtonsGroup from '../components/RadioButtonGroup';
+import CheckboxesGroup from '../components/CheckboxGroup';
 import PrimaryButton from '../components/PrimaryButton';
 
 const categories = [
