@@ -21,7 +21,7 @@ export default function useFactories() {
 
     // returning the unsubscribe function will ensure that
     // we unsubscribe from document changes when we leave component
-    return () => unsubscribe();
+    return () => unsubscribe;
   }, []);
 
   return { factories };
