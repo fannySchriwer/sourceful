@@ -1,5 +1,5 @@
 import React from 'react';
-import useFactories from '../utils/useFactories';
+import useFactories from '../hooks/useFactories';
 import FactorySummary from './FactorySummary';
 
 const FactoryList = () => {
