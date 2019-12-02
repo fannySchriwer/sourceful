@@ -70,11 +70,6 @@ yarn-error.log
 
 # Firebase 
 .firebaserc
-<<<<<<< HEAD
 
 .cred.json
 src/services/cred.json
-=======
-.credential.json
-src/services/credential.json
->>>>>>> f60cfdd...  added credentials to .gitignore
