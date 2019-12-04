@@ -30,10 +30,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const { id, name } = node;
     if (id) {
       createPage({
-        path: `factories/${id}`,
+        path: `factories/${name}`,
         component: require.resolve('./src/templates/factory.js'),
         context: {
           id,
+          name,
         },
       });
     } else {

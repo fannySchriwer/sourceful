@@ -17,7 +17,7 @@ module.exports = {
       // eslint-disable-next-line no-dupe-keys
       options: {
         // eslint-disable-next-line global-require
-        credential: require('./src/services/credentials.json'),
+        credential: require('./src/services/cred.json'),
         types: [
           {
             type: 'Factory',
