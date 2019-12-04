@@ -70,3 +70,6 @@ yarn-error.log
 
 # Firebase 
 .firebaserc
+
+.credentials.json
+src/services/credentials.json

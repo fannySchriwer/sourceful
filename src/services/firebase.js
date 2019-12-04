@@ -1,5 +1,5 @@
-import firebase from "firebase/app"
-import "firebase/firestore"
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 const config = {
   apiKey: process.env.GATSBY_FIRESTORE_APIKEY,
@@ -10,8 +10,8 @@ const config = {
   appId: process.env.GATSBY_FIRESTORE_APPID,
   messagingSenderId: process.env.GATSBY_FIRESTORE_MESSAGINGSENDERID,
   measurementId: process.env.GATSBY_FIRESTORE_MEASUREMENTID,
-}
+};
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
-export default firebase
+export default firebase;
