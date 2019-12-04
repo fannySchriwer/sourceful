@@ -5,7 +5,7 @@ const FactorySummary = ({ factory }) => (
   <div key={factory.id}>
     <div>
       <h1>{factory.name}</h1>
-      <p>{factory.country}</p>
+      <p>{factory.address.country}</p>
     </div>
     <div>
       <p>Number of employees</p>
@@ -23,8 +23,10 @@ FactorySummary.propTypes = {
   factory: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
+    address: PropTypes.shape({
+      country: PropTypes.string.isRequired,
+    }),
     employee: PropTypes.number.isRequired,
-    summary: PropTypes.number.isRequired,
+    summary: PropTypes.string.isRequired,
   }).isRequired,
 };

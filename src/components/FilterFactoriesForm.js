@@ -89,6 +89,10 @@ const FilterFactoriesForm = () => {
     });
   }
 
+  // useEffect(() => {
+  //   console.log(filters);
+  // }, [filters, setFilters]);
+
   const { factories } = useGetAllFactories(filters);
 
   return (
