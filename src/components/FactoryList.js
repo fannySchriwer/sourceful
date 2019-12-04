@@ -1,18 +1,17 @@
 import React from 'react';
-import useFactories from '../utils/useFactories';
+import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 
-const FactoryList = () => {
-  const { factories } = useFactories();
-  return (
-    <div>
-      <h1>Factories</h1>
+const FactoryList = ({ factories }) => (
+  <div>
+    <h1>Factories</h1>
 
-      {factories.map((factory) => (
-        <FactorySummary key={factory.id} factory={factory} />
-      ))}
-    </div>
-  );
-};
-
+    {factories.map((factory) => (
+      <FactorySummary key={factory.id} factory={factory} />
+    ))}
+  </div>
+);
 export default FactoryList;
+FactoryList.propTypes = {
+  factories: PropTypes.node.isRequired,
+};

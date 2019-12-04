@@ -1,6 +1,5 @@
 import React from 'react';
-import SEO from '../components/Seo';
-import FactoryList from '../components/FactoryList';
+import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 
 const IndexPage = () => (
@@ -9,7 +8,6 @@ const IndexPage = () => (
 
     <h1>This is sourceful</h1>
     <FilterFactoriesForm />
-    <FactoryList />
   </div>
 );
 
