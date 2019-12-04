@@ -13,5 +13,5 @@ const FactoryList = ({ factories }) => (
 );
 export default FactoryList;
 FactoryList.propTypes = {
-  factories: PropTypes.node.isRequired,
+  factories: PropTypes.instanceOf(Array).isRequired,
 };
