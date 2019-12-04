@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FactorySummary = ({ factory }) => (
   <div key={factory.id}>
@@ -17,3 +18,13 @@ const FactorySummary = ({ factory }) => (
 );
 
 export default FactorySummary;
+
+FactorySummary.propTypes = {
+  factory: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    employee: PropTypes.number.isRequired,
+    summary: PropTypes.number.isRequired,
+  }).isRequired,
+};
