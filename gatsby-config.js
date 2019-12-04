@@ -12,6 +12,31 @@ module.exports = {
         name: 'pages',
         path: `${__dirname}/src/pages/`,
       },
+      // eslint-disable-next-line no-dupe-keys
+      resolve: 'gatsby-source-firestore',
+      // eslint-disable-next-line no-dupe-keys
+      options: {
+        // eslint-disable-next-line global-require
+        credential: require('./src/services/cred.json'),
+        types: [
+          {
+            type: 'Factory',
+            collection: 'factories',
+            map: (doc) => ({
+              name: doc.name,
+              id: doc.id,
+              continent: doc.continent,
+              contact: doc.contact,
+              address: doc.address,
+              category: doc.category,
+              description: doc.description,
+              employee: doc.employee,
+              summary: doc.summary,
+              certification: doc.certification,
+            }),
+          },
+        ],
+      },
     },
     'gatsby-plugin-material-ui',
     'gatsby-transformer-sharp',
