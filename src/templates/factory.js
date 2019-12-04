@@ -10,7 +10,7 @@ const Factory = ({ data: { factory } }) => {
 
   const { email, website } = contact;
   const {
- city, country, street, postalcode_ 
+ city, country, street 
 } = address;
 
   return (
@@ -29,13 +29,13 @@ const Factory = ({ data: { factory } }) => {
       <p>
         <span>address</span>
         {street}
-        {postalcode_}
+       
         {city}
         {country}
       </p>
       <p>
 Number of employees
-{' '}
+
 {employee}
 </p>
       <p>{description}</p>
@@ -78,7 +78,6 @@ export const pageQuery = graphql`
       address {
         city
         country
-        postalcode_
         street
       }
       category {
