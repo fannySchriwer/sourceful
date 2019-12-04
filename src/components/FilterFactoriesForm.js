@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from './SelectField';
 import RadioButtonsGroup from './RadioButtonGroup';
 import CheckboxesGroup from './CheckboxGroup';
@@ -84,6 +84,10 @@ const FilterFactoriesForm = () => {
       ],
     });
   }
+
+  // useEffect(() => {
+  //   console.log(filters);
+  // }, [filters, setFilters]);
 
   const { factories } = useGetAllFactories(filters);
 
