@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Select from './SelectField';
 import RadioButtonsGroup from './RadioButtonGroup';
 import CheckboxesGroup from './CheckboxGroup';
@@ -69,10 +69,6 @@ const FilterFactoriesForm = () => {
       [event.target.name]: value,
     });
   }
-
-  useEffect(() => {
-    console.log('filters', filters);
-  }, [filters]);
 
   function clearFilter() {
     setFilters({
