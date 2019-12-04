@@ -5,20 +5,14 @@ import PropTypes from 'prop-types';
 
 const Factory = ({ data: { factory } }) => {
   const {
-    name,
-    category,
-    contact,
-    address,
-    description,
-    employee,
-    certification,
-  } = factory;
+ name, contact, address, description, employee 
+} = factory;
 
   const { email, website } = contact;
   const {
  city, country, street, postalcode_ 
 } = address;
-  const { image, title } = certification.bsci;
+
   return (
     <div>
       <h1>{name}</h1>
@@ -39,11 +33,12 @@ const Factory = ({ data: { factory } }) => {
         {city}
         {country}
       </p>
+      <p>
+Number of employees
+{' '}
+{employee}
+</p>
       <p>{description}</p>
-      {category.map((c) => (
-        <p>{c}</p>
-      ))}
-      <p>{title}</p>
     </div>
   );
 };
@@ -62,8 +57,6 @@ Factory.propTypes = {
           title: PropTypes.string.isRequired,
         }),
       }),
-
-      category: PropTypes.arrayOf(PropTypes.string).isRequired,
       contact: PropTypes.shape({
         email: PropTypes.string.isRequired,
         website: PropTypes.string.isRequired,
@@ -81,30 +74,26 @@ Factory.propTypes = {
 export const pageQuery = graphql`
   query($id: String!) {
     factory(id: { eq: $id }) {
-      category
+      name
       address {
         city
         country
         postalcode_
         street
       }
-      certification {
-        bsci {
-          image
-          title
-        }
+      category {
+        jersey
+        knit
+        woven
       }
       contact {
         email
-        phone
         website
       }
       continent
       description
-      employee
       id
-      name
-      summary
+      employee
     }
   }
 `;
