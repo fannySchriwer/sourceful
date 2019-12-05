@@ -92,7 +92,7 @@ const FilterFactoriesForm = () => {
 
   const { factories } = useGetAllFactories(filters);
   const { loggedInUser } = useIsLoggedIn();
-  console.log(loggedInUser.loggedIn);
+  console.log(loggedInUser);
 
   return (
     <div>
