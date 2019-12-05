@@ -4,8 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import PrimaryButton from '../components/PrimaryButton';
-import firebase from '../services/firebase';
+import PrimaryButton from "./PrimaryButton";
+import firebase from '../services/firebase'
+;
 require('firebase/auth');
 
 function SignUp() {
@@ -13,7 +14,7 @@ function SignUp() {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
   });
 
   const auth = firebase.auth();
@@ -27,18 +28,17 @@ function SignUp() {
     });
   }
 
-    function handleSubmit(event) {
-      event.preventDefault();
-      auth.createUserWithEmailAndPassword(
-        signupUser.email,
-        signupUser.password)
-        .then(function(userRecord) {
-        console.log('Successfully created new user:', userRecord.user.email);
-        })
-        .catch(function(error) {
-        console.log('Error creating new user:', error);
-        });
-    }
+  function handleSubmit(event) {
+    event.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(signupUser.email, signupUser.password)
+      .then((userRecord) => {
+        console.log("Successfully created new user:", userRecord.user.email)
+      })
+      .catch((error) => {
+        console.log("Error creating new user:", error)
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -100,7 +100,7 @@ function SignUp() {
               />
             </Grid>
           </Grid>
-          <PrimaryButton propFunction={handleSubmit} label="Sign up"/>
+          <PrimaryButton propFunction={handleSubmit} label="Sign up" />
         </form>
       </div>
     </Container>
