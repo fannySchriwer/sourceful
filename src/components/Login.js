@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import firebase from '../services/firebase';
-import PrimaryButton from './PrimaryButton'
+import PrimaryButton from "./PrimaryButton"
 ;
 require('firebase/auth');
 
