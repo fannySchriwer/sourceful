@@ -5,13 +5,28 @@ import PropTypes from 'prop-types';
 
 const Factory = ({ data: { factory } }) => {
   const {
- name, contact, address, description, employee 
-} = factory;
-
+    name,
+    contact,
+    address,
+    description,
+    employee,
+    producttype,
+    certificates,
+  } = factory;
   const { email, website } = contact;
-  const {
- city, country, street 
-} = address;
+  const { city, country, street } = address;
+
+  let bsci;
+  certificates.bsci
+    ? (bsci = (
+      <div>
+          <span>{certificates.bsci.name}</span>
+          <img src={certificates.bsci.logo} alt="BSCI logo" />
+        </div>
+    ))
+    : bsci;
+
+  console.log(bsci);
 
   return (
     <div>
@@ -29,16 +44,19 @@ const Factory = ({ data: { factory } }) => {
       <p>
         <span>address</span>
         {street}
-       
         {city}
         {country}
       </p>
       <p>
-Number of employees
-
-{employee}
-</p>
+        Number of employees
+        {employee}
+      </p>
+      <p>Product types:</p>
+      {producttype.map((prod, i) => (
+        <p key={i}>{prod}</p>
+      ))}
       <p>{description}</p>
+      {bsci}
     </div>
   );
 };
@@ -51,9 +69,10 @@ Factory.propTypes = {
       name: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       employee: PropTypes.number.isRequired,
-      certification: PropTypes.shape({
+      producttype: PropTypes.array.isRequired,
+      certifications: PropTypes.shape({
         bsci: PropTypes.shape({
-          image: PropTypes.string.isRequired,
+          logo: PropTypes.string.isRequired,
           title: PropTypes.string.isRequired,
         }),
       }),
@@ -61,11 +80,16 @@ Factory.propTypes = {
         email: PropTypes.string.isRequired,
         website: PropTypes.string.isRequired,
       }),
+      certificates: PropTypes.shape({
+        bsci: PropTypes.shape({
+          logo: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+        }),
+      }),
       address: PropTypes.shape({
         city: PropTypes.string.isRequired,
         country: PropTypes.string.isRequired,
         street: PropTypes.string.isRequired,
-        postalcode_: PropTypes.string.isRequired,
       }),
     }),
   }).isRequired,
@@ -93,6 +117,13 @@ export const pageQuery = graphql`
       description
       id
       employee
+      producttype
+      certificates {
+        bsci {
+          logo
+          name
+        }
+      }
     }
   }
 `;
