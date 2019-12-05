@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Select from './SelectField';
 import RadioButtonsGroup from './RadioButtonGroup';
 import CheckboxesGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
+import useIsLoggedIn from '../hooks/useIsLoggedIn';
 import FactoryList from './FactoryList';
+import firebase from '../services/firebase';
+require('firebase/auth');
 
 const categories = ['knit', 'woven', 'jersey'];
 
@@ -50,6 +53,7 @@ const FilterFactoriesForm = () => {
       { value: 'BSCI', isChecked: false },
     ],
   });
+  
 
   function handleCheckbox(event) {
     const certifications = filters.certification;
@@ -85,14 +89,20 @@ const FilterFactoriesForm = () => {
     });
   }
 
-  // useEffect(() => {
-  //   console.log(filters);
-  // }, [filters, setFilters]);
+  function logOut(e) {
+    e.preventDefault();
+    auth.signOut()
+  }
 
   const { factories } = useGetAllFactories(filters);
+  const { loggedInUser } = useIsLoggedIn();
+  const auth = firebase.auth();
 
   return (
     <div>
+      {loggedInUser && 
+        <PrimaryButton propFunction={logOut} label="Sign out" />
+      }
       <div style={{ display: 'flex' }}>
         <div>
           <Select
