@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Select from './SelectField';
 import RadioButtonsGroup from './RadioButtonGroup';
 import CheckboxesGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
+import useIsLoggedIn from '../hooks/useIsLoggedIn';
 import FactoryList from './FactoryList';
 
 const categories = ['knit', 'woven', 'jersey'];
@@ -85,11 +86,9 @@ const FilterFactoriesForm = () => {
     });
   }
 
-  // useEffect(() => {
-  //   console.log(filters);
-  // }, [filters, setFilters]);
-
   const { factories } = useGetAllFactories(filters);
+  const { loggedInUser } = useIsLoggedIn();
+  console.log(loggedInUser.loggedIn);
 
   return (
     <div>
