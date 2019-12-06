@@ -69,11 +69,12 @@ function Login() {
             <PrimaryButton propFunction={logOut} label="Sign out" />
           )}
         </form>
-        {auth.currentUser && <p>
-Hey
-{' '}
-{auth.currentUser.email}
-</p>}
+        {auth.currentUser && (
+          <p>
+            Hey
+            {auth.currentUser.email}
+          </p>
+        )}
       </div>
     </Container>
   );
