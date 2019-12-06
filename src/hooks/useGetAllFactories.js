@@ -3,7 +3,10 @@ import firebase from '../services/firebase';
 
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
-  let query = firebase.firestore().collection('factories');
+  const db = firebase.firestore();
+  const settings = { timestampsInSnapshots: true };
+  db.settings(settings);
+  let query = db.collection('factories');
   if (filters.continent) {
     query = query.where('continent', '==', `${filters.continent}`);
   }
