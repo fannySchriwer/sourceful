@@ -1,43 +1,33 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import PrimaryButton from "./PrimaryButton";
-import firebase from '../services/firebase'
-;
-require('firebase/auth');
+import React, { useState } from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import TextField from "@material-ui/core/TextField"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import PrimaryButton from "./PrimaryButton"
+import { useAuth } from "../hooks/useAuth"
 
 function SignUp() {
+  const auth = useAuth()
   const [signupUser, setSignupUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-
-  const auth = firebase.auth();
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  })
 
   function handleChange(event) {
-    event.preventDefault();
-    const { value } = event.target;
+    event.preventDefault()
+    const { value } = event.target
     setSignupUser({
       ...signupUser,
       [event.target.name]: value,
-    });
+    })
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(signupUser.email, signupUser.password)
-      .then((userRecord) => {
-        console.log("Successfully created new user:", userRecord.user.email)
-      })
-      .catch((error) => {
-        console.log("Error creating new user:", error)
-      });
+    event.preventDefault()
+    auth.signup(signupUser.email, signupUser.password)
   }
 
   return (
@@ -104,7 +94,7 @@ function SignUp() {
         </form>
       </div>
     </Container>
-  );
+  )
 }
 
-export default SignUp;
+export default SignUp

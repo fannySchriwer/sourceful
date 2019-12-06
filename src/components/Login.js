@@ -3,18 +3,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import firebase from '../services/firebase';
-import PrimaryButton from "./PrimaryButton"
-;
-require('firebase/auth');
+import PrimaryButton from './PrimaryButton';
+import { useAuth } from '../hooks/useAuth';
 
 function Login() {
+  const auth = useAuth();
   const [loginUser, setLoginInfo] = useState({
     email: '',
     password: '',
   });
-
-  const auth = firebase.auth();
 
   function handleChange(event) {
     event.preventDefault();
@@ -27,11 +24,12 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    auth
-      .signInWithEmailAndPassword(loginUser.email, loginUser.password)
-      .then((cred) => {
-        console.log(cred.user);
-      });
+    auth.signin(loginUser.email, loginUser.password);
+  }
+
+  function logOut(e) {
+    e.preventDefault();
+    auth.signout();
   }
 
   return (
@@ -67,7 +65,15 @@ function Login() {
             onChange={handleChange}
           />
           <PrimaryButton propFunction={handleSubmit} label="Sign in" />
+          {auth.user && (
+            <PrimaryButton propFunction={logOut} label="Sign out" />
+          )}
         </form>
+        {auth.currentUser && <p>
+Hey
+{' '}
+{auth.currentUser.email}
+</p>}
       </div>
     </Container>
   );
