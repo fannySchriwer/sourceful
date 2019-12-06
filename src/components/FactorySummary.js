@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 
 const FactorySummary = ({ factory }) => (
   <div key={factory.id}>
@@ -8,12 +9,11 @@ const FactorySummary = ({ factory }) => (
       <p>{factory.address.country}</p>
     </div>
     <div>
-      <p>Number of employees</p>
-      {factory.employee}
+      <p>Number of employees: {factory.employee}</p>
     </div>
 
     <p>{factory.summary}</p>
-    <div>Read more</div>
+    <Link to={factory.name}>Read more</Link>
   </div>
 );
 
