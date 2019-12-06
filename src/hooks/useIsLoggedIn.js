@@ -5,16 +5,17 @@ require('firebase/auth');
 
 export default function useIsLoggedIn() {
   const [loggedInUser, setLoggedInUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
     const auth = firebase.auth();
-
     auth.onAuthStateChanged((user) => {
       if (user) {
         setLoggedInUser(true);
+        setCurrentUser(user);
       }
     });
-  });
+  }, []);
 
-  return { loggedInUser };
+  return { loggedInUser, currentUser };
 }
