@@ -32,6 +32,8 @@ function Login() {
     auth.signout();
   }
 
+  console.log(auth.curretnUser);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,7 +67,7 @@ function Login() {
             onChange={handleChange}
           />
           <PrimaryButton propFunction={handleSubmit} label="Sign in" />
-          {auth.user && (
+          {auth.currentUser && (
             <PrimaryButton propFunction={logOut} label="Sign out" />
           )}
         </form>
