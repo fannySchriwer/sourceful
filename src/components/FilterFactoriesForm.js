@@ -45,9 +45,12 @@ const FilterFactoriesForm = () => {
     continent: '',
     quantity: '',
     certification: [
+      { value: 'Oeko-tex', isChecked: false },
+      { value: 'BCI', isChecked: false },
+      { value: 'Gortex', isChecked: false },
       { value: 'Blue-sign', isChecked: false },
       { value: 'HIGS-index', isChecked: false },
-      { value: 'BCI', isChecked: false },
+      { value: 'RDS', isChecked: false },
       { value: 'BSCI', isChecked: false },
     ],
   });
@@ -78,9 +81,12 @@ const FilterFactoriesForm = () => {
       continent: '',
       quantity: '',
       certification: [
+        { value: 'Oeko-tex', isChecked: false },
+        { value: 'BCI', isChecked: false },
+        { value: 'Gortex', isChecked: false },
         { value: 'Blue-sign', isChecked: false },
         { value: 'HIGS-index', isChecked: false },
-        { value: 'BCI', isChecked: false },
+        { value: 'RDS', isChecked: false },
         { value: 'BSCI', isChecked: false },
       ],
     });
