@@ -15,11 +15,7 @@ export default function useGetAllFactories(filters) {
   }
   if (filters.productType) {
     query = query.where(
-<<<<<<< HEAD
       'producttype',
-=======
-      'product_type',
->>>>>>> 6028dee8d239f4a13adbc2e8aeeeda60126ae6a0
       'array-contains',
       `${filters.productType}`,
     );
