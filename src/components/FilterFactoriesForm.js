@@ -71,10 +71,13 @@ const FilterFactoriesForm = () => {
     });
   }
 
+<<<<<<< HEAD
   useEffect(() => {
     console.log('filters', filters);
   }, [filters]);
 
+=======
+>>>>>>> 6028dee8d239f4a13adbc2e8aeeeda60126ae6a0
   function clearFilter() {
     setFilters({
       productType: '',
