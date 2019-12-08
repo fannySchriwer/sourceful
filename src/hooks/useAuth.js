@@ -2,22 +2,9 @@ import React, {
  useState, useEffect, useContext, createContext 
 } from 'react';
 import PropTypes from 'prop-types';
-import firebase from '../services/firebase';
-
-require('firebase/auth');
-
+import firebase from '../services/firebase'
+;
 const authContext = createContext();
-
-// Provider component that wraps your app and makes auth object ...
-// ... available to any child component that calls useAuth().
-export function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
-
-// Hook for child components to get the auth object ...
-// ... and re-render when it changes.
-export const useAuth = () => useContext(authContext);
 
 function useProvideAuth() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -78,6 +65,17 @@ function useProvideAuth() {
     signout,
   };
 }
+
+// Provider component that wraps your app and makes auth object ...
+// ... available to any child component that calls useAuth().
+export function ProvideAuth({ children }) {
+  const auth = useProvideAuth();
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+}
+
+// Hook for child components to get the auth object ...
+// ... and re-render when it changes.
+export const useAuth = () => useContext(authContext);
 
 ProvideAuth.propTypes = {
   children: PropTypes.node.isRequired,
