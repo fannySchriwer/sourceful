@@ -25,6 +25,19 @@ export default function useGetAllFactories(filters) {
     query = query.where('quantity', '>=', quantityFilter);
   }
 
+  if (filters.certification) {
+    filters.certification.forEach((certificate) => {
+      if (certificate.isChecked) {
+        const certField = certificate.value.toLowerCase();
+        query = query.where(
+          `certificates.${certField}.${certField}`,
+          '==',
+          true,
+        );
+      }
+    });
+  }
+
   useEffect(() => {
     const unsubscribe = query
       .get()
