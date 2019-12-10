@@ -32,8 +32,6 @@ function Login() {
     auth.signout();
   }
 
-  console.log(auth.curretnUser);
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

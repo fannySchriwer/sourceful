@@ -17,16 +17,15 @@ const Factory = ({ data: { factory } }) => {
   const { city, country, street } = address;
 
   let bsci;
+  // eslint-disable-next-line no-unused-expressions
   certificates.bsci
     ? (bsci = (
       <div>
-          <span>{certificates.bsci.name}</span>
-          <img src={certificates.bsci.logo} alt="BSCI logo" />
-        </div>
+        <span>{certificates.bsci.name}</span>
+        <img src={certificates.bsci.logo} alt="BSCI logo" />
+      </div>
     ))
     : bsci;
-
-  console.log(bsci);
 
   return (
     <div>
@@ -53,6 +52,7 @@ const Factory = ({ data: { factory } }) => {
       </p>
       <p>Product types:</p>
       {producttype.map((prod, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <p key={i}>{prod}</p>
       ))}
       <p>{description}</p>
