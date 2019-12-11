@@ -45,7 +45,7 @@ function Login() {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="signinemail"
             label="Email Address"
             name="email"
             autoComplete="email"
@@ -60,7 +60,7 @@ function Login() {
             name="password"
             label="Password"
             type="password"
-            id="password"
+            id="signinpassword"
             autoComplete="current-password"
             onChange={handleChange}
           />
