@@ -42,20 +42,21 @@ function useProviderAuth() {
     .signOut()
     .then(() => {
       setCurrentUser(false);
+      setUserLoaded(false);
     });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      console.log('from auth');
       if (user) {
         setCurrentUser(user);
       } else {
-        setCurrentUser(false);
+        setCurrentUser(null);
       }
     });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
+   
   }, []);
 
   // Return the user object and auth methods

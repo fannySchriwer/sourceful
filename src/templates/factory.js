@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,10 +11,16 @@ import ModalPortal from '../components/Modal/ModalPortal';
 
 
 const Factory = ({ data: { factory } }) => {
-  const [modalOpen, setModalOpen, closeModal] = useModal();
   const auth = useAuth();
-  
-  console.log('this is auth', auth);
+  const [modalOpen, setModalOpen, closeModal] = useModal();
+  const [loadedUser, setLoadedUser] = useState(false);
+
+  useEffect(() => {
+    if(auth.currentUser){
+      setLoadedUser(true)    
+    }
+  }, [auth]);
+
 
   const {
     name,
@@ -38,14 +44,15 @@ const Factory = ({ data: { factory } }) => {
     ))
     : bsci;
 
+
   return (
     <Fragment>
       <h1>{name}</h1>
-      <button onClick={setModalOpen}> 
-        <FontAwesomeIcon
-        icon={['far', 'heart']}
-        sx={{ color: 'primary', fontSize: 6 }}
-      /></button>
+     <button onClick={setModalOpen}> 
+       <FontAwesomeIcon
+       icon={['far', 'heart']}
+       sx={{ color: 'primary', fontSize: 6 }}
+     /></button>
       <p>{country}</p>
       <h2>Contact information</h2>
       <p>
@@ -78,6 +85,7 @@ const Factory = ({ data: { factory } }) => {
         <Modal
           closeModal={closeModal}
           modalOpen={modalOpen}
+          isLoaded={loadedUser}
         />
       </ModalPortal>
     </Fragment>
