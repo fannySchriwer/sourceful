@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Select = ({
- options, inputLabel, onChange, name 
+  options, inputLabel, onChange, name,
 }) => (
   <div>
     <label id={name} htmlFor={inputLabel}>

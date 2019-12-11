@@ -9,7 +9,10 @@ const FactorySummary = ({ factory }) => (
       <p>{factory.address.country}</p>
     </div>
     <div>
-      <p>Number of employees: {factory.employee}</p>
+      <p>
+        Number of employees:
+        {factory.employee}
+      </p>
     </div>
 
     <p>{factory.summary}</p>

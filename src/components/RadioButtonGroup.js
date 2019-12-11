@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const RadioButtonsGroup = ({
- options, formLabel, name, onChange 
+  options, formLabel, name, onChange,
 }) => (
   <div>
     <FormControl component="fieldset">

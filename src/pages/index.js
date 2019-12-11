@@ -1,5 +1,6 @@
-import React from 'react';
-import SEO from '../components/Seo';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 import SignUp from '../components/Signup';
 import Login from '../components/Login';
@@ -9,7 +10,13 @@ const IndexPage = () => (
   <ProvideAuth>
     <div>
       <SEO title="Home" />
-      <h1>This is sourceful</h1>
+      <h1
+        sx={{
+          color: 'primary',
+        }}
+      >
+        This is sourceful
+      </h1>
       <SignUp />
       <Login />
       <FilterFactoriesForm />
