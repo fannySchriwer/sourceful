@@ -42,7 +42,6 @@ function useProviderAuth() {
     .signOut()
     .then(() => {
       setCurrentUser(false);
-      setUserLoaded(false);
     });
 
   useEffect(() => {
