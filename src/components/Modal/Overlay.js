@@ -2,9 +2,8 @@
 import PropTypes from 'prop-types';
 import { jsx } from 'theme-ui';
 
-const Overlay = ({ children, onClick }) => (
+const Overlay = ({ children }) => (
   <div
-    onClick={onClick}
     role="presentation"
     sx={{
       position: 'fixed',
@@ -23,6 +22,5 @@ const Overlay = ({ children, onClick }) => (
 export default Overlay;
 
 Overlay.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired
 };
