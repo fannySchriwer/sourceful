@@ -1,6 +1,9 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
 import useModal from '../hooks/useModal';
@@ -10,6 +13,8 @@ import ModalPortal from '../components/Modal/ModalPortal';
 const Factory = ({ data: { factory } }) => {
   const [modalOpen, setModalOpen, closeModal] = useModal();
   const auth = useAuth();
+  
+  console.log('this is auth', auth);
 
   const {
     name,
@@ -24,7 +29,6 @@ const Factory = ({ data: { factory } }) => {
   const { city, country, street } = address;
 
   let bsci;
-  // eslint-disable-next-line no-unused-expressions
   certificates.bsci
     ? (bsci = (
       <div>
@@ -35,8 +39,13 @@ const Factory = ({ data: { factory } }) => {
     : bsci;
 
   return (
-    <div>
+    <Fragment>
       <h1>{name}</h1>
+      <button onClick={setModalOpen}> 
+        <FontAwesomeIcon
+        icon={['far', 'heart']}
+        sx={{ color: 'primary', fontSize: 6 }}
+      /></button>
       <p>{country}</p>
       <h2>Contact information</h2>
       <p>
@@ -71,8 +80,7 @@ const Factory = ({ data: { factory } }) => {
           modalOpen={modalOpen}
         />
       </ModalPortal>
-
-    </div>
+    </Fragment>
   );
 };
 

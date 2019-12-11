@@ -46,6 +46,7 @@ function useProviderAuth() {
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      console.log('from auth');
       if (user) {
         setCurrentUser(user);
       } else {
@@ -63,6 +64,7 @@ function useProviderAuth() {
     signin,
     signup,
     signout,
+
   };
 }
 
