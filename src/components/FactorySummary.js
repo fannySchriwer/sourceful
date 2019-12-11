@@ -11,7 +11,6 @@ const FactorySummary = ({ factory }) => (
     <div>
       <p>
         Number of employees:
-        {' '}
         {factory.employee}
       </p>
     </div>
