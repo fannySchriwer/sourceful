@@ -1,11 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-
 import PropTypes from 'prop-types';
-
 import { useAuth } from '../hooks/useAuth';
+import Modal from '../components/Modal';
+import useModal from '../hooks/useModal';
+import ModalPortal from '../components/Modal/ModalPortal';
+
 
 const Factory = ({ data: { factory } }) => {
+  const [modalOpen, setModalOpen, closeModal] = useModal();
   const auth = useAuth();
 
   const {
@@ -25,9 +28,9 @@ const Factory = ({ data: { factory } }) => {
   certificates.bsci
     ? (bsci = (
       <div>
-          <span>{certificates.bsci.name}</span>
-          <img src={certificates.bsci.logo} alt="BSCI logo" />
-        </div>
+        <span>{certificates.bsci.name}</span>
+        <img src={certificates.bsci.logo} alt="BSCI logo" />
+      </div>
     ))
     : bsci;
 
@@ -61,6 +64,14 @@ const Factory = ({ data: { factory } }) => {
       ))}
       <p>{description}</p>
       {bsci}
+
+      <ModalPortal>
+        <Modal
+          closeModal={closeModal}
+          modalOpen={modalOpen}
+        />
+      </ModalPortal>
+
     </div>
   );
 };
