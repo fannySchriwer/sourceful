@@ -1,12 +1,26 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { Fragment, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
-
 import PropTypes from 'prop-types';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../hooks/useAuth';
+import Modal from '../components/Modal';
+import useModal from '../hooks/useModal';
+import ModalPortal from '../components/Modal/ModalPortal';
+
 
 const Factory = ({ data: { factory } }) => {
   const auth = useAuth();
+  const [modalOpen, setModalOpen, closeModal] = useModal();
+  const [loadedUser, setLoadedUser] = useState(false);
+
+  useEffect(() => {
+    if(auth.currentUser){
+      setLoadedUser(true)    
+    }
+  }, [auth]);
+
 
   const {
     name,
@@ -21,19 +35,24 @@ const Factory = ({ data: { factory } }) => {
   const { city, country, street } = address;
 
   let bsci;
-  // eslint-disable-next-line no-unused-expressions
   certificates.bsci
     ? (bsci = (
       <div>
-          <span>{certificates.bsci.name}</span>
-          <img src={certificates.bsci.logo} alt="BSCI logo" />
-        </div>
+        <span>{certificates.bsci.name}</span>
+        <img src={certificates.bsci.logo} alt="BSCI logo" />
+      </div>
     ))
     : bsci;
 
+
   return (
-    <div>
+    <Fragment>
       <h1>{name}</h1>
+     <button onClick={setModalOpen}> 
+       <FontAwesomeIcon
+       icon={['far', 'heart']}
+       sx={{ color: 'primary', fontSize: 6 }}
+     /></button>
       <p>{country}</p>
       <h2>Contact information</h2>
       <p>
@@ -61,7 +80,15 @@ const Factory = ({ data: { factory } }) => {
       ))}
       <p>{description}</p>
       {bsci}
-    </div>
+
+      <ModalPortal>
+        <Modal
+          closeModal={closeModal}
+          modalOpen={modalOpen}
+          isLoaded={loadedUser}
+        />
+      </ModalPortal>
+    </Fragment>
   );
 };
 

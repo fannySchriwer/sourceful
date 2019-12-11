@@ -42,6 +42,7 @@ function useProviderAuth() {
     .signOut()
     .then(() => {
       setCurrentUser(false);
+      setUserLoaded(false);
     });
 
   useEffect(() => {
@@ -49,12 +50,13 @@ function useProviderAuth() {
       if (user) {
         setCurrentUser(user);
       } else {
-        setCurrentUser(false);
+        setCurrentUser(null);
       }
     });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
+   
   }, []);
 
   // Return the user object and auth methods
@@ -63,6 +65,7 @@ function useProviderAuth() {
     signin,
     signup,
     signout,
+
   };
 }
 
