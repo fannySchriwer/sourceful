@@ -3,7 +3,11 @@ import { graphql } from 'gatsby';
 
 import PropTypes from 'prop-types';
 
+import { useAuth } from '../hooks/useAuth';
+
 const Factory = ({ data: { factory } }) => {
+  const auth = useAuth();
+
   const {
     name,
     contact,
@@ -21,9 +25,9 @@ const Factory = ({ data: { factory } }) => {
   certificates.bsci
     ? (bsci = (
       <div>
-        <span>{certificates.bsci.name}</span>
-        <img src={certificates.bsci.logo} alt="BSCI logo" />
-      </div>
+          <span>{certificates.bsci.name}</span>
+          <img src={certificates.bsci.logo} alt="BSCI logo" />
+        </div>
     ))
     : bsci;
 
