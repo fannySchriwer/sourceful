@@ -26,4 +26,5 @@ Select.propTypes = {
   inputLabel: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
 };

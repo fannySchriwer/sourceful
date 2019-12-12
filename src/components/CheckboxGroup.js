@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 
-const CheckboxesGroup = ({ checkBoxStateValues, name, onChange }) => (
+const CheckboxGroup = ({ checkBoxStateValues, name, onChange }) => (
   <div>
     <FormControl component="fieldset">
       <FormLabel component="legend">Certificates</FormLabel>
@@ -24,11 +24,10 @@ const CheckboxesGroup = ({ checkBoxStateValues, name, onChange }) => (
   </div>
 );
 
-export default CheckboxesGroup;
+export default CheckboxGroup;
 
-CheckboxesGroup.propTypes = {
-  checkboxOptions: PropTypes.instanceOf(Array).isRequired,
+CheckboxGroup.propTypes = {
+  checkBoxStateValues: PropTypes.instanceOf(Array).isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  defaultValue: PropTypes.object.isRequired,
 };

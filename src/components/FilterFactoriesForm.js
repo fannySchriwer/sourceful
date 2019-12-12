@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Select from './SelectField';
 import RadioButtonsGroup from './RadioButtonGroup';
-import CheckboxesGroup from './CheckboxGroup';
+import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
 
@@ -118,7 +118,7 @@ const FilterFactoriesForm = () => {
             defaultValue={filters.quantity}
             onChange={handleChange}
           />
-          <CheckboxesGroup
+          <CheckboxGroup
             name="certification"
             onChange={handleCheckbox}
             checkBoxStateValues={filters.certification}
