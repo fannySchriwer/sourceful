@@ -100,7 +100,7 @@ const FilterFactoriesForm = () => {
             inputLabel="Categories"
             onChange={handleChange}
             name="category"
-            defaultValue={filters.categoriy}
+            defaultValue={filters.category}
           />
           <Select
             options={continents}
