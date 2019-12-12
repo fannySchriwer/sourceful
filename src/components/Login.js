@@ -3,8 +3,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import PrimaryButton from './PrimaryButton';
+import SecondaryButton from './SecondaryButton';
 import { useAuth } from '../hooks/useAuth';
+
 
 function Login() {
   const auth = useAuth();
@@ -61,7 +62,7 @@ function Login() {
             autoComplete="current-password"
             onChange={handleChange}
           />
-          <PrimaryButton propFunction={handleSubmit}>Sign In</PrimaryButton>
+          <SecondaryButton propFunction={handleSubmit}>Sign In</SecondaryButton>
         </form>
         {auth.currentUser && (
           <p>

@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import PrimaryButton from './PrimaryButton';
+import SecondaryButton from './SecondaryButton';
 import { useAuth } from '../hooks/useAuth';
 
 function SignUp() {
@@ -90,7 +90,7 @@ function SignUp() {
               />
             </Grid>
           </Grid>
-          <PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
+          <SecondaryButton propFunction={handleSubmit}>Sign up</SecondaryButton>
         </form>
       </div>
     </Container>

@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-// import { useContext } from 'react';
+import { useContext } from 'react';
 import LogoDesktop from '../LogoDesktop';
+import { ToggleContext } from '../ToggleContext';
 
 
 const NavBrand = () => {
-  // const { closeNavigation } = useContext(ToggleContext);
+  const { closeNavigation } = useContext(ToggleContext);
   const { datoCmsCompanyInfo } = useStaticQuery(
     graphql`
       query {
@@ -21,7 +22,7 @@ const NavBrand = () => {
 
   return (
     <Link
-      // onClick={closeNavigation}
+      onClick={closeNavigation}
       sx={{
         display: 'flex',
         alignItems: 'center',
