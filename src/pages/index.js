@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 import SignUp from '../components/Signup';
-import Login from '../components/Login';
 import Navigation from '../components/Navigation'
 
 const IndexPage = () => (
@@ -13,7 +12,6 @@ const IndexPage = () => (
     <SEO title="Home" />
     <Navigation />
     <SignUp />
-    <Login />
     <FilterFactoriesForm />
   </Fragment>
 );

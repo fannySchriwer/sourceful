@@ -90,7 +90,7 @@ function SignUp() {
               />
             </Grid>
           </Grid>
-          <PrimaryButton propFunction={handleSubmit} label="Sign up" />
+          <PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
         </form>
       </div>
     </Container>

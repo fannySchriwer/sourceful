@@ -3,7 +3,13 @@ import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 
 const SecondaryButton = ({ children, propFunction }) => (
-  <button onClick={propFunction}>{children}</button>
+  <button
+    onClick={propFunction}
+    sx={{
+        variant: 'buttons.secondary'
+    }}>
+    {children}
+  </button>
 );
 export default SecondaryButton;
 

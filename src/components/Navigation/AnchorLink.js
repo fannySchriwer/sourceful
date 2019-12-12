@@ -8,7 +8,32 @@ const AnchorLink = ({ children, href, id }) => (
     to={`#${href}`}
     aria-label={`Scroll to ${href}`}
     key={id}
-    sx={{margin: 1}}
+    sx={{
+      mx: 3,
+      position: 'relative',
+      '&::before': {
+        content: '""',
+        display: 'inline-block',
+        backgroundColor: 'secondary',
+        position: 'absolute',
+        top: 4,
+        left: '-5px',
+        width: 'calc(100% + 10px)',
+        height: 'calc(100% - 16px)',
+        transform: 'scaleX(0)',
+        transformOrigin: '0% 50%',
+        transition: 'ease-in-out 0.35s',
+      },
+      '&:hover': {
+        '&::before': { transform: 'scaleX(1)' },
+      },
+      '&:focus': {
+        '&::before': { transform: 'scaleX(1)' },
+      },
+        '&.active': {
+          '&::before': { transform: 'scaleX(1)' },
+      },
+    }}
   >
     {children}
   </Styled.a>

@@ -61,7 +61,7 @@ function Login() {
             autoComplete="current-password"
             onChange={handleChange}
           />
-          <PrimaryButton propFunction={handleSubmit} label="Sign in" />
+          <PrimaryButton propFunction={handleSubmit}>Sign In</PrimaryButton>
         </form>
         {auth.currentUser && (
           <p>
