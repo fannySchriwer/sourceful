@@ -86,6 +86,7 @@ const Factory = ({ data: { factory } }) => {
           closeModal={closeModal}
           modalOpen={modalOpen}
           isLoaded={loadedUser}
+          factory={factory}
         />
       </ModalPortal>
     </Fragment>
