@@ -20,7 +20,7 @@ export default function useGetAllFactories(filters) {
       `${filters.productType}`,
     );
   }
-  if (filters.quantity) {
+  if (filters.quantity && filters.quantity !== "0") {
     const quantityFilter = parseInt(filters.quantity, 10);
     query = query.where('quantity', '>=', quantityFilter);
   }
