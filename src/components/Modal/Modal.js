@@ -5,8 +5,10 @@ import DialogBox from './DialogBox';
 import DialogBoxWrapper from './DialogBoxWrapper';
 import Overlay from './Overlay';
 import Login from '../Login';
+import AddComment from '../AddComment';
+import PrimaryButton from '../PrimaryButton';
 
-const Modal = ({ modalOpen, closeModal, isLoaded }) => {
+const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
   if (!modalOpen) {
     return null;
   }
@@ -14,8 +16,8 @@ const Modal = ({ modalOpen, closeModal, isLoaded }) => {
     <Overlay >
       <DialogBoxWrapper>
         <DialogBox>
-          {isLoaded ? (<h1>Hey you are logged import {} from "module";</h1>) : <Login />}
-          <button onClick={closeModal}>Close</button>
+          <PrimaryButton label={'X'} propFunction={closeModal} />
+          {isLoaded ? (<AddComment factory={factory} />) : <Login />}
         </DialogBox>
       </DialogBoxWrapper>
     </Overlay>
