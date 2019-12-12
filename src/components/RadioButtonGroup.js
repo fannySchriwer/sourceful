@@ -7,12 +7,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const RadioButtonsGroup = ({
-  options, formLabel, name, onChange,
+  options, formLabel, name, onChange, defaultValue
 }) => (
   <div>
     <FormControl component="fieldset">
       <FormLabel component="legend">{formLabel}</FormLabel>
-      <RadioGroup name={name} onChange={onChange}>
+      <RadioGroup name={name} value={defaultValue} onChange={onChange}>
         {options.map((option) => (
           <FormControlLabel
             key={option.value}

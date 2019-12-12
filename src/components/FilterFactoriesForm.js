@@ -21,6 +21,7 @@ const productTypes = [
 const continents = ['europe', 'asia'];
 
 const minQuantity = [
+  { value: '0', label: 'None' },
   { value: '100', label: '100' },
   { value: '200', label: '200' },
   { value: '300', label: '300' },
@@ -28,22 +29,12 @@ const minQuantity = [
   { value: '500', label: '500' },
 ];
 
-const checkboxOptions = [
-  { id: '1', value: 'Oeko-tex', label: 'Oeko-tex' },
-  { id: '2', value: 'BCI', label: 'BCI' },
-  { id: '3', value: 'Gortex', label: 'Gortex' },
-  { id: '4', value: 'Blue-sign', label: 'Blue sign' },
-  { id: '5', value: 'HIGS-index', label: 'HIGS-index' },
-  { id: '6', value: 'RDS', label: 'RDS' },
-  { id: '7', value: 'BSCI', label: 'BSCI' },
-];
-
 const FilterFactoriesForm = () => {
   const [filters, setFilters] = useState({
     productType: '',
     category: '',
     continent: '',
-    quantity: '',
+    quantity: '0',
     certification: [
       { value: 'Oeko-tex', isChecked: false },
       { value: 'BCI', isChecked: false },
@@ -79,7 +70,7 @@ const FilterFactoriesForm = () => {
       productType: '',
       category: '',
       continent: '',
-      quantity: '',
+      quantity: '0',
       certification: [
         { value: 'Oeko-tex', isChecked: false },
         { value: 'BCI', isChecked: false },
@@ -102,18 +93,21 @@ const FilterFactoriesForm = () => {
             inputLabel="Product type"
             onChange={handleChange}
             name="productType"
+            defaultValue={filters.productType}
           />
           <Select
             options={categories}
             inputLabel="Categories"
             onChange={handleChange}
             name="category"
+            defaultValue={filters.categoriy}
           />
           <Select
             options={continents}
             inputLabel="Continent"
             onChange={handleChange}
             name="continent"
+            defaultValue={filters.continent}
           />
         </div>
         <div style={{ display: 'flex' }}>
@@ -121,12 +115,13 @@ const FilterFactoriesForm = () => {
             options={minQuantity}
             formLabel="Minimum Qiantity"
             name="quantity"
+            defaultValue={filters.quantity}
             onChange={handleChange}
           />
           <CheckboxesGroup
-            checkboxOptions={checkboxOptions}
             name="certification"
             onChange={handleCheckbox}
+            checkBoxStateValues={filters.certification}
           />
         </div>
       </div>

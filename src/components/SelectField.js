@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Select = ({
-  options, inputLabel, onChange, name,
+  options, inputLabel, onChange, name, defaultValue
 }) => (
   <div>
     <label id={name} htmlFor={inputLabel}>
@@ -10,7 +10,7 @@ const Select = ({
     </label>
 
     <select name={name} onChange={onChange}>
-      <option value="">--Please choose an option--</option>
+      <option value={defaultValue} selected>Choose an option</option>
       {options.map((option) => (
         <option value={option} key={option}>
           {option}
