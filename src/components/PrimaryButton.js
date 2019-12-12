@@ -2,19 +2,19 @@
 import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 
-const PrimaryButton = ({ label, propFunction }) => (
+const PrimaryButton = ({ children, propFunction }) => (
   <div>
     <button type="button" onClick={propFunction}
       sx={{
         variant: 'buttons.primary'
       }}>
-      {label}
+      {children}
     </button>
   </div>
 );
 export default PrimaryButton;
 
 PrimaryButton.propTypes = {
-  label: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   propFunction: PropTypes.func.isRequired,
 };

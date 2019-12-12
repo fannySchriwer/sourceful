@@ -2,8 +2,8 @@
 import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 
-const SecondaryButton = ({ children, handleClick }) => (
-  <button onClick={handleClick}>{children}</button>
+const SecondaryButton = ({ children, propFunction }) => (
+  <button onClick={propFunction}>{children}</button>
 );
 export default SecondaryButton;
 

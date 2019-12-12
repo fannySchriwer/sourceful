@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 
 const AnchorLink = ({ children, href, id }) => (
-  <Styled.a
+  <Styled.a as={Link}
+    to={`#${href}`}
     aria-label={`Scroll to ${href}`}
-    href={`#${href}`}
     key={id}
     sx={{margin: 1}}
   >

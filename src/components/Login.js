@@ -27,10 +27,7 @@ function Login() {
     auth.signin(loginUser.email, loginUser.password);
   }
 
-  function logOut(e) {
-    e.preventDefault();
-    auth.signout();
-  }
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,9 +62,6 @@ function Login() {
             onChange={handleChange}
           />
           <PrimaryButton propFunction={handleSubmit} label="Sign in" />
-          {auth.currentUser && (
-            <PrimaryButton propFunction={logOut} label="Sign out" />
-          )}
         </form>
         {auth.currentUser && (
           <p>

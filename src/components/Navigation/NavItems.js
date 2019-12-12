@@ -47,6 +47,11 @@ const NavItems = () => {
   const auth = useAuth();
   const [loadedUser, setLoadedUser] = useState(false);
 
+  function logOut(e) {
+    e.preventDefault();
+    auth.signout();
+  }
+
   useEffect(() => {
     if (auth.currentUser) {
       setLoadedUser(true)    
@@ -72,9 +77,11 @@ const NavItems = () => {
           )
         }
       })}
-      <SecondaryButton handleClick={setModalOpen}>
-        {loadedUser ? `${signOutBtnText}` : `${signInBtnText}`}
-      </SecondaryButton>
+      {auth.currentUser ?
+        (<SecondaryButton propFunction={logOut} label={signOutBtnText}>{signOutBtnText}</SecondaryButton>)
+        :
+        (<SecondaryButton propFunction={setModalOpen} label={signInBtnText}>{signInBtnText}</SecondaryButton>)
+      }
       <ModalPortal>
         <Modal
           closeModal={closeModal}
