@@ -4,7 +4,6 @@ export default {
     text: '#182628',
     primary: '#005467',
     secondary: '#B6D6CB',
-
   },
   fontWeights: {
     body: 400,
@@ -32,4 +31,15 @@ export default {
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  styles: {
+    a: {
+      // fontFamily: 'body',
+      fontWeight: 'bold',
+      fontSize: 2,
+      textDecoration: 'none',
+      textTransform: 'uppercase'
+      // color: 'text', 
+    },
+  },
+
 };

@@ -5,18 +5,13 @@ import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 import SignUp from '../components/Signup';
 import Login from '../components/Login';
+import Navigation from '../components/Navigation'
 
 const IndexPage = () => (
   // eslint-disable-next-line react/jsx-fragments
   <Fragment>
     <SEO title="Home" />
-    <h1
-      sx={{
-        color: 'primary',
-      }}
-    >
-      This is sourceful
-    </h1>
+    <Navigation />
     <SignUp />
     <Login />
     <FilterFactoriesForm />
