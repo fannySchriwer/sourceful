@@ -9,7 +9,6 @@ import AddComment from '../AddComment';
 import PrimaryButton from '../PrimaryButton';
 
 const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
-	console.log(factory);
 	if (!modalOpen) {
 		return null;
 	}
