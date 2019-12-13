@@ -41,7 +41,7 @@ function useProviderAuth() {
     .auth()
     .signOut()
     .then(() => {
-      setCurrentUser(false);
+      setCurrentUser(null);
     });
 
   useEffect(() => {
