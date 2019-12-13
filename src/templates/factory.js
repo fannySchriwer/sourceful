@@ -21,7 +21,6 @@ const Factory = ({ data: { factory } }) => {
     }
   }, [auth]);
 
-
   const {
     name,
     contact,
@@ -147,6 +146,7 @@ export const pageQuery = graphql`
       }
       continent
       description
+      quantity
       id
       employee
       producttype
