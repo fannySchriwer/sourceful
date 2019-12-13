@@ -9,22 +9,32 @@ import AddComment from '../AddComment';
 import PrimaryButton from '../PrimaryButton';
 
 const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
-  if (!modalOpen) {
-    return null;
-  }
-  return (
-    <Overlay >
-      <DialogBoxWrapper>
-        <DialogBox>
-          <PrimaryButton label={'X'} propFunction={closeModal} />
-          {isLoaded ? (<AddComment factory={factory} />) : <Login />}
-        </DialogBox>
-      </DialogBoxWrapper>
-    </Overlay>
-  );
+	console.log(factory);
+	if (!modalOpen) {
+		return null;
+	}
+
+	function handleSignin() {
+		if (!factory) {
+			closeModal();
+		} else {
+			return;
+		}
+	}
+
+	return (
+		<Overlay>
+			<DialogBoxWrapper>
+				<DialogBox>
+					<PrimaryButton label={'X'} propFunction={closeModal} />
+					{isLoaded && factory ? <AddComment factory={factory} /> : <Login propFunction={handleSignin} />}
+				</DialogBox>
+			</DialogBoxWrapper>
+		</Overlay>
+	);
 };
 export default Modal;
 Modal.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-  modalOpen: PropTypes.bool.isRequired,
+	closeModal: PropTypes.func.isRequired,
+	modalOpen: PropTypes.bool.isRequired
 };
