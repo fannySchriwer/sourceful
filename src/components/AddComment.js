@@ -10,7 +10,7 @@ const AddComment = ({ factory }) => {
 	const auth = useAuth();
 
   function addFactoryToMyList() {
-	  db.collection('myList').add({
+	  db.collection('users').doc(auth.currentUser.uid).collection('myList').add({
 			comment: comment,
 			name: factory.name,
 		  factoryID: factory.id,
@@ -18,7 +18,8 @@ const AddComment = ({ factory }) => {
 			employee: factory.employee,
 		  quantity: factory.quantity,
 			producttype: factory.producttype,
-			category: factory.category
+			category: factory.category,
+			country: factory.address.country,
 
 	  }).then((response) => {
 		  if(response.id) {
