@@ -123,7 +123,7 @@ const FilterFactoriesForm = () => {
 					Remove filters
 				</PrimaryButton>
 			</div>
-			<FactoryList factories={factories} />
+			{/* <FactoryList factories={factories} /> */}
 		</div>
 	);
 };
