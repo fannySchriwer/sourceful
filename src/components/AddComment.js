@@ -9,20 +9,24 @@ const AddComment = ({ factory }) => {
 	const db = firebase.firestore();
 	const auth = useAuth();
 
-	function addFactoryToMyList() {
-		db
-			.collection('myList')
-			.add({
-				comment: comment,
-				factoryID: factory.id,
-				userID: auth.currentUser.uid
-			})
-			.then((response) => {
-				if (response.id) {
-					console.log('succesfully added factory to my list');
-				}
-			});
-	}
+  function addFactoryToMyList() {
+	  db.collection('users').doc(auth.currentUser.uid).collection('myList').add({
+			comment: comment,
+			name: factory.name,
+		  factoryID: factory.id,
+		  userID: auth.currentUser.uid,
+			employee: factory.employee,
+		  quantity: factory.quantity,
+			producttype: factory.producttype,
+			category: factory.category,
+			country: factory.address.country,
+
+	  }).then((response) => {
+		  if(response.id) {
+			  console.log('succesfully added factory to my list');
+		  }
+	  });
+  }
 
 	function handleChange(e) {
 		setComment(e.target.value);

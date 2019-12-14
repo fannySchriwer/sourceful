@@ -4,8 +4,7 @@ import firebase from '../services/firebase';
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
   const db = firebase.firestore();
-  const settings = { timestampsInSnapshots: true };
-  db.settings(settings);
+
   let query = db.collection('factories');
   if (filters.continent) {
     query = query.where('continent', '==', `${filters.continent}`);
@@ -24,7 +23,6 @@ export default function useGetAllFactories(filters) {
     const quantityFilter = parseInt(filters.quantity, 10);
     query = query.where('quantity', '>=', quantityFilter);
   }
-
   if (filters.certification) {
     filters.certification.forEach((certificate) => {
       if (certificate.isChecked) {

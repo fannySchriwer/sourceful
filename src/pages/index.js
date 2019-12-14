@@ -13,7 +13,12 @@ const IndexPage = () => (
 		<SEO title="Home" />
 		<BreakpointProvider>
 			<Navigation />
+			<div sx={{
+				paddingTop: '300px'
+			}}>
+
 			<SignUp />
+			</div>
 			<FilterFactoriesForm />
 		</BreakpointProvider>
 	</Fragment>
