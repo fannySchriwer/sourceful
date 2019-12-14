@@ -5,6 +5,7 @@ import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 import SignUp from '../components/Signup';
 import Layout from '../components/Layout';
+import Hero from '../components/Hero';
 import { BreakpointProvider } from 'react-socks';
 
 const IndexPage = () => (
@@ -13,6 +14,7 @@ const IndexPage = () => (
 		<SEO title="Home" />
 		<BreakpointProvider>
 			<Layout>
+				<Hero />
 				<SignUp />
 				<FilterFactoriesForm />
 			</Layout>

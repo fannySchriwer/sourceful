@@ -27,6 +27,18 @@ export default {
 		hover: '0 3px 4px rgba(0,0,0,0.3)'
 	},
 	styles: {
+		h1: {
+			fontFamily: 'heading',
+			fontWeight: 'heading',
+			fontSize: [ 5, null, 6 ],
+			color: 'primary'
+		},
+		h2: {
+			fontFamily: 'heading',
+			fontWeight: 'body',
+			fontSize: [ 3, null, 4 ],
+			color: 'text'
+		},
 		a: {
 			fontFamily: 'body',
 			fontWeight: 'heading',
