@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import SEO from '../components/seo';
 import FilterFactoriesForm from '../components/FilterFactoriesForm';
 import SignUp from '../components/Signup';
-import Navigation from '../components/Navigation';
+import Layout from '../components/Layout';
 import { BreakpointProvider } from 'react-socks';
 
 const IndexPage = () => (
@@ -12,14 +12,10 @@ const IndexPage = () => (
 	<Fragment>
 		<SEO title="Home" />
 		<BreakpointProvider>
-			<Navigation />
-			<div sx={{
-				paddingTop: '300px'
-			}}>
-
-			<SignUp />
-			</div>
-			<FilterFactoriesForm />
+			<Layout>
+				<SignUp />
+				<FilterFactoriesForm />
+			</Layout>
 		</BreakpointProvider>
 	</Fragment>
 );
