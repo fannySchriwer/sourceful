@@ -7,7 +7,6 @@ import Hero from '../components/Hero';
 import { BreakpointProvider } from 'react-socks';
 
 const IndexPage = () => (
-	// eslint-disable-next-line react/jsx-fragments
 	<Fragment>
 		<BreakpointProvider>
 			<Layout>
