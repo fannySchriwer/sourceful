@@ -16,7 +16,7 @@ const CheckboxGroup = ({ checkBoxStateValues, name, onChange }) => {
       }}>
         <FormControl component="fieldset">
           <FormLabel>
-            <Styled.h3 sx={{ marginBottom: 0, color: 'black' }}>Certificates</Styled.h3>
+            <Styled.h4 sx={{ marginBottom: 1, color: 'black' }}>Certificates</Styled.h4>
           </FormLabel>
           <FormGroup
             sx={{

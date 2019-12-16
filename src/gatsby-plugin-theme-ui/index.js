@@ -21,7 +21,7 @@ export default {
 	radii: [ '5px', '20px', '32px', '40px' ],
 	fontSizes: [ 12, 14, 16, 20, 24, 32, 48, 64, 72 ],
 	sizes: [ 0, 4, 8, 16, 32, 64, 128, 256, 512 ],
-	space: [ 0, 4, 8, 16, 32, 64, 128, 256, 512 ],
+	space: [ 0, 4, 8, 16, 32, 64, 96, 128, 256, 512 ],
 	breakpoints: [ '40em', '52em', '64em' ],
 	shadows: {
 		hover: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
@@ -41,6 +41,12 @@ export default {
 			color: 'text'
 		},
 		h3: {
+			fontFamily: 'heading',
+			fontWeight: 'heading',
+			color: 'primary',
+			fontSize: 4
+		},
+		h4: {
 			fontFamily: 'heading',
 			fontWeight: 'heading',
 			fontSize: 2

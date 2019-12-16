@@ -10,11 +10,11 @@ const Select = ({
     flexDirection: 'column'
   }}>
     <label id={name} htmlFor={inputLabel}>
-      <Styled.h3
+      <Styled.h4
         sx={{
-          marginBottom: 1,
+          marginBottom: 2,
         }}
-      >{inputLabel}</Styled.h3>
+      >{inputLabel}</Styled.h4>
     </label>
 
     <select name={name} value={defaultValue} onChange={onChange}
@@ -24,6 +24,7 @@ const Select = ({
         padding: 3,
         marginBottom: 3,
         textAlign: 'center',
+        backgroundColor: 'white',
         ':focus': {
 					border: (t) => `2px solid ${t.colors.primary}`,
 					outline: 'none'
