@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
 import useModal from '../hooks/useModal';
 import ModalPortal from '../components/Modal/ModalPortal';
+import Layout from '../components/Layout';
 
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
@@ -38,7 +39,7 @@ const Factory = ({ data: { factory } }) => {
 		: bsci;
 
 	return (
-		<Fragment>
+		<Layout>
 			<h1>{name}</h1>
 			<button onClick={setModalOpen}>
 				<FontAwesomeIcon icon={[ 'far', 'heart' ]} sx={{ color: 'primary', fontSize: 6 }} />
@@ -74,7 +75,7 @@ const Factory = ({ data: { factory } }) => {
 			<ModalPortal>
 				<Modal closeModal={closeModal} modalOpen={modalOpen} isLoaded={loadedUser} factory={factory} />
 			</ModalPortal>
-		</Fragment>
+		</Layout>
 	);
 };
 

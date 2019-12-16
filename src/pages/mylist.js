@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { Fragment } from 'react';
 import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
 
 import { useAuthantification } from '../hooks/useAuth';
 
@@ -15,10 +15,10 @@ const MyList = ({ data: { allUser } }) => {
 	}
 
 	return (
-		<Fragment>
+		<Layout>
 			<h1>My List</h1>
 			{!initializing && <p>Hello {user.email}</p>}
-		</Fragment>
+		</Layout>
 	);
 };
 

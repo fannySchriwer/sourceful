@@ -2,20 +2,14 @@
 import { jsx } from 'theme-ui';
 import Navigation from './Navigation';
 import { Fragment } from 'react';
+import SEO from '../components/seo';
 
 const Layout = ({ children }) => {
 	return (
 		<Fragment>
+			<SEO title="Home" />
 			<Navigation>{children}</Navigation>
-			<main
-				sx={{
-					maxWidth: '1140px',
-					marginX: [ 4, 5, 6 ],
-					paddingY: [ 6 ]
-				}}
-			>
-				{children}
-			</main>
+			{children}
 		</Fragment>
 	);
 };

@@ -29,9 +29,10 @@ export default {
 	styles: {
 		h1: {
 			fontFamily: 'heading',
-			fontWeight: 'heading',
-			fontSize: [ 5, null, 6 ],
-			color: 'primary'
+			fontWeight: 'bold',
+			fontSize: [ 6, null, 7 ],
+			color: 'primary',
+			lineHeight: 'heading'
 		},
 		h2: {
 			fontFamily: 'heading',
