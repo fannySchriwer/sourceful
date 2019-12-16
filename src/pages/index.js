@@ -10,7 +10,7 @@ const IndexPage = () => (
 	<Fragment>
 		<BreakpointProvider>
 			<Layout>
-				{/*<SignUp />*/}
+				<Hero />
 				<FilterFactoriesForm />
 			</Layout>
 		</BreakpointProvider>
