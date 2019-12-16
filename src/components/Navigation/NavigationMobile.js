@@ -11,7 +11,7 @@ const NavigationMobile = () => {
 	const [ shouldHideHeader, setShouldHideHeader ] = useState(false);
 	const [ shouldShowBackgroundColor, setShouldShowBackgroundColor ] = useState(false);
 
-	const MINIMUM_SCROLL = 150;
+	const MINIMUM_SCROLL = 100;
 	const TIMEOUT_DELAY = 200;
 
 	useDocumentScrollThrottled((callbackData) => {
@@ -19,10 +19,9 @@ const NavigationMobile = () => {
 		const isScrolledDown = previousScrollTop < currentScrollTop;
 		const isMinimumScrolled = currentScrollTop > MINIMUM_SCROLL;
 
-		setShouldShowBackgroundColor(currentScrollTop > 2);
-
+		setShouldHideHeader(isScrolledDown && isMinimumScrolled);
 		setTimeout(() => {
-			setShouldHideHeader(isScrolledDown && isMinimumScrolled);
+			setShouldShowBackgroundColor(isMinimumScrolled && currentScrollTop > 2);
 		}, TIMEOUT_DELAY);
 	});
 	return (

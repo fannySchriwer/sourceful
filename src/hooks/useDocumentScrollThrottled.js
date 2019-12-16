@@ -18,7 +18,8 @@ function useDocumentScrollThrottled(callback) {
 		callback({ previousScrollTop, currentScrollTop });
 	}
 
-	const handleDocumentScrollThrottled = throttle(handleDocumentScroll, 100);
+	// a throttle function that will fire at most every 250ms
+	const handleDocumentScrollThrottled = throttle(handleDocumentScroll, 250);
 
 	useLayoutEffect(
 		() => {

@@ -84,9 +84,14 @@ const NavItems = () => {
 				}
 			})}
 			{auth.currentUser ? (
-				<PrimaryButton propFunction={logOut} label={signOutBtnText}>
-					{signOutBtnText}
-				</PrimaryButton>
+				<Fragment>
+					<InternalLink href={auth.currentUser.uid} handleClick={closeNavigation}>
+						My List
+					</InternalLink>
+					<PrimaryButton propFunction={logOut} label={signOutBtnText}>
+						{signOutBtnText}
+					</PrimaryButton>
+				</Fragment>
 			) : (
 				<PrimaryButton propFunction={setModalOpen} label={signInBtnText}>
 					{signInBtnText}

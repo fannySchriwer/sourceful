@@ -41,10 +41,11 @@ const NavBrand = () => {
 				<span
 					sx={{
 						color: 'primary',
-						fontSize: 4,
-						fontFamily: 'heading',
+						fontFamily: 'body',
 						fontWeight: 'heading',
-						textTransform: 'lowercase'
+						fontSize: 3,
+						textDecoration: 'none',
+						textTransform: 'uppercase'
 					}}
 				>
 					{brandName}
