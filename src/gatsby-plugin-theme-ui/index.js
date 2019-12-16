@@ -18,7 +18,7 @@ export default {
 		body: 1.5,
 		heading: 1.125
 	},
-	radii: [ '3px', '20px', '32px', '40px' ],
+	radii: [ '5px', '20px', '32px', '40px' ],
 	fontSizes: [ 12, 14, 16, 20, 24, 32, 48, 64, 72 ],
 	sizes: [ 0, 4, 8, 16, 32, 64, 128, 256, 512 ],
 	space: [ 0, 4, 8, 16, 32, 64, 128, 256, 512 ],
@@ -39,6 +39,11 @@ export default {
 			fontWeight: 'body',
 			fontSize: [ 3, null, 4 ],
 			color: 'text'
+		},
+		h3: {
+			fontFamily: 'heading',
+			fontWeight: 'heading',
+			fontSize: 2
 		},
 		a: {
 			fontFamily: 'body',
