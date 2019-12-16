@@ -8,6 +8,7 @@ import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
 
 import FactoryList from './FactoryList';
+import SearchHeader from './SearchHeader';
 
 const categories = [ 'knit', 'woven', 'jersey' ];
 const productTypes = [ 'tops', 'bottoms', 'tailoring', 'outerwear', 'underwear', 'sportswear' ];
@@ -77,12 +78,15 @@ const FilterFactoriesForm = () => {
 
 	const { factories } = useGetAllFactories(filters);
 	return (
-		<div>
+		<div sx={{
+        paddingTop: [6, 2, null]
+      }}>
+      <SearchHeader />
 			<div sx={{
         display: 'flex',
         flexDirection: ['column', 'row', null],
-        justifyContent: ['center', 'space-between', null]
-        }}>
+        justifyContent: ['center', 'space-between', null],
+      }}>
 				<div
           sx={{
             width: ['100%', '40%', '40%']

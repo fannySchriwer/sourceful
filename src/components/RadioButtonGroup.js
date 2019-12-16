@@ -17,10 +17,10 @@ const RadioButtonGroup = ({
     }}>
     <FormControl component="fieldset">
       <FormLabel>
-        <Styled.h3
-          sx={{ marginBottom: 0, color: 'black' }}>
+        <Styled.h4
+          sx={{ marginBottom: 1, color: 'black' }}>
           {formLabel}
-        </Styled.h3>
+        </Styled.h4>
       </FormLabel>
       <RadioGroup
         sx={{
