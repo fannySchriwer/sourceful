@@ -9,7 +9,7 @@ const InternalLink = ({ children, href, handleClick }) => (
 		to={`/${href}`}
 		onClick={handleClick}
 		sx={{
-			marginX: 3,
+			marginX: [ 3, null, 4 ],
 			marginBottom: [ 4 ],
 			position: 'relative',
 			':before': {

@@ -10,7 +10,7 @@ const AnchorLink = ({ children, href, handleClick }) => (
 		aria-label={`Scroll to ${href}`}
 		onClick={handleClick}
 		sx={{
-			marginX: 3,
+			marginX: [ 3, null, 4 ],
 			marginBottom: [ 4 ],
 			position: 'relative',
 			':before': {
@@ -27,7 +27,6 @@ const AnchorLink = ({ children, href, handleClick }) => (
 				transition: 'all 0.3s ease-in-out'
 			},
 			'&:hover': {
-				color: 'primary',
 				'&:before': {
 					visibility: 'visible',
 					transform: 'scaleX(1)'
