@@ -29,7 +29,7 @@ export default {
 	styles: {
 		h1: {
 			fontFamily: 'heading',
-			fontWeight: 'bold',
+			fontWeight: [ 'heading', null, 'bold' ],
 			fontSize: [ 6, null, 7 ],
 			color: 'primary',
 			lineHeight: 'heading'
