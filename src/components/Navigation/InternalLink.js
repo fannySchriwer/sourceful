@@ -40,7 +40,6 @@ export default InternalLink;
 
 InternalLink.propTypes = {
 	href: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 	handleClick: PropTypes.func.isRequired
 };

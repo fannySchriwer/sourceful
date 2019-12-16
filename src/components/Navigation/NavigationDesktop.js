@@ -8,12 +8,11 @@ const NavigationDesktop = () => {
 	return (
 		<nav
 			sx={{
-				position: 'absolute',
-				zIndex: 3,
+				position: 'fixed',
 				width: '100%',
 				boxSizing: 'border-box',
 				paddingX: 4,
-				paddingY: 4,
+				paddingTop: 4,
 				display: 'flex',
 				alignItems: 'center'
 			}}
