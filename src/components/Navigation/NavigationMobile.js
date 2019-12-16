@@ -12,7 +12,7 @@ const NavigationMobile = () => {
 	const [ shouldShowBackgroundColor, setShouldShowBackgroundColor ] = useState(false);
 
 	const MINIMUM_SCROLL = 150;
-	const TIMEOUT_DELAY = 100;
+	const TIMEOUT_DELAY = 200;
 
 	useDocumentScrollThrottled((callbackData) => {
 		const { previousScrollTop, currentScrollTop } = callbackData;
@@ -34,7 +34,10 @@ const NavigationMobile = () => {
 				boxSizing: 'border-box',
 				paddingX: 3,
 				paddingY: 3,
-				display: shouldHideHeader ? 'none' : 'flex'
+				display: shouldHideHeader ? 'none' : 'flex',
+				background: shouldShowBackgroundColor
+					? 'linear-gradient(0deg, rgba(182,214,203,1) 0%, rgba(0,84,103,1) 100%)'
+					: 'transperant'
 			}}
 		>
 			<ToggleContextProvider>
