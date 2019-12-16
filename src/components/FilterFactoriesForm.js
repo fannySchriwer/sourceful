@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { useState } from 'react';
 import Select from './SelectField';
-import RadioButtonsGroup from './RadioButtonGroup';
+import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
@@ -8,18 +10,15 @@ import useGetAllFactories from '../hooks/useGetAllFactories';
 import FactoryList from './FactoryList';
 
 const categories = [ 'knit', 'woven', 'jersey' ];
-
 const productTypes = [ 'tops', 'bottoms', 'tailoring', 'outerwear', 'underwear', 'sportswear' ];
-
 const continents = [ 'europe', 'asia' ];
-
 const minQuantity = [
 	{ value: '0', label: 'None' },
 	{ value: '100', label: '100' },
 	{ value: '200', label: '200' },
 	{ value: '300', label: '300' },
 	{ value: '400', label: '400' },
-	{ value: '500', label: '500' }
+	{ value: '500', label: '> 500' }
 ];
 
 const FilterFactoriesForm = () => {
@@ -79,8 +78,15 @@ const FilterFactoriesForm = () => {
 	const { factories } = useGetAllFactories(filters);
 	return (
 		<div>
-			<div style={{ display: 'flex' }}>
-				<div>
+			<div sx={{
+        display: 'flex',
+        flexDirection: ['column', 'row', null],
+        justifyContent: ['center', 'space-between', null]
+        }}>
+				<div
+          sx={{
+            width: ['100%', '40%', '40%']
+          }}>
 					<Select
 						options={productTypes}
 						inputLabel="Product type"
@@ -103,8 +109,13 @@ const FilterFactoriesForm = () => {
 						defaultValue={filters.continent}
 					/>
 				</div>
-				<div style={{ display: 'flex' }}>
-					<RadioButtonsGroup
+				<div sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            width: ['100%', '55%', null]
+          }}>
+					<RadioButtonGroup
 						options={minQuantity}
 						formLabel="Minimum Qiantity"
 						name="quantity"
@@ -118,12 +129,16 @@ const FilterFactoriesForm = () => {
 					/>
 				</div>
 			</div>
-			<div>
+			<div
+        sx={{
+          paddingTop: 3,
+          paddingBottom: [3, 4],
+        }}>
 				<PrimaryButton propFunction={clearFilter} value="submit">
 					Remove filters
 				</PrimaryButton>
 			</div>
-			<FactoryList factories={factories} />
+			{ <FactoryList factories={factories} /> }
 		</div>
 	);
 };
