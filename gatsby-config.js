@@ -60,8 +60,7 @@ module.exports = {
 		},
 		'gatsby-plugin-material-ui',
 		'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-theme-material-ui',
+		'gatsby-plugin-sharp',
 		{
 			resolve: 'gatsby-source-datocms',
 			options: {
