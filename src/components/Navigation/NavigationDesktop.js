@@ -8,6 +8,7 @@ const NavigationDesktop = () => {
 	return (
 		<nav
 			sx={{
+				position: 'absolute',
 				zIndex: 3,
 				width: '100%',
 				boxSizing: 'border-box',

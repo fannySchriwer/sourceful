@@ -24,9 +24,22 @@ export default {
 	space: [ 0, 4, 8, 16, 32, 64, 128, 256, 512 ],
 	breakpoints: [ '40em', '52em', '64em' ],
 	shadows: {
-		hover: '0 3px 4px rgba(0,0,0,0.3)'
+		hover: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
 	},
 	styles: {
+		h1: {
+			fontFamily: 'heading',
+			fontWeight: 'bold',
+			fontSize: [ 6, null, 7 ],
+			color: 'primary',
+			lineHeight: 'heading'
+		},
+		h2: {
+			fontFamily: 'heading',
+			fontWeight: 'body',
+			fontSize: [ 3, null, 4 ],
+			color: 'text'
+		},
 		a: {
 			fontFamily: 'body',
 			fontWeight: 'heading',
@@ -49,22 +62,7 @@ export default {
 			border: 'solid',
 			borderColor: 'primary',
 			borderRadius: 3,
-			transition: 'ease-in 0.3s',
-			':hover': {
-				bg: 'secondary',
-				borderColor: 'transparent',
-				boxShadow: 'hover'
-			},
-			':focus': {
-				bg: 'secondary',
-				borderColor: 'transparent',
-				boxShadow: 'hover'
-			},
-			':active': {
-				bg: 'secondary',
-				borderColor: 'transparent',
-				boxShadow: 'hover'
-			}
+			transition: 'ease-in 0.3s'
 		}
 	}
 };

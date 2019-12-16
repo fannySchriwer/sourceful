@@ -12,27 +12,24 @@ const InternalLink = ({ children, href, handleClick }) => (
 			marginX: 3,
 			marginBottom: [ 4 ],
 			position: 'relative',
-			'&::before': {
+			':before': {
 				content: '""',
-				display: 'inline-block',
-				backgroundColor: 'secondary',
 				position: 'absolute',
-				top: '30px',
-				left: '-5px',
-				width: 'calc(100% + 10px)',
-				height: 'calc(100% - 20px)',
+				width: 'calc(100% + 20px)',
+				height: '2px',
+				bottom: '-50%',
+				left: '-10px',
+				borderRadius: 2,
+				backgroundColor: 'secondary',
+				visibility: 'hidden',
 				transform: 'scaleX(0)',
-				transformOrigin: '0% 50%',
-				transition: 'ease-in-out 0.35s'
+				transition: 'all 0.3s ease-in-out'
 			},
 			'&:hover': {
-				'&::before': { transform: 'scaleX(1)' }
-			},
-			'&:focus': {
-				'&::before': { transform: 'scaleX(1)' }
-			},
-			'&.active': {
-				'&::before': { transform: 'scaleX(1)' }
+				'&:before': {
+					visibility: 'visible',
+					transform: 'scaleX(1)'
+				}
 			}
 		}}
 	>
