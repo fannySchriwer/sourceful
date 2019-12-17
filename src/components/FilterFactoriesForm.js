@@ -11,8 +11,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import FactoryList from './FactoryList';
 import SearchHeader from './SearchHeader';
 
-const categories = [ 'knit', 'woven', 'jersey' ];
-const productTypes = [ 'tops', 'bottoms', 'tailoring', 'outerwear', 'underwear', 'sportswear' ];
 const continents = [ 'europe', 'asia' ];
 const minQuantity = [
 	{ value: '0', label: 'None' },
@@ -24,21 +22,32 @@ const minQuantity = [
 ];
 
 const FilterFactoriesForm = () => {
-	const { allDatoCmsCategoryFilter } = useStaticQuery(
+	const { datoCmsCategoryFilter, datoCmsProductFilter } = useStaticQuery(
 		graphql`
 			query {
-				allDatoCmsCategoryFilter {
-					edges {
-						node {
-							filters {
-								categoryName
-							}
-						}
+				datoCmsCategoryFilter {
+					filters {
+						categoryName
+					}
+				}
+				datoCmsProductFilter {
+					productFilters {
+						productName
 					}
 				}
 			}
 		`
 	);
+
+	let categories = [];
+	datoCmsCategoryFilter.filters.map(({ categoryName }) => {
+		categories.push(categoryName);
+	});
+
+	let productTypes = [];
+	datoCmsProductFilter.productFilters.map(({ productName }) => {
+		productTypes.push(productName);
+	});
 
 	const [ filters, setFilters ] = useState({
 		productType: '',
