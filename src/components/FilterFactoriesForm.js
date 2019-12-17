@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import Select from './SelectField';
 import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import FactoryList from './FactoryList';
 import SearchHeader from './SearchHeader';
@@ -23,6 +24,22 @@ const minQuantity = [
 ];
 
 const FilterFactoriesForm = () => {
+	const { allDatoCmsCategoryFilter } = useStaticQuery(
+		graphql`
+			query {
+				allDatoCmsCategoryFilter {
+					edges {
+						node {
+							filters {
+								categoryName
+							}
+						}
+					}
+				}
+			}
+		`
+	);
+
 	const [ filters, setFilters ] = useState({
 		productType: '',
 		category: '',
@@ -78,72 +95,87 @@ const FilterFactoriesForm = () => {
 
 	const { factories } = useGetAllFactories(filters);
 	return (
-		<div sx={{
-        paddingTop: [6, 2, null]
-      }}>
-      <SearchHeader />
-			<div sx={{
-        display: 'flex',
-        flexDirection: ['column', 'row', null],
-        justifyContent: ['center', 'space-between', null],
-      }}>
+		<Fragment>
+			<section>
 				<div
-          sx={{
-            width: ['100%', '40%', '40%']
-          }}>
-					<Select
-						options={productTypes}
-						inputLabel="Product type"
-						onChange={handleChange}
-						name="productType"
-						defaultValue={filters.productType}
-					/>
-					<Select
-						options={categories}
-						inputLabel="Categories"
-						onChange={handleChange}
-						name="category"
-						defaultValue={filters.category}
-					/>
-					<Select
-						options={continents}
-						inputLabel="Continent"
-						onChange={handleChange}
-						name="continent"
-						defaultValue={filters.continent}
-					/>
+					sx={{
+						paddingTop: [ 6, 2, null ]
+					}}
+				>
+					<SearchHeader />
+					<div
+						sx={{
+							display: 'flex',
+							flexDirection: [ 'column', 'row', null ],
+							justifyContent: [ 'center', 'space-between', null ]
+						}}
+					>
+						<div
+							sx={{
+								width: [ '100%', '40%', '40%' ]
+							}}
+						>
+							<Select
+								options={productTypes}
+								inputLabel="Product type"
+								onChange={handleChange}
+								name="productType"
+								defaultValue={filters.productType}
+							/>
+							<Select
+								options={categories}
+								inputLabel="Categories"
+								onChange={handleChange}
+								name="category"
+								defaultValue={filters.category}
+							/>
+							<Select
+								options={continents}
+								inputLabel="Continent"
+								onChange={handleChange}
+								name="continent"
+								defaultValue={filters.continent}
+							/>
+						</div>
+						<div
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+								width: [ '100%', '55%', null ]
+							}}
+						>
+							<RadioButtonGroup
+								options={minQuantity}
+								formLabel="Minimum Qiantity"
+								name="quantity"
+								defaultValue={filters.quantity}
+								onChange={handleChange}
+							/>
+							<CheckboxGroup
+								name="certification"
+								onChange={handleCheckbox}
+								checkBoxStateValues={filters.certification}
+							/>
+						</div>
+					</div>
+
+					<div
+						sx={{
+							paddingTop: 3,
+							paddingBottom: [ 3, 4 ]
+						}}
+					>
+						<PrimaryButton propFunction={clearFilter} value="submit">
+							Remove filters
+						</PrimaryButton>
+					</div>
 				</div>
-				<div sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: ['100%', '55%', null]
-          }}>
-					<RadioButtonGroup
-						options={minQuantity}
-						formLabel="Minimum Qiantity"
-						name="quantity"
-						defaultValue={filters.quantity}
-						onChange={handleChange}
-					/>
-					<CheckboxGroup
-						name="certification"
-						onChange={handleCheckbox}
-						checkBoxStateValues={filters.certification}
-					/>
-				</div>
-			</div>
-			<div
-        sx={{
-          paddingTop: 3,
-          paddingBottom: [3, 4],
-        }}>
-				<PrimaryButton propFunction={clearFilter} value="submit">
-					Remove filters
-				</PrimaryButton>
-			</div>
-			{ <FactoryList factories={factories} /> }
-		</div>
+			</section>
+			<section>
+				<FactoryList factories={factories} />
+			</section>
+		</Fragment>
 	);
 };
 
