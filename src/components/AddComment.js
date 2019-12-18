@@ -7,8 +7,9 @@ import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
 import { graphql, useStaticQuery } from 'gatsby';
 
-const AddComment = ({ factory }) => {
-	const [ comment, setComment ] = useState('');
+const AddComment = ({ factory, closeModal }) => {
+  const [ comment, setComment ] = useState('');
+  const [errors, setErrors] = useState('');
 	const db = firebase.firestore();
   const auth = useAuth();
   
@@ -21,7 +22,6 @@ const AddComment = ({ factory }) => {
 			}
 		`
   );
-
 
   function addFactoryToMyList() {
 	  db.collection('users').doc(auth.currentUser.uid).collection('myList').add({
@@ -37,9 +37,13 @@ const AddComment = ({ factory }) => {
 
 	  }).then((response) => {
 		  if(response.id) {
-			  console.log('succesfully added factory to my list');
+        console.log('succesfully added factory to my list');
+        closeModal();
 		  }
-	  });
+	  }).catch((error) => {
+      setErrors(error.message);
+      return errorMessage;
+    });;
   }
 
 	function handleChange(e) {
@@ -53,6 +57,13 @@ const AddComment = ({ factory }) => {
       <div sx={{padding: 3}}>
 			  <PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
       </div>
+      {errors && (
+					<p sx={{
+            color: '#f50057'
+          }}>
+						{String(errors)}
+					</p>
+				)}
 		</div>
 	);
 };
