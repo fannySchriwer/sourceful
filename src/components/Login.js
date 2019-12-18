@@ -74,7 +74,7 @@ const Login = ({ propFunction }) => {
 				</form>
 				{errors && (
 					<p sx={{
-            color: 'red'
+            color: '#f50057'
           }}>
 						{String(errors)}
 					</p>

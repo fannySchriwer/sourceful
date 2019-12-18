@@ -51,7 +51,7 @@ const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 							sx={{ color: 'primary', fontSize: 5, textAlight: 'center' }}
 						/>
 					</button>
-					{isLoaded && factory ? <AddComment factory={factory} /> : <Login propFunction={handleSignin} />}
+					{isLoaded && factory ? <AddComment closeModal={closeModal} factory={factory} /> : <Login propFunction={handleSignin} />}
 				</DialogBox>
 			</DialogBoxWrapper>
 		</Overlay>
