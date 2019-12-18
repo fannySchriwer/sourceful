@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
 const List = ({ data: { user } }) => {
-	console.log(user);
 	return (
 		<Fragment>
 			<h2>Pliz work, its your list {user.email}</h2>

@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx, Styled } from 'theme-ui';
+import { useState } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const AddComment = ({ factory }) => {
 	const [ comment, setComment ] = useState('');
 	const db = firebase.firestore();
-	const auth = useAuth();
+  const auth = useAuth();
+  
+  const { datoCmsHelperText } = useStaticQuery(
+		graphql`
+			query {
+				datoCmsHelperText {
+          addComment
+        }
+			}
+		`
+  );
+
 
   function addFactoryToMyList() {
 	  db.collection('users').doc(auth.currentUser.uid).collection('myList').add({
@@ -33,10 +47,12 @@ const AddComment = ({ factory }) => {
 	}
 	return (
 		<div>
-			<h1>Add factory</h1>
-			<h2>{factory.name}</h2>
+			<Styled.h2>{factory.name}</Styled.h2>
+      <Styled.p sx={{padding: 4}}>{datoCmsHelperText.addComment}</Styled.p>
 			<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" />
-			<PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
+      <div sx={{padding: 3}}>
+			  <PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
+      </div>
 		</div>
 	);
 };
