@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -90,7 +92,11 @@ function SignUp() {
 							/>
 						</Grid>
 					</Grid>
-					<PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
+          <div  sx={{
+              marginTop: [ 3, 4]
+            }}>
+				  	<PrimaryButton  propFunction={handleSubmit}>Sign up</PrimaryButton>
+          </div>
 				</form>
 			</div>
 		</Container>
