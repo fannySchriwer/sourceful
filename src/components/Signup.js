@@ -107,7 +107,7 @@ function SignUp() {
           </div>
           {errors && (
 					<p sx={{
-            color: 'red'
+            color: '#f50057'
           }}>
 						{String(errors)}
 					</p>
