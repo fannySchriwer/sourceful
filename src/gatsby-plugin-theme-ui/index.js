@@ -60,7 +60,7 @@ export default {
 			fontWeight: 'body',
 			fontStyle: 'italic',
 			color: 'primary',
-			fontSize: 3
+			fontSize: 2
 		},
 		a: {
 			fontFamily: 'body',

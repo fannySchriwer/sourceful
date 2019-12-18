@@ -31,9 +31,21 @@ const AddComment = ({ factory, closeModal }) => {
 		  userID: auth.currentUser.uid,
 			employee: factory.employee,
 		  quantity: factory.quantity,
-			producttype: factory.producttype,
+      producttype: factory.producttype,
+      address: {
+        city: factory.address.city,
+        country: factory.address.country,
+        street: factory.address.street,
+        postalcode: factory.address.postalcode,
+      },
 			category: factory.category,
-			country: factory.address.country,
+      certificates: factory.certificates,
+      contact: {
+        email: factory.contact.email,
+        website: factory.contact.website,
+      },
+      continent: factory.continent,
+      description: factory.description,
 
 	  }).then((response) => {
 		  if(response.id) {
