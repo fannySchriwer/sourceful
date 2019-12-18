@@ -11,9 +11,9 @@ import Select from '../components/SelectField';
 const List = ({ data: { user } }) => {
   console.log(user.childrenList);
   const productTypes = [
-    'option 1',
-    'option 2',
-    'option 3'
+    'Knit',
+    'Woven',
+    'Jersey'
   ];
 	return (
 		<Layout>
@@ -70,13 +70,20 @@ export const pageQuery = graphql`
 			id
 			email
 			childrenList {
-			name
-			continent
-			description
-			quantity
-			id
-			employee
-			producttype
+        address {
+          country
+        }
+        comment
+        category {
+          jersey
+          knit
+          woven
+        }
+        name
+        id
+        employee
+        producttype
+        factoryID
 			}
 		}
 	}

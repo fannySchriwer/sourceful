@@ -50,16 +50,14 @@ module.exports = {
 								type: `List`,
 								collection: `myList`,
 								map: (doc) => ({
-									address: doc.address,
+                  address: doc.address,
+                  comment: doc.comment,
                   category: doc.category,
-                  certificates: doc.certificates,
-                  contact: doc.contact,
-                  continent: doc.continent,
-                  description: doc.description,
                   employee: doc.employee,
                   quantity: doc.quantity,
                   name: doc.name,
                   producttype: doc.producttype,
+                  factoryID: doc.factoryID
 								})
 							}
 						]
