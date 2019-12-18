@@ -20,7 +20,7 @@ export const pageQuery = graphql`
 		user(id: { eq: $id }) {
 			id
 			email
-			childList {
+			childrenList {
 				comment
 				name
 			}

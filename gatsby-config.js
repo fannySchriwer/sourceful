@@ -34,6 +34,7 @@ module.exports = {
 							quantity: doc.quantity,
 							name: doc.name,
 							producttype: doc.producttype,
+							segment: doc.segment,
 							summary: doc.summary
 						})
 					},
