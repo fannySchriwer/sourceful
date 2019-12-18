@@ -26,8 +26,8 @@ const Login = ({ propFunction }) => {
 		});
 	}
 
-  //takes state values and runs firebase login
-  //
+  //runs firebase login on click
+  //closes modal on success and shows error on fail
 	function handleSubmit(event) {
 		event.preventDefault();
 		setErrors(validate(loginUser));
@@ -38,7 +38,6 @@ const Login = ({ propFunction }) => {
         setErrors(response);
       }
     });
-    console.log(errors);
 	}
 
 	return (
