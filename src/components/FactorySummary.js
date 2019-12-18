@@ -25,7 +25,7 @@ const FactorySummary = ({ factory }) => (
 
 		<Styled.p sx={{ marginY: 3 }}>{factory.summary}</Styled.p>
 		<Link
-			to={factory.name}
+			to={factory.id}
 			sx={{
 				fontStyle: 'italic',
 				textDecoration: 'none',
