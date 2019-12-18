@@ -1,16 +1,18 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PrimaryButton from './PrimaryButton';
 import { useAuth } from '../hooks/useAuth';
+import { ToggleContext } from './ToggleContext';
 
 const Login = ({ propFunction }) => {
-  const auth = useAuth();
-	const [errors, setErrors] = useState('');
+	const auth = useAuth();
+	const { closeNavigation } = useContext(ToggleContext);
+	const [ errors, setErrors ] = useState('');
 	const [ loginUser, setLoginInfo ] = useState({
 		email: '',
 		password: ''
@@ -25,17 +27,18 @@ const Login = ({ propFunction }) => {
 		});
 	}
 
-  //runs firebase login on click
-  //closes modal on success and shows error on fail
+	//runs firebase login on click
+	//closes modal on success and shows error on fail
 	function handleSubmit(event) {
 		event.preventDefault();
-    auth.signin(loginUser.email, loginUser.password).then((response) => {
-      if (response.uid) {
-        propFunction();
-      } else {
-        setErrors(response);
-      }
-    });
+		auth.signin(loginUser.email, loginUser.password).then((response) => {
+			if (response.uid) {
+				propFunction();
+				setTimeout(closeNavigation, 500);
+			} else {
+				setErrors(response);
+			}
+		});
 	}
 
 	return (
@@ -73,9 +76,11 @@ const Login = ({ propFunction }) => {
 					<PrimaryButton propFunction={handleSubmit}>Sign In</PrimaryButton>
 				</form>
 				{errors && (
-					<p sx={{
-            color: '#f50057'
-          }}>
+					<p
+						sx={{
+							color: '#f50057'
+						}}
+					>
 						{String(errors)}
 					</p>
 				)}
