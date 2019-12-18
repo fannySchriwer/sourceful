@@ -9,7 +9,8 @@ import useGetAllFactories from '../hooks/useGetAllFactories';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import FactoryList from './FactoryList';
-import SearchHeader from './SearchHeader';
+import SectionContainer from './SectionContainer';
+import SectionHeader from './SectionHeader';
 
 const continents = [ 'europe', 'asia' ];
 const minQuantity = [
@@ -22,7 +23,7 @@ const minQuantity = [
 ];
 
 const FilterFactoriesForm = () => {
-	const { datoCmsCategoryFilter, datoCmsProductFilter } = useStaticQuery(
+	const { datoCmsCategoryFilter, datoCmsProductFilter, datoCmsSearchSection } = useStaticQuery(
 		graphql`
 			query {
 				datoCmsCategoryFilter {
@@ -35,9 +36,15 @@ const FilterFactoriesForm = () => {
 						productName
 					}
 				}
+				datoCmsSearchSection {
+					slug
+					text
+				}
 			}
 		`
 	);
+
+	const { slug, text } = datoCmsSearchSection;
 
 	let categories = [];
 	datoCmsCategoryFilter.filters.map(({ categoryName }) => {
@@ -105,85 +112,77 @@ const FilterFactoriesForm = () => {
 	const { factories } = useGetAllFactories(filters);
 	return (
 		<Fragment>
-			<section>
-				<div
-					sx={{
-						paddingTop: [ 6, 2, null ]
-					}}
-				>
-					<SearchHeader />
+			<section
+				id={slug}
+				sx={{
+					backgroundColor: 'lightGrey',
+					paddingY: 4
+				}}
+			>
+				<SectionHeader>{text}</SectionHeader>
+				<SectionContainer>
+					<div
+						sx={{
+							width: [ '100%', '40%', '40%' ]
+						}}
+					>
+						<Select
+							options={productTypes}
+							inputLabel="Product type"
+							onChange={handleChange}
+							name="productType"
+							defaultValue={filters.productType}
+						/>
+						<Select
+							options={categories}
+							inputLabel="Categories"
+							onChange={handleChange}
+							name="category"
+							defaultValue={filters.category}
+						/>
+						<Select
+							options={continents}
+							inputLabel="Continent"
+							onChange={handleChange}
+							name="continent"
+							defaultValue={filters.continent}
+						/>
+					</div>
 					<div
 						sx={{
 							display: 'flex',
-							flexDirection: [ 'column', 'row', null ],
-							justifyContent: [ 'center', 'space-between', null ]
+							flexDirection: 'column',
+							justifyContent: 'center',
+							width: [ '100%', '55%', null ]
 						}}
 					>
-						<div
-							sx={{
-								width: [ '100%', '40%', '40%' ]
-							}}
-						>
-							<Select
-								options={productTypes}
-								inputLabel="Product type"
-								onChange={handleChange}
-								name="productType"
-								defaultValue={filters.productType}
-							/>
-							<Select
-								options={categories}
-								inputLabel="Categories"
-								onChange={handleChange}
-								name="category"
-								defaultValue={filters.category}
-							/>
-							<Select
-								options={continents}
-								inputLabel="Continent"
-								onChange={handleChange}
-								name="continent"
-								defaultValue={filters.continent}
-							/>
-						</div>
-						<div
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								width: [ '100%', '55%', null ]
-							}}
-						>
-							<RadioButtonGroup
-								options={minQuantity}
-								formLabel="Minimum Qiantity"
-								name="quantity"
-								defaultValue={filters.quantity}
-								onChange={handleChange}
-							/>
-							<CheckboxGroup
-								name="certification"
-								onChange={handleCheckbox}
-								checkBoxStateValues={filters.certification}
-							/>
-						</div>
+						<RadioButtonGroup
+							options={minQuantity}
+							formLabel="Minimum Qiantity"
+							name="quantity"
+							defaultValue={filters.quantity}
+							onChange={handleChange}
+						/>
+						<CheckboxGroup
+							name="certification"
+							onChange={handleCheckbox}
+							checkBoxStateValues={filters.certification}
+						/>
 					</div>
-
-					<div
-						sx={{
-							paddingTop: 3,
-							paddingBottom: [ 3, 4 ]
-						}}
-					>
-						<PrimaryButton propFunction={clearFilter} value="submit">
-							Remove filters
-						</PrimaryButton>
-					</div>
+				</SectionContainer>
+				<div
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						paddingBottom: [ 3, 4 ]
+					}}
+				>
+					<PrimaryButton propFunction={clearFilter} value="submit">
+						Remove filters
+					</PrimaryButton>
 				</div>
 			</section>
-			<section>
-				<FactoryList factories={factories} />
-			</section>
+			<FactoryList factories={factories} />
 		</Fragment>
 	);
 };

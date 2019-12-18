@@ -1,19 +1,15 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
+import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
 
 const FactoryListCounter = ({ nrOfFactories }) => {
 	return (
-		<div>
-			<p sx={{ fontStyle: 'italic', color: 'primary' }}>
-				{nrOfFactories > 1 && `${nrOfFactories} factories found`}
-			</p>
-			<p sx={{ fontStyle: 'italic', color: 'primary' }}>
-				{nrOfFactories === 1 && `${nrOfFactories} factory found`}
-			</p>
-			<p sx={{ fontStyle: 'italic', color: 'primary' }}>
+		<div sx={{ textAlign: 'center' }}>
+			<Styled.h5>{nrOfFactories > 1 && `${nrOfFactories} factories found`}</Styled.h5>
+			<Styled.h5>{nrOfFactories === 1 && `${nrOfFactories} factory found`}</Styled.h5>
+			<Styled.h5 sx={{ fontStyle: 'italic', color: 'primary' }}>
 				{nrOfFactories === 0 && 'No factories found, try clearing your filters'}
-			</p>
+			</Styled.h5>
 		</div>
 	);
 };

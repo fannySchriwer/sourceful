@@ -9,14 +9,7 @@ const IndexPage = () => (
 	<Fragment>
 		<Layout>
 			<Hero />
-			<main
-				sx={{
-					marginRight: [ 4, 5, 6 ],
-					marginLeft: [ 4, 5, 6 ],
-					marginTop: [ 3, 4 ],
-					marginBottom: [ 3, 4 ]
-				}}
-			>
+			<main>
 				<FilterFactoriesForm />
 			</main>
 		</Layout>
