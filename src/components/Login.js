@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PrimaryButton from './PrimaryButton';
-import validate from './FormValidationRules';
 import { useAuth } from '../hooks/useAuth';
 
 const Login = ({ propFunction }) => {
@@ -30,7 +29,6 @@ const Login = ({ propFunction }) => {
   //closes modal on success and shows error on fail
 	function handleSubmit(event) {
 		event.preventDefault();
-		setErrors(validate(loginUser));
     auth.signin(loginUser.email, loginUser.password).then((response) => {
       if (response.uid) {
         propFunction();
