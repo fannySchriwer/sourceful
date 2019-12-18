@@ -11,6 +11,7 @@ import Layout from '../components/Layout';
 import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
 import HeaderContainer from '../components/HeaderContainer';
+import Subheading from '../components/Subheading';
 
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
@@ -26,7 +27,18 @@ const Factory = ({ data: { factory } }) => {
 		[ auth ]
 	);
 
-	const { name, contact, category, address, description, employee, producttype, certificates, continent } = factory;
+	const {
+		name,
+		contact,
+		category,
+		address,
+		description,
+		employee,
+		producttype,
+		certificates,
+		continent,
+		quantity
+	} = factory;
 	const { email, website } = contact;
 	const { city, country, postalcode, street } = address;
 
@@ -51,8 +63,16 @@ const Factory = ({ data: { factory } }) => {
 	let web;
 	website ? (web = <Styled.p>{website}</Styled.p>) : web;
 
-	let jersey;
-	category.jersey ? (jersey = <Styled.p>Jersey</Styled.p>) : web;
+	//Check if factory has certain category or return empty string
+	let categoryJersey;
+	category.jersey ? (categoryJersey = <span>Jersey,</span>) : categoryJersey;
+
+	let categoryWoven;
+	category.woven ? (categoryWoven = <span>Woven,</span>) : categoryWoven;
+	let categoryKnit;
+	category.knit ? (categoryKnit = <span>Knit,</span>) : categoryKnit;
+	let categoryGortex;
+	category.gortex ? (categoryGortex = <span>GORE-TEX</span>) : categoryGortex;
 
 	return (
 		<Layout>
@@ -73,16 +93,20 @@ const Factory = ({ data: { factory } }) => {
 						zIndex: 2,
 						paddingX: [ 3, 5, 6 ],
 						marginTop: [ 3, 6, 6 ],
-						backgroundColor: 'hotpink',
 						display: 'grid',
-						gridTemplateColumns: '[outer-start] 1fr [center] 1fr [outer-end]',
-						gridTemplateRows: [ '[top] 100px [middle-start] 100px [middle-end] auto [bottom]' ]
+						gridTemplateColumns: '[outer-start] 1fr [center-start] 20px [center-end] 1fr [outer-end]',
+						gridTemplateRows: [ '[top] 150px [middle-start] 100px [middle-end] auto [bottom]' ]
 					}}
 				>
 					<Styled.h1
 						as="div"
 						sx={{
-							gridArea: [ 'top/outer-start/midle-start/outer-end', 'top/outer-start/midle-start/center' ]
+							gridArea: [
+								'top/outer-start/midle-start/outer-end',
+								null,
+								'top/outer-start/midle-start/center'
+							],
+							paddingTop: 5
 						}}
 					>
 						{name}
@@ -90,85 +114,62 @@ const Factory = ({ data: { factory } }) => {
 					<Styled.h2
 						as="div"
 						sx={{
-							gridArea: [
-								'middle-start/outer-start/midle-end/outer-end',
-								'middle-start/outer-start/midle-end/outer-end'
-							]
+							gridArea: [ 'middle-start/outer-start/midle-end/outer-end' ]
 						}}
 					>
 						Contact information:
 					</Styled.h2>
 					<div
 						sx={{
-							gridArea: [ 'middle-start/center/midle-end/outer-end' ],
-							justifySelf: 'end'
+							gridArea: [
+								'middle-start/center-start/midle-end/outer-end',
+								null,
+								'middle-start/outer-start/midle-end/center-start'
+							],
+							justifySelf: [ 'end' ]
 						}}
 					>
 						<LikeButton setModalOpen={setModalOpen} />
 					</div>
-					{/* 
 					<div
 						sx={{
-							marginTop: 4
+							gridArea: [
+								'middle-end/outer-start/bottom/outer-end',
+								null,
+								'middle-end/outer-start/bottom/center-start'
+							],
+							display: 'grid',
+							gridTemplateColumns: '1fr 2fr',
+							gridTemplateRow: 'auto'
 						}}
 					>
-						<Styled.h2>Contact information: </Styled.h2> */}
-					{/* Contact details container */}
-					{/* <div
+						<Subheading>Webside:</Subheading>
+						<Styled.p as="div">{web}</Styled.p>
+						<Subheading>Email</Subheading>
+						<Styled.p
+							as="a"
+							href={`mailto:${email}`}
 							sx={{
-								textAlign: 'right'
+								textDecoration: 'none',
+								color: 'text',
+								':hover': {
+									color: 'primary',
+									fontWeight: 'normal',
+									cursor: 'pointer'
+								}
 							}}
 						>
-							<LikeButton setModalOpen={setModalOpen} />
+							{email}
+						</Styled.p>
+						<Subheading>Address:</Subheading>
+						<div>
+							<Styled.p>{street},</Styled.p>
+							<Styled.p> {postalcode},</Styled.p>
+							<Styled.p> {city},</Styled.p>
+							<Styled.p> {country},</Styled.p>
+							<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
 						</div>
-
-						<div
-							sx={{
-								display: 'grid',
-								gridTemplateColumns: '1fr 2fr',
-								marginTop: 4,
-								gridGap: '20px'
-							}}
-						>
-							<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-								Webside:
-							</Styled.p>
-							<Styled.p as="div">{web}</Styled.p>
-							<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-								Email
-							</Styled.p>
-							<Styled.p
-								as="a"
-								href={`mailto:${email}`}
-								sx={{
-									textDecoration: 'none',
-									color: 'text',
-									':hover': {
-										color: 'primary',
-										fontWeight: 'normal'
-									}
-								}}
-							>
-								{email}
-							</Styled.p>
-							<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal', marginTop: 4 }}>
-								Address:
-							</Styled.p>
-							<div sx={{ marginTop: 4 }}>
-								<Styled.p>{street},</Styled.p>
-								<Styled.p> {postalcode},</Styled.p>
-								<Styled.p> {city},</Styled.p>
-								<Styled.p> {country},</Styled.p>
-								<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
-							</div> */}
-					{/* Contact details container end */}
-					{/* </div> */}
-					{/* Contact information container end */}
-					{/* </div>
-					<div sx={{ display: 'flex', marginTop: 3 }}>
-						{bsci}
-						{gortex}
-					</div> */}
+					</div>
 				</div>
 			</HeaderContainer>
 
@@ -177,28 +178,27 @@ const Factory = ({ data: { factory } }) => {
 					paddingX: [ 3, 5, 6 ]
 				}}
 			>
-				{/* Factory details container */}
+				<article sx={{ maxWidth: '1000px', marginY: 3 }}>
+					<Styled.h2 sx={{ marginBottom: 4 }}>About {name}</Styled.h2>
+					<Styled.p>{description}</Styled.p>
+				</article>
 				<div
 					sx={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 1fr',
-						marginTop: 4
+						marginY: 4
 					}}
 				>
-					<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-						Minimum quantity:
-					</Styled.p>
-					<Styled.p as="div">{web}</Styled.p>
-					<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-						Categories:
-					</Styled.p>
-					<div>{jersey}</div>
-					<Styled.p as="div" sx={{ fontStyle: 'italic', fontWeight: 'normal', marginTop: 4 }}>
-						Product type:
-					</Styled.p>
-					<div sx={{ marginTop: 4 }}>{producttype.map((prod, i) => <Styled.p key={i}>{prod}</Styled.p>)}</div>
-					{/* Factory details container end */}
+					{bsci}
+					{gortex}
 				</div>
+			</section>
+			<section sx={{ backgroundColor: 'lightGrey', paddingX: [ 3, 5, 6 ], paddingY: 4 }}>
+				<Styled.p>
+					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Minimum quantity: </span> {quantity}
+				</Styled.p>
+				<Styled.p>
+					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Categories: </span>
+					{categoryJersey} {categoryWoven} {categoryKnit} {categoryGortex}
+				</Styled.p>
 			</section>
 
 			<ModalPortal>
@@ -288,6 +288,7 @@ export const pageQuery = graphql`
 				jersey
 				knit
 				woven
+				gortex
 			}
 			certificates {
 				blue_sign {
