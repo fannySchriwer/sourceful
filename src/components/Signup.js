@@ -10,7 +10,8 @@ import PrimaryButton from './PrimaryButton';
 import { useAuth } from '../hooks/useAuth';
 
 function SignUp() {
-	const auth = useAuth();
+  const auth = useAuth();
+  const [errors, setErrors] = useState('');
 	const [ signupUser, setSignupUser ] = useState({
 		firstName: '',
 		lastName: '',
@@ -29,7 +30,13 @@ function SignUp() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		auth.signup(signupUser.email, signupUser.password);
+    auth.signup(signupUser.email, signupUser.password).then((response) => {
+      if (response.uid) {
+        console.log('success, close modal or redirect');
+      } else {
+        setErrors(response);
+      }
+    });
 	}
 
 	return (
@@ -43,11 +50,12 @@ function SignUp() {
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
+                color="primary"
 								autoComplete="fname"
 								name="firstName"
 								variant="outlined"
 								required
-								fullWidth
+                fullWidth
 								id="firstName"
 								label="First Name"
 								onChange={handleChange}
@@ -95,8 +103,15 @@ function SignUp() {
           <div  sx={{
               marginTop: [ 3, 4]
             }}>
-				  	<PrimaryButton  propFunction={handleSubmit}>Sign up</PrimaryButton>
+				  	<PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
           </div>
+          {errors && (
+					<p sx={{
+            color: 'red'
+          }}>
+						{String(errors)}
+					</p>
+				)}
 				</form>
 			</div>
 		</Container>
