@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PrimaryButton from './PrimaryButton';
+import validate from './FormValidationRules';
 import { useAuth } from '../hooks/useAuth';
 
 const Login = ({ propFunction }) => {
-	const auth = useAuth();
+  const auth = useAuth();
+	const [errors, setErrors] = useState('');
 	const [ loginUser, setLoginInfo ] = useState({
 		email: '',
 		password: ''
@@ -22,10 +26,19 @@ const Login = ({ propFunction }) => {
 		});
 	}
 
+  //takes state values and runs firebase login
+  //
 	function handleSubmit(event) {
 		event.preventDefault();
-		auth.signin(loginUser.email, loginUser.password);
-		propFunction();
+		setErrors(validate(loginUser));
+    auth.signin(loginUser.email, loginUser.password).then((response) => {
+      if (response.uid) {
+        propFunction();
+      } else {
+        setErrors(response);
+      }
+    });
+    console.log(errors);
 	}
 
 	return (
@@ -62,10 +75,11 @@ const Login = ({ propFunction }) => {
 					/>
 					<PrimaryButton propFunction={handleSubmit}>Sign In</PrimaryButton>
 				</form>
-				{auth.currentUser && (
-					<p>
-						Hey
-						{auth.currentUser.email}
+				{errors && (
+					<p sx={{
+            color: 'red'
+          }}>
+						{String(errors)}
 					</p>
 				)}
 			</div>

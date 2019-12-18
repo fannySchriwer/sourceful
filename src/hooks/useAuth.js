@@ -41,13 +41,11 @@ function useProviderAuth() {
 			.signInWithEmailAndPassword(email, password)
 			.then((response) => {
 				setCurrentUser(response.user);
-				console.log(response.user);
 				return response.user;
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorMessage, errorCode);
+	      const errorMessage = error.message;
+				return errorMessage;
 			});
 
 	const signup = (email, password) =>
@@ -67,9 +65,8 @@ function useProviderAuth() {
 				return response.user;
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorMessage, errorCode);
+	      const errorMessage = error.message;
+				return errorMessage;
 			});
 
 	const signout = () =>
