@@ -106,7 +106,7 @@ const Factory = ({ data: { factory } }) => {
 								null,
 								'top/outer-start/midle-start/center'
 							],
-							paddingTop: 5
+							paddingTop: 2
 						}}
 					>
 						{name}
