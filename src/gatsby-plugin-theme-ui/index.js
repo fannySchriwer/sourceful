@@ -11,6 +11,7 @@ export default {
 	},
 	fontWeights: {
 		body: 300,
+		subheading: 400,
 		heading: 700,
 		bold: 900
 	},
@@ -32,24 +33,34 @@ export default {
 			fontWeight: [ 'heading', null, 'bold' ],
 			fontSize: [ 6, null, 7 ],
 			color: 'primary',
-			lineHeight: 'heading'
+			lineHeight: 'heading',
+			margin: 0
 		},
 		h2: {
 			fontFamily: 'heading',
-			fontWeight: 'body',
-			fontSize: [ 3, null, 4 ],
-			color: 'text'
+			fontWeight: 'subheading',
+			color: 'primary',
+			fontSize: 4,
+			margin: 0
 		},
 		h3: {
 			fontFamily: 'heading',
-			fontWeight: 'heading',
-			color: 'primary',
-			fontSize: 4
+			fontWeight: 'body',
+			fontSize: [ 3, null, 4 ],
+			color: 'text',
+			margin: 0
 		},
 		h4: {
 			fontFamily: 'heading',
 			fontWeight: 'heading',
 			fontSize: 2
+		},
+		h5: {
+			fontFamily: 'heading',
+			fontWeight: 'body',
+			fontStyle: 'italic',
+			color: 'primary',
+			fontSize: 3
 		},
 		a: {
 			fontFamily: 'body',
@@ -58,6 +69,12 @@ export default {
 			textDecoration: 'none',
 			textTransform: 'uppercase',
 			color: 'lightGrey'
+		},
+		p: {
+			fontFamily: 'body',
+			fontWeight: 'body',
+			margin: 0,
+			lineHeight: 'body'
 		}
 	},
 	buttons: {

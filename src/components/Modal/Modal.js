@@ -6,7 +6,7 @@ import DialogBoxWrapper from './DialogBoxWrapper';
 import Overlay from './Overlay';
 import Login from '../Login';
 import AddComment from '../AddComment';
-import PrimaryButton from '../PrimaryButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 	if (!modalOpen) {
@@ -25,7 +25,33 @@ const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 		<Overlay>
 			<DialogBoxWrapper>
 				<DialogBox>
-					<PrimaryButton label={'X'} propFunction={closeModal} />
+					<button
+						sx={{
+							background: 'none',
+							border: 'none',
+							top: 0,
+							position: 'absolute',
+							right: 0,
+							padding: 4,
+							borderRadius: 4,
+							':hover': {
+								backgroundColor: 'secondary'
+							},
+							':active': {
+								backgroundColor: 'primary'
+							},
+							':focus': {
+								backgroundColor: 'primary'
+							}
+						}}
+						onClick={closeModal}
+					>
+						<FontAwesomeIcon
+							icon={[ 'fas', 'times' ]}
+							sx={{ color: 'primary', fontSize: 5, textAlight: 'center' }}
+						/>
+					</button>
+					{/* <PrimaryButton propFunction={closeModal} /> */}
 					{isLoaded && factory ? <AddComment factory={factory} /> : <Login propFunction={handleSignin} />}
 				</DialogBox>
 			</DialogBoxWrapper>

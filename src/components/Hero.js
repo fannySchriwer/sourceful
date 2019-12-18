@@ -2,13 +2,17 @@
 import { jsx, Styled } from 'theme-ui';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-import PrimaryButton from './PrimaryButton';
+import LinkButton from './LinkButton';
 import BackgroundImage from './BackgroundImg';
+import HeaderContainer from './HeaderContainer';
 
 const Hero = () => {
-	const { datoCmsHero } = useStaticQuery(
+	const { datoCmsHero, datoCmsSearchSection } = useStaticQuery(
 		graphql`
 			query {
+				datoCmsSearchSection {
+					slug
+				}
 				datoCmsHero {
 					heroImg {
 						fluid {
@@ -25,14 +29,7 @@ const Hero = () => {
 
 	const { ctaText, heroTitle, heroText, heroImg } = datoCmsHero;
 	return (
-		<header
-			sx={{
-				height: [ '100vh' ],
-				display: 'grid',
-				gridTemplateColumns: '[outer-start] 1fr [center] 4fr [outer-end]',
-				gridTemplateRows: '[top] 1fr [middle-start] 3fr [middle-end] 1fr [bottom]'
-			}}
-		>
+		<HeaderContainer>
 			<div
 				sx={{
 					gridArea: [ 'top/outer-start/bottom/outer-end', 'top/center/middle-end/outer-end' ]
@@ -58,14 +55,14 @@ const Hero = () => {
 					}}
 				>
 					<Styled.h1 sx={{ maxWidth: '500px' }}>{heroTitle}</Styled.h1>
-					<Styled.h2 sx={{ marginBottom: [ 4, 5 ] }}>{heroText}</Styled.h2>
-					<PrimaryButton>{ctaText}</PrimaryButton>
+					<Styled.h3 sx={{ marginBottom: [ 4, 5 ], marginTop: [ 4, 5 ] }}>{heroText}</Styled.h3>
+					<LinkButton href={datoCmsSearchSection.slug}>{ctaText}</LinkButton>
 				</div>
 				<div sx={{ height: '100%', width: '100%', paddingTop: [ 0, null, 6 ] }}>
 					<Img fluid={heroImg.fluid} />
 				</div>
 			</div>
-		</header>
+		</HeaderContainer>
 	);
 };
 
