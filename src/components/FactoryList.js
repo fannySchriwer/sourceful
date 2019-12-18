@@ -3,7 +3,7 @@ import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 import FactoryListCounter from './FactoryListCounter';
-import SectionContainer from './SectionContainer';
+import CardContainer from './CardContainer';
 
 const FactoryList = ({ factories }) => {
 	const nrOfFactories = Object.keys(factories).length;
@@ -15,15 +15,9 @@ const FactoryList = ({ factories }) => {
 			}}
 		>
 			<FactoryListCounter nrOfFactories={nrOfFactories} />
-			<div
-				sx={{
-					display: 'grid',
-					gridTemplateColumns: [ '1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)' ],
-					gridGap: 4
-				}}
-			>
+			<CardContainer>
 				{factories.map((factory) => <FactorySummary key={factory.id} factory={factory} />)}
-			</div>
+			</CardContainer>
 		</section>
 	);
 };
