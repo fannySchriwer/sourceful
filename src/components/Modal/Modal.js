@@ -33,16 +33,7 @@ const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 							position: 'absolute',
 							right: 0,
 							padding: 4,
-							borderRadius: 4,
-							':hover': {
-								backgroundColor: 'secondary'
-							},
-							':active': {
-								backgroundColor: 'primary'
-							},
-							':focus': {
-								backgroundColor: 'primary'
-							}
+							borderRadius: 4
 						}}
 						onClick={closeModal}
 					>

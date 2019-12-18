@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 import FactoryListCounter from './FactoryListCounter';
 import SectionContainer from './SectionContainer';
-import SectionHeader from './SectionHeader';
 
 const FactoryList = ({ factories }) => {
 	const nrOfFactories = Object.keys(factories).length;

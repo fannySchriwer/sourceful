@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Styled } from 'theme-ui';
+import { jsx } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const LikeButton = ({ setModalOpen }) => (
 	<button sx={{ background: 'none', border: 'none' }} onClick={setModalOpen}>

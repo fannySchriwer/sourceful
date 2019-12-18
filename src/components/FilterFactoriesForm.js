@@ -116,7 +116,8 @@ const FilterFactoriesForm = () => {
 				id={slug}
 				sx={{
 					backgroundColor: 'lightGrey',
-					paddingY: 4
+          marginTop: 6,
+          paddingY: [4, 5],
 				}}
 			>
 				<SectionHeader>{text}</SectionHeader>

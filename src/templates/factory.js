@@ -106,7 +106,7 @@ const Factory = ({ data: { factory } }) => {
 								null,
 								'top/outer-start/midle-start/center'
 							],
-							paddingTop: 5
+							paddingTop: 2
 						}}
 					>
 						{name}
@@ -165,8 +165,7 @@ const Factory = ({ data: { factory } }) => {
 						<div>
 							<Styled.p>{street},</Styled.p>
 							<Styled.p> {postalcode},</Styled.p>
-							<Styled.p> {city},</Styled.p>
-							<Styled.p> {country},</Styled.p>
+							<Styled.p> {city}, {country}</Styled.p>
 							<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
 						</div>
 					</div>

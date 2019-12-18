@@ -51,7 +51,8 @@ const Hero = () => {
 				<div
 					sx={{
 						paddingX: [ 3, 5, 6 ],
-						paddingTop: [ 1, null, 5 ]
+            paddingTop: [ 1, null, 5 ],
+            marginTop: [7, 3],
 					}}
 				>
 					<Styled.h1 sx={{ maxWidth: '500px' }}>{heroTitle}</Styled.h1>
