@@ -5,18 +5,38 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "gatsby": "^2.18.4",
+    "@emotion/core": "^10.0.22",
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
+    "@fortawesome/free-regular-svg-icons": "^5.12.0",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@martinreiche/gatsby-firestore": "^1.0.1",
+    "@material-ui/core": "^4.7.1",
+    "@material-ui/styles": "^4.7.1",
+    "@mdx-js/react": "^1.5.1",
+    "firebase": "^7.5.0",
+    "gatsby": "^2.18.11",
+    "gatsby-background-image": "^0.9.12",
     "gatsby-image": "^2.2.34",
-    "gatsby-plugin-manifest": "^2.2.30",
+    "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-offline": "^3.0.24",
     "gatsby-plugin-react-helmet": "^3.1.16",
     "gatsby-plugin-sharp": "^2.3.4",
+    "gatsby-plugin-theme-ui": "^0.2.43",
+    "gatsby-source-datocms": "^2.1.20",
     "gatsby-source-filesystem": "^2.1.39",
+    "gatsby-theme-material-ui": "^1.0.5",
     "gatsby-transformer-sharp": "^2.3.6",
+    "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-breakpoints": "^3.0.3",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-ripples": "^2.2.1",
+    "theme-ui": "^0.2.49",
+    "typeface-lato": "0.0.75"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
@@ -25,8 +45,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1"
+    "eslint-plugin-react-hooks": "^1.7.0"
   },
   "keywords": [
     "gatsby"
@@ -40,12 +59,5 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
