@@ -54,7 +54,7 @@ const List = ({ data: { user } }) => {
 			<section
 				sx={{
 					paddingX: [ 4, 5, 6 ],
-					marginTop: [ '-300px', '-200px' ]
+					marginTop: [ '-300px', '-450px' ]
 				}}
 			>
 				<CardContainer>
