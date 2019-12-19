@@ -7,16 +7,19 @@ export default function useGetAllFactories(filters) {
 
   let query = db.collection('factories');
   if (filters.continent) {
-    query = query.where('continent', '==', `${filters.continent}`);
+    const continent = filters.continent.toLowerCase();
+    query = query.where('continent', '==', `${continent}`);
   }
   if (filters.category) {
-    query = query.where(`category.${filters.category}`, '==', true);
+    const category = filters.category.toLowerCase();
+    query = query.where(`category.${category}`, '==', true);
   }
   if (filters.productType) {
+    const productType = filters.productType.toLowerCase();
     query = query.where(
       'producttype',
       'array-contains',
-      `${filters.productType}`,
+      `${productType}`,
     );
   }
   if (filters.quantity && filters.quantity !== "0") {

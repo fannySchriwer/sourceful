@@ -64,7 +64,7 @@ const FilterFactoriesForm = () => {
 		certification: [
 			{ value: 'Oeko-tex', isChecked: false },
 			{ value: 'BCI', isChecked: false },
-			{ value: 'Gortex', isChecked: false },
+			{ value: 'GORE-TEX', isChecked: false },
 			{ value: 'Blue-sign', isChecked: false },
 			{ value: 'HIGS-index', isChecked: false },
 			{ value: 'RDS', isChecked: false },
@@ -100,7 +100,7 @@ const FilterFactoriesForm = () => {
 			certification: [
 				{ value: 'Oeko-tex', isChecked: false },
 				{ value: 'BCI', isChecked: false },
-				{ value: 'Gortex', isChecked: false },
+				{ value: 'GORE-TEX', isChecked: false },
 				{ value: 'Blue-sign', isChecked: false },
 				{ value: 'HIGS-index', isChecked: false },
 				{ value: 'RDS', isChecked: false },
