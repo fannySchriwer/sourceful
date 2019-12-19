@@ -1,18 +1,23 @@
 /** @jsx jsx */
-import { jsx, Styled } from 'theme-ui';
+import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 import FactoryListCounter from './FactoryListCounter';
-import SectionContainer from './SectionContainer';
+import CardContainer from './CardContainer';
 
 const FactoryList = ({ factories }) => {
 	const nrOfFactories = Object.keys(factories).length;
 	return (
-		<section>
+		<section
+			sx={{
+				paddingX: [ 4, 5, 6 ],
+				paddingY: [ 3, 4 ]
+			}}
+		>
 			<FactoryListCounter nrOfFactories={nrOfFactories} />
-			<SectionContainer>
+			<CardContainer>
 				{factories.map((factory) => <FactorySummary key={factory.id} factory={factory} />)}
-			</SectionContainer>
+			</CardContainer>
 		</section>
 	);
 };

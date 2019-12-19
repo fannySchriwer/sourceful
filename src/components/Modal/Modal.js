@@ -33,16 +33,28 @@ const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 							position: 'absolute',
 							right: 0,
 							padding: 4,
-							borderRadius: 4
+							borderRadius: 4,
+							cursor: 'pointer'
 						}}
 						onClick={closeModal}
 					>
 						<FontAwesomeIcon
 							icon={[ 'fas', 'times' ]}
-							sx={{ color: 'primary', fontSize: 5, textAlight: 'center' }}
+							sx={{
+								color: 'primary',
+								fontSize: 4,
+								textAlight: 'center',
+								':hover': {
+									color: 'secondary'
+								}
+							}}
 						/>
 					</button>
-					{isLoaded && factory ? <AddComment closeModal={closeModal} factory={factory} /> : <Login propFunction={handleSignin} />}
+					{isLoaded && factory ? (
+						<AddComment closeModal={closeModal} factory={factory} />
+					) : (
+						<Login propFunction={handleSignin} />
+					)}
 				</DialogBox>
 			</DialogBoxWrapper>
 		</Overlay>
