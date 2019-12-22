@@ -12,7 +12,6 @@ import FactoryList from './FactoryList';
 import SectionContainer from './SectionContainer';
 import SectionHeader from './SectionHeader';
 
-const continents = [ 'europe', 'asia' ];
 const minQuantity = [
 	{ value: '0', label: 'None' },
 	{ value: '100', label: '100' },
@@ -23,16 +22,27 @@ const minQuantity = [
 ];
 
 const FilterFactoriesForm = () => {
-	const { datoCmsCategoryFilter, datoCmsProductFilter, datoCmsSearchSection } = useStaticQuery(
+	const {
+		datoCmsCategoryFilter,
+		datoCmsSearchSection,
+		datoCmsContinentFilter,
+		datoCmsProductFilter
+	} = useStaticQuery(
 		graphql`
 			query {
 				datoCmsCategoryFilter {
 					filters {
-						categoryName
+						title
+					}
+				}
+				datoCmsContinentFilter {
+					continent {
+						id
+						continentName
 					}
 				}
 				datoCmsProductFilter {
-					productFilters {
+					productFilter {
 						productName
 					}
 				}
@@ -46,13 +56,17 @@ const FilterFactoriesForm = () => {
 
 	const { slug, text } = datoCmsSearchSection;
 
+	let continents = [];
+	datoCmsContinentFilter.continent.map(({ continentName }) => {
+		continents.push(continentName);
+	});
 	let categories = [];
-	datoCmsCategoryFilter.filters.map(({ categoryName }) => {
-		categories.push(categoryName);
+	datoCmsCategoryFilter.filters.map(({ title }) => {
+		categories.push(title);
 	});
 
 	let productTypes = [];
-	datoCmsProductFilter.productFilters.map(({ productName }) => {
+	datoCmsProductFilter.productFilter.map(({ productName }) => {
 		productTypes.push(productName);
 	});
 
@@ -116,8 +130,8 @@ const FilterFactoriesForm = () => {
 				id={slug}
 				sx={{
 					backgroundColor: 'lightGrey',
-          marginTop: 6,
-          paddingY: [4, 5],
+					marginTop: 6,
+					paddingY: [ 4, 5 ]
 				}}
 			>
 				<SectionHeader>{text}</SectionHeader>
