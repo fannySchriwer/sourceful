@@ -51,14 +51,14 @@ const Factory = ({ data: { factory } }) => {
 			))
 		: bsci;
 
-	let gortex;
-	certificates.gortex
-		? (gortex = (
+	let goretex;
+	certificates.gore_tex
+		? (goretex = (
 				<div>
-					<img sx={{ width: '100px' }} src={certificates.gortex.logo} alt="Gortex logo" />
+					<img sx={{ width: '100px' }} src={certificates.gore_tex.logo} alt="Goretex logo" />
 				</div>
 			))
-		: gortex;
+		: goretex;
 
 	let web;
 	website ? (web = <Styled.p>{website}</Styled.p>) : web;
@@ -71,8 +71,8 @@ const Factory = ({ data: { factory } }) => {
 	category.woven ? (categoryWoven = <span>Woven,</span>) : categoryWoven;
 	let categoryKnit;
 	category.knit ? (categoryKnit = <span>Knit,</span>) : categoryKnit;
-	let categoryGortex;
-	category.gortex ? (categoryGortex = <span>GORE-TEX</span>) : categoryGortex;
+	let categoryGoretex;
+	category.gore_tex ? (categoryGoretex = <span>GORE-TEX</span>) : categoryGoretex;
 
 	return (
 		<Layout>
@@ -165,7 +165,10 @@ const Factory = ({ data: { factory } }) => {
 						<div>
 							<Styled.p>{street},</Styled.p>
 							<Styled.p> {postalcode},</Styled.p>
-							<Styled.p> {city}, {country}</Styled.p>
+							<Styled.p>
+								{' '}
+								{city}, {country}
+							</Styled.p>
 							<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
 						</div>
 					</div>
@@ -187,7 +190,7 @@ const Factory = ({ data: { factory } }) => {
 					}}
 				>
 					{bsci}
-					{gortex}
+					{goretex}
 				</div>
 			</section>
 			<section sx={{ backgroundColor: 'lightGrey', paddingX: [ 3, 5, 6 ], paddingY: 4 }}>
@@ -196,7 +199,7 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 				<Styled.p>
 					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Categories: </span>
-					{categoryJersey} {categoryWoven} {categoryKnit} {categoryGortex}
+					{categoryJersey} {categoryWoven} {categoryKnit} {categoryGoretex}
 				</Styled.p>
 			</section>
 
@@ -219,7 +222,7 @@ Factory.defaultProps = {
 			logo: 'https://i.ibb.co/qkFw4pR/blue-sign.jpg',
 			name: ''
 		}),
-		gortex: PropTypes.shape({
+		gore_tex: PropTypes.shape({
 			logo: 'https://i.ibb.co/GJfF21h/GORE-TEX-Brand-Logo-600x500.jpg',
 			name: ''
 		}),
@@ -256,7 +259,7 @@ Factory.propTypes = {
 				logo: PropTypes.string,
 				name: PropTypes.string
 			}),
-			gortex: PropTypes.shape({
+			gore_tex: PropTypes.shape({
 				logo: PropTypes.string,
 				name: PropTypes.string
 			}),
@@ -287,7 +290,7 @@ export const pageQuery = graphql`
 				jersey
 				knit
 				woven
-				gortex
+				gore_tex
 			}
 			certificates {
 				blue_sign {
@@ -300,9 +303,9 @@ export const pageQuery = graphql`
 					logo
 					name
 				}
-				gortex {
+				gore_tex {
+					gore_tex
 					logo
-					gortex
 					name
 				}
 			}

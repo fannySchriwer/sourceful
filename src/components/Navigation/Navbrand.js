@@ -39,7 +39,7 @@ const NavBrand = () => {
 						case breakpoints[currentBreakpoint] > breakpoints.tabletLandscape:
 							return (
 								<Fragment>
-									<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+									<div sx={{ width: '35px', marginRight: 3 }}>
 										<LogoDesktop />
 									</div>
 									<span
@@ -59,14 +59,14 @@ const NavBrand = () => {
 							break;
 						case breakpoints[currentBreakpoint] > breakpoints.mobile:
 							return (
-								<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+								<div sx={{ width: '35px', marginRight: 3 }}>
 									<LogoDesktop />
 								</div>
 							);
 							break;
 						case breakpoints[currentBreakpoint] <= breakpoints.mobile:
 							return (
-								<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+								<div sx={{ width: '35px', marginRight: 3 }}>
 									<LogoMobile />
 								</div>
 							);

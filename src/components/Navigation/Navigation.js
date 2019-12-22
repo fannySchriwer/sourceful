@@ -31,7 +31,7 @@ const Navigation = () => {
 				width: '100%',
 				boxSizing: 'border-box',
 				paddingX: 3,
-				paddingY: 3,
+				paddingY: 2,
 				alignItems: 'center',
 				display: shouldHideHeader ? 'none' : 'flex',
 				background: shouldShowBackgroundColor
@@ -41,11 +41,7 @@ const Navigation = () => {
 		>
 			<Media>
 				{({ breakpoints, currentBreakpoint }) =>
-					breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
-						<NavigationDesktop />
-					) : (
-						<NavigationMobile />
-					)}
+					breakpoints[currentBreakpoint] > breakpoints.tablet ? <NavigationDesktop /> : <NavigationMobile />}
 			</Media>
 		</nav>
 	);
