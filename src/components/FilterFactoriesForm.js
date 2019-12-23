@@ -26,6 +26,7 @@ const FilterFactoriesForm = () => {
 		datoCmsCategoryFilter,
 		datoCmsSearchSection,
 		datoCmsContinentFilter,
+		datoCmsCertificateFilter,
 		datoCmsProductFilter
 	} = useStaticQuery(
 		graphql`
@@ -46,6 +47,11 @@ const FilterFactoriesForm = () => {
 						productName
 					}
 				}
+				datoCmsCertificateFilter {
+					certificateFilters {
+						certificateName
+					}
+				}
 				datoCmsSearchSection {
 					slug
 					text
@@ -55,17 +61,23 @@ const FilterFactoriesForm = () => {
 	);
 
 	const { slug, text } = datoCmsSearchSection;
+	const certificateNames = [];
+	datoCmsCertificateFilter.certificateFilters.map(({ certificateName }) => {
+		const certificateStatus = { isChecked: false };
+		const certificate = { ...certificateStatus, value: `${certificateName}` };
+		certificateNames.push(certificate);
+	});
 
-	let continents = [];
+	const continents = [];
 	datoCmsContinentFilter.continent.map(({ continentName }) => {
 		continents.push(continentName);
 	});
-	let categories = [];
+	const categories = [];
 	datoCmsCategoryFilter.filters.map(({ title }) => {
 		categories.push(title);
 	});
 
-	let productTypes = [];
+	const productTypes = [];
 	datoCmsProductFilter.productFilter.map(({ productName }) => {
 		productTypes.push(productName);
 	});
@@ -75,15 +87,7 @@ const FilterFactoriesForm = () => {
 		category: '',
 		continent: '',
 		quantity: '0',
-		certification: [
-			{ value: 'Oeko-tex', isChecked: false },
-			{ value: 'BCI', isChecked: false },
-			{ value: 'GORE-TEX', isChecked: false },
-			{ value: 'Blue-sign', isChecked: false },
-			{ value: 'HIGS-index', isChecked: false },
-			{ value: 'RDS', isChecked: false },
-			{ value: 'BSCI', isChecked: false }
-		]
+		certification: certificateNames
 	});
 
 	function handleCheckbox(event) {
@@ -111,15 +115,7 @@ const FilterFactoriesForm = () => {
 			category: '',
 			continent: '',
 			quantity: '0',
-			certification: [
-				{ value: 'Oeko-tex', isChecked: false },
-				{ value: 'BCI', isChecked: false },
-				{ value: 'GORE-TEX', isChecked: false },
-				{ value: 'Blue-sign', isChecked: false },
-				{ value: 'HIGS-index', isChecked: false },
-				{ value: 'RDS', isChecked: false },
-				{ value: 'BSCI', isChecked: false }
-			]
+			certification: certificateNames
 		});
 	}
 
