@@ -26,7 +26,8 @@ const MyFactory = ({ factory }) => {
 		key={factory.id}
 		sx={{
 			boxShadow: 'hover',
-			padding: 4,
+      paddingX: 3,
+      paddingY: 4,
 			maxWidth: '500px'
 		}}
 	>
