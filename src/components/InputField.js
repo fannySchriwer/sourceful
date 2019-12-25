@@ -3,7 +3,7 @@ import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
-const InputField = ({ inputLabel, onChange }) => {
+const InputField = ({ inputLabel, onChange, placeholder }) => {
   return (
     <div
       sx={{
@@ -21,7 +21,7 @@ const InputField = ({ inputLabel, onChange }) => {
         </Styled.h4>
       </label>
 
-      <TextField id="outlined-basic" variant="outlined" onChange={onChange} />
+      <TextField id="outlined-basic" variant="outlined" onChange={onChange} placeholder={placeholder} />
 
     </div>
   )
@@ -30,6 +30,7 @@ const InputField = ({ inputLabel, onChange }) => {
 export default InputField;
 InputField.propTypes = {
 	inputLabel: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
 };
 

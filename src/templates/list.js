@@ -8,7 +8,7 @@ import BackgroundImg from '../components/BackgroundImg';
 import CardContainer from '../components/CardContainer';
 import InputField from '../components/InputField';
 
-const List = ({ data: { user, datoCmsMyListHeader } }) => {
+const List = ({ data: { user, datoCmsMyList } }) => {
 
 	function handleChange(event) {
 		event.preventDefault();
@@ -47,12 +47,13 @@ const List = ({ data: { user, datoCmsMyListHeader } }) => {
 							textAlign: 'center'
 						}}
 					>
-						{datoCmsMyListHeader.title}
+						{datoCmsMyList.title}
 					</Styled.h1>
 					<div sx={{ width: '250px', marginRight:  ['auto', null, 0], marginLeft: ['auto', null, 0] }}>
 						<InputField
-							inputLabel="Search factories"
+							inputLabel={datoCmsMyList.filterTitle}
 							onChange={handleChange}
+							placeholder='Search'
 						/>
 					</div>
 				</div>
@@ -96,8 +97,9 @@ export const pageQuery = graphql`
 				quantity
 			}
 		}
-		datoCmsMyListHeader {
+		datoCmsMyList {
 			title
+			filterTitle
 		}
 	}
 `;
