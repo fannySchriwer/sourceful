@@ -2,43 +2,108 @@
 import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const MyFactory = ({ factory }) => {
+  const categories = Object.keys(factory.category).filter(c => factory.category[c]);
+  
+	const { datoCmsMyList } = useStaticQuery(
+		graphql`
+			query {
+				datoCmsMyList {
+          categoriesTitle
+          linkText
+          minimumQuantityTitle
+          personalCommentTitle
+          productTypeTitle
+        }
+			}
+		`
+  );
+
 	return(
 		<article
 		key={factory.id}
 		sx={{
 			boxShadow: 'hover',
-			paddingX: 3,
-      paddingBottom: 4,
-      paddingTop: 2,
-			marginX: [ null, 3, 4 ],
-			marginY: [ 3, 4 ],
+      paddingX: 3,
+      paddingY: 4,
 			maxWidth: '500px'
 		}}
 	>
       <div>
-        <Styled.h4
-          sx={{ marginBottom: 2 }}
-        >
+        <Styled.h2
+          sx={{ marginBottom: 2 }}>
           {factory.name}
-        </Styled.h4>
+        </Styled.h2>
         <Styled.p
-          sx={{ fontStyle: 'italic' }}
-        >
+          sx={{ fontStyle: 'italic' }}>
           {factory.address.country}
         </Styled.p>
       </div>
-      <Styled.h5
-        sx={{marginBottom: 0, fontWeight: 'heading'}}
-        >
-          Personal comment:
-        </Styled.h5>
-			<Styled.p
-        sx={{ fontStyle: 'italic', paddingBottom: 2, }}
-      >
-				" {factory.comment} "
-			</Styled.p>
+      <div sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        paddingY: 2,
+        minHeight: '170px'
+      }}>
+        <div sx={{
+          width: '100%',
+          paddingY: 1,
+          height: '60px'
+        }}>
+          <Styled.p
+            sx={{marginBottom: 0, fontWeight: 'heading'}}>
+              {datoCmsMyList.minimumQuantityTitle} 
+          </Styled.p>
+          <Styled.p
+            sx={{ fontStyle: 'italic', paddingBottom: 2, }}>
+            {factory.quantity}
+          </Styled.p>
+        </div>
+        <div sx={{
+          width: '45%',
+          paddingRight: 1,
+          height: '100px'
+        }}>
+          <Styled.p
+            sx={{marginBottom: 0, fontWeight: 'heading'}}>
+              {datoCmsMyList.productTypeTitle}  
+          </Styled.p>
+            {factory.producttype.map((type) => (
+            <Styled.p
+              sx={{ fontStyle: 'italic', paddingRight: 1 }}>
+              {type}
+            </Styled.p>
+            ))}
+        </div>
+        <div sx={{
+          width: '45%',
+          paddingRight: 1,
+          height: '100px'
+        }}>
+          <Styled.p
+            sx={{marginBottom: 0, fontWeight: 'heading'}}>
+              {datoCmsMyList.categoriesTitle}  
+            </Styled.p>
+            {categories.map((category) => (
+            <Styled.p
+              sx={{ fontStyle: 'italic' }}>
+              {category}
+            </Styled.p>
+            ))}
+        </div>
+      </div>
+      <div>
+        <Styled.p
+          sx={{marginBottom: 0, fontWeight: 'heading'}}>
+            {datoCmsMyList.personalCommentTitle} 
+        </Styled.p>
+        <Styled.p
+          sx={{ fontStyle: 'italic', paddingBottom: 2, paddingY: 2 }}>
+          {factory.comment}
+        </Styled.p>
+      </div>
 		  <Link
         to={factory.factoryID}
         sx={{
@@ -47,9 +112,8 @@ const MyFactory = ({ factory }) => {
           color: 'primary',
           fontWeight: 'subheading',
           fontFamily: 'body'
-        }}
-      >
-			Read more...
+        }}>
+			{datoCmsMyList.linkText}
 		</Link>
 	</article>
 	)

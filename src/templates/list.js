@@ -5,11 +5,17 @@ import MyFactory from '../components/MyFactory';
 import Layout from '../components/Layout';
 import HeaderContainer from '../components/HeaderContainer';
 import BackgroundImg from '../components/BackgroundImg';
-import Select from '../components/SelectField';
 import CardContainer from '../components/CardContainer';
+import InputField from '../components/InputField';
 
-const List = ({ data: { user } }) => {
-	const productTypes = [ 'Knit', 'Woven', 'Jersey' ];
+const List = ({ data: { user, datoCmsMyList } }) => {
+
+	function handleChange(event) {
+		event.preventDefault();
+		const { value } = event.target;
+		//handle free search here
+	}
+
 	return (
 		<Layout>
 			<HeaderContainer>
@@ -29,7 +35,10 @@ const List = ({ data: { user } }) => {
 						],
 						zIndex: 2,
 						paddingX: [ 3, 5, 6 ],
-						marginTop: [ 3, 6, 6 ]
+						marginTop: [ 3, 6, 6 ],
+						display: ['block', null, 'flex'],
+						flexDirection: 'column',
+						alignItems: 'flex-start',
 					}}
 				>
 					<Styled.h1
@@ -38,15 +47,13 @@ const List = ({ data: { user } }) => {
 							textAlign: 'center'
 						}}
 					>
-						My List
+						{datoCmsMyList.title}
 					</Styled.h1>
-					<div sx={{ width: '250px', marginRight: 'auto', marginLeft: 'auto' }}>
-						<Select
-							options={productTypes}
-							inputLabel="Product type"
-							onChange={'handleChange'}
-							name="productType"
-							defaultValue={'filters.productType'}
+					<div sx={{ width: '250px', marginRight:  ['auto', null, 0], marginLeft: ['auto', null, 0] }}>
+						<InputField
+							inputLabel={datoCmsMyList.filterTitle}
+							onChange={handleChange}
+							placeholder='Search'
 						/>
 					</div>
 				</div>
@@ -54,7 +61,7 @@ const List = ({ data: { user } }) => {
 			<section
 				sx={{
 					paddingX: [ 4, 5, 6 ],
-					marginTop: [ '-300px', '-450px' ]
+					marginTop: [ '-300px', '-170px' ]
 				}}
 			>
 				<CardContainer>
@@ -87,7 +94,12 @@ export const pageQuery = graphql`
 				employee
 				producttype
 				factoryID
+				quantity
 			}
+		}
+		datoCmsMyList {
+			title
+			filterTitle
 		}
 	}
 `;
