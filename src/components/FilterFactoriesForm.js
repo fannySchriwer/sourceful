@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState, useEffect, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import Select from './SelectField';
 import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
