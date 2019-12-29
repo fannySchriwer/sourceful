@@ -21,13 +21,17 @@ const Pagination = ({ factoriesPerPage, totalFactories, paginate }) => {
 							paddingX: 3,
 							margin: 2,
 							listStyle: 'none',
-							backgroundColor: 'secondary'
+							backgroundColor: 'secondary',
+							':hover': {
+								backgroundColor: 'primary',
+								color: 'white'
+							}
 						}}>
 							<a onClick={() => paginate(number)} href="#pagination" sx={{
 								textDecoration: 'none',
 								color: 'black',
 								':hover': {
-									color: 'green'
+									color: 'white'
 								}
 							}}>{number}</a>
 						</li>
