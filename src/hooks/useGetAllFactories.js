@@ -3,16 +3,18 @@ import firebase from '../services/firebase';
 
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
+  const [lastDoc, setLastDoc] = useState(null);
+
   const db = firebase.firestore();
 
   let query = db.collection('factories');
   if (filters.continent) {
     const continent = filters.continent.toLowerCase();
-    query = query.where('continent', '==', `${continent}`);
+    query = query.where('continent', '==', `${continent}`).orderBy('continent', 'asc');
   }
   if (filters.category) {
     const category = filters.category.toLowerCase();
-    query = query.where(`category.${category}`, '==', true);
+    query = query.where(`category.${category}`, '==', true).orderBy('category', 'asc');
   }
   if (filters.productType) {
     const productType = filters.productType.toLowerCase();
@@ -20,11 +22,11 @@ export default function useGetAllFactories(filters) {
       'producttype',
       'array-contains',
       `${productType}`,
-    );
+    ).orderBy('producttype', 'asc');
   }
   if (filters.quantity && filters.quantity !== "0") {
     const quantityFilter = parseInt(filters.quantity, 10);
-    query = query.where('quantity', '>=', quantityFilter);
+    query = query.where('quantity', '>=', quantityFilter).orderBy('quantity', 'asc');
   }
   if (filters.certification) {
     filters.certification.forEach((certificate) => {
@@ -34,20 +36,22 @@ export default function useGetAllFactories(filters) {
           `certificates.${certField}.${certField}`,
           '==',
           true,
-        );
+        ).orderBy('certificates', 'asc');
       }
     });
   }
 
-  useEffect(() => {
+  const filterFactories = () => {
     const unsubscribe = query
+      .limit(12)
       .get()
       .then((querySnapshot) => {
         const newFactories = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
+        const lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+        setLastDoc(lastVisible);
         setFactories(newFactories);
       })
       .catch((error) => {
@@ -57,7 +61,11 @@ export default function useGetAllFactories(filters) {
     // returning the unsubscribe function will ensure that
     // we unsubscribe from document changes when we leave component
     return () => unsubscribe;
+  }
+
+  useEffect(() => {
+    filterFactories();
   }, [filters]);
 
-  return { factories };
+  return { factories, lastDoc };
 }

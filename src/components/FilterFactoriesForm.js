@@ -5,7 +5,6 @@ import Select from './SelectField';
 import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
-import useGetAllFactories from '../hooks/useGetAllFactories';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import FactoryList from './FactoryList';
@@ -119,7 +118,6 @@ const FilterFactoriesForm = () => {
 		});
 	}
 
-	const { factories } = useGetAllFactories(filters);
 	return (
 		<Fragment>
 			<section
@@ -193,7 +191,7 @@ const FilterFactoriesForm = () => {
 					</PrimaryButton>
 				</div>
 			</section>
-			<FactoryList factories={factories} />
+			<FactoryList filters={filters} />
 		</Fragment>
 	);
 };
