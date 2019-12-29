@@ -1,24 +1,28 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 import FactoryListCounter from './FactoryListCounter';
 import CardContainer from './CardContainer';
 import Pagination from './Pagination';
-
 import useGetAllFactories from '../hooks/useGetAllFactories';
 
 const FactoryList = ({ filters }) => {
 	const { factories } = useGetAllFactories(filters);
 	const nrOfFactories = Object.keys(factories).length;
-
 	const [currentPage, setCurrentPage] = useState(1);
 	const factoriesPerPage = 3;
-
+  const nrOfPages = Math.ceil(nrOfFactories / factoriesPerPage);
 	const indexOfLastPost = currentPage * factoriesPerPage;
 	const indexOfFirstPost = indexOfLastPost - factoriesPerPage;
 	const currentFactories = factories.slice(indexOfFirstPost, indexOfLastPost);
+
+	useEffect(() => {
+		if (currentPage > nrOfPages) {
+			setCurrentPage(1);
+		}
+	});
 
 	//Change page
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
