@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 import FactorySummary from './FactorySummary';
 import FactoryListCounter from './FactoryListCounter';
 import CardContainer from './CardContainer';
+import Pagination from './Pagination';
 
-const FactoryList = ({ factories }) => {
+import useGetAllFactories from '../hooks/useGetAllFactories';
+
+const FactoryList = ({ filters }) => {
+	const { factories } = useGetAllFactories(filters);
 	const nrOfFactories = Object.keys(factories).length;
+
 	return (
 		<section
 			sx={{
@@ -18,6 +23,7 @@ const FactoryList = ({ factories }) => {
 			<CardContainer>
 				{factories.map((factory) => <FactorySummary key={factory.id} factory={factory} />)}
 			</CardContainer>
+			<Pagination />
 		</section>
 	);
 };

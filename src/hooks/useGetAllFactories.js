@@ -3,6 +3,8 @@ import firebase from '../services/firebase';
 
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
+  const [lastDoc, setLastDoc] = useState(null);
+
   const db = firebase.firestore();
 
   let query = db.collection('factories');
@@ -39,15 +41,18 @@ export default function useGetAllFactories(filters) {
     });
   }
 
-  useEffect(() => {
+  const filterFactories = () => {
     const unsubscribe = query
+      .orderBy('name', 'asc')
+      .limit(12)
       .get()
       .then((querySnapshot) => {
         const newFactories = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
+        const lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+        setLastDoc(lastVisible);
         setFactories(newFactories);
       })
       .catch((error) => {
@@ -57,7 +62,11 @@ export default function useGetAllFactories(filters) {
     // returning the unsubscribe function will ensure that
     // we unsubscribe from document changes when we leave component
     return () => unsubscribe;
+  }
+
+  useEffect(() => {
+    filterFactories();
   }, [filters]);
 
-  return { factories };
+  return { factories, lastDoc };
 }
