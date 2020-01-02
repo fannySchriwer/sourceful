@@ -1,10 +1,12 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import Select from './SelectField';
 import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
+import useGetAllFactories from '../hooks/useGetAllFactories';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import FactoryList from './FactoryList';
@@ -81,22 +83,22 @@ const FilterFactoriesForm = () => {
 		productTypes.push(productName);
 	});
 
-	const [ filters, setFilters ] = useState({
+	const [ filters, setFilters ] = useLocalStorage('filters', {
 		productType: '',
 		category: '',
 		continent: '',
 		quantity: '0',
-		certification: certificateNames
+		certificates: certificateNames
 	});
 
 	function handleCheckbox(event) {
-		const certifications = filters.certification;
+		const certifications = filters.certificates;
 		certifications.forEach((c) => {
 			if (c.value === event.target.value) {
 				c.isChecked = event.target.checked;
 			}
 		});
-		setFilters({ ...filters, certification: certifications });
+		setFilters({ ...filters, certificates: certifications });
 	}
 
 	function handleChange(event) {
@@ -114,7 +116,7 @@ const FilterFactoriesForm = () => {
 			category: '',
 			continent: '',
 			quantity: '0',
-			certification: certificateNames
+			certificates: certificateNames
 		});
 	}
 
@@ -175,7 +177,7 @@ const FilterFactoriesForm = () => {
 						<CheckboxGroup
 							name="certification"
 							onChange={handleCheckbox}
-							checkBoxStateValues={filters.certification}
+							checkBoxStateValues={filters.certificates}
 						/>
 					</div>
 				</SectionContainer>
