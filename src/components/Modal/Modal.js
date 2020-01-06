@@ -8,18 +8,18 @@ import Login from '../Login';
 import AddComment from '../AddComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
+const Modal = ({ modalOpen, closeModal, isLoaded, factory, children }) => {
 	if (!modalOpen) {
 		return null;
 	}
 
-	function handleSignin() {
-		if (!factory) {
-			closeModal();
-		} else {
-			return;
-		}
-	}
+	// function handleSignin() {
+	// 	if (!factory) {
+	// 		closeModal();
+	// 	} else {
+	// 		return;
+	// 	}
+	// }
 
 	return (
 		<Overlay>
@@ -50,11 +50,12 @@ const Modal = ({ modalOpen, closeModal, isLoaded, factory }) => {
 							}}
 						/>
 					</button>
-					{isLoaded && factory ? (
+					{children}
+					{/* {isLoaded && factory ? (
 						<AddComment closeModal={closeModal} factory={factory} />
 					) : (
 						<Login propFunction={handleSignin} />
-					)}
+					)} */}
 				</DialogBox>
 			</DialogBoxWrapper>
 		</Overlay>

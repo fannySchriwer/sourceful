@@ -9,6 +9,7 @@ import Modal from '../Modal';
 import useModal from '../../hooks/useModal';
 import ModalPortal from '../Modal/ModalPortal';
 import { useAuth } from '../../hooks/useAuth';
+import Login from '../Login';
 
 import { ToggleContext } from '../ToggleContext';
 
@@ -98,7 +99,9 @@ const NavItems = () => {
 				</PrimaryButton>
 			)}
 			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen} isLoaded={loadedUser} />
+				<Modal closeModal={closeModal} modalOpen={modalOpen}>
+					<Login propFunction={closeModal} />
+				</Modal>
 			</ModalPortal>
 		</Fragment>
 	);

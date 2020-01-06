@@ -12,6 +12,8 @@ import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
 import HeaderContainer from '../components/HeaderContainer';
 import Subheading from '../components/Subheading';
+import Login from '../components/Login';
+import AddComment from '../components/AddComment';
 
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
@@ -204,7 +206,13 @@ const Factory = ({ data: { factory } }) => {
 			</section>
 
 			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen} isLoaded={loadedUser} factory={factory} />
+				<Modal closeModal={closeModal} modalOpen={modalOpen}>
+					{loadedUser && factory ? (
+						<AddComment closeModal={closeModal} factory={factory} />
+					) : (
+						<Login propFunction={closeModal} />
+					)}
+				</Modal>
 			</ModalPortal>
 		</Layout>
 	);
