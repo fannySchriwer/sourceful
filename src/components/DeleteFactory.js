@@ -4,7 +4,6 @@ import { useState } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
-import Modal from './Modal';
 
 const DeleteFactory = ({ modalOpen, closeModal, factory }) => {
 	const [ errors, setErrors ] = useState('');
@@ -14,6 +13,7 @@ const DeleteFactory = ({ modalOpen, closeModal, factory }) => {
 	function deleteFactoryFromMyList() {
 		const userId = auth.currentUser.uid;
 		console.log(userId);
+		console.log(factory.id);
 		db
 			.collection('users')
 			.doc(userId)
@@ -30,25 +30,23 @@ const DeleteFactory = ({ modalOpen, closeModal, factory }) => {
 	}
 
 	return (
-		<Modal closeModal={closeModal} modalOpen={modalOpen}>
-			<div>
-				<Styled.h2>{factory.name}</Styled.h2>
-				<Styled.p sx={{ padding: 4 }}>Do you want to delete this factory from your list?</Styled.p>
-				<div sx={{ padding: 3 }}>
-					<PrimaryButton propFunction={closeModal}>Cancel</PrimaryButton>
-					<PrimaryButton propFunction={deleteFactoryFromMyList}>Delete</PrimaryButton>
-				</div>
-				{errors && (
-					<p
-						sx={{
-							color: '#f50057'
-						}}
-					>
-						{String(errors)}
-					</p>
-				)}
+		<div>
+			<Styled.h2>{factory.name}</Styled.h2>
+			<Styled.p sx={{ padding: 4 }}>Do you want to delete this factory from your list?</Styled.p>
+			<div sx={{ padding: 3 }}>
+				<PrimaryButton propFunction={closeModal}>Cancel</PrimaryButton>
+				<PrimaryButton propFunction={deleteFactoryFromMyList}>Delete</PrimaryButton>
 			</div>
-		</Modal>
+			{errors && (
+				<p
+					sx={{
+						color: '#f50057'
+					}}
+				>
+					{String(errors)}
+				</p>
+			)}
+		</div>
 	);
 };
 export default DeleteFactory;

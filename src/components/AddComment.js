@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
@@ -8,6 +8,7 @@ import TextArea from './TextArea';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Fragment } from 'react';
+import { SavedFactoryContext } from './SavedFactoryContext';
 
 const AddComment = ({ factory, closeModal }) => {
 	const [ comment, setComment ] = useState('');
@@ -15,6 +16,7 @@ const AddComment = ({ factory, closeModal }) => {
 	const [ sentMessage, setSentMessage ] = useState(false);
 	const db = firebase.firestore();
 	const auth = useAuth();
+	const { saved, toggleSaveBtn, unsaveFactory } = useContext(SavedFactoryContext);
 
 	const { datoCmsHelperText } = useStaticQuery(
 		graphql`
@@ -57,10 +59,12 @@ const AddComment = ({ factory, closeModal }) => {
 			.then((response) => {
 				if (response.id) {
 					console.log('succesfully added factory to my list');
-					setSentMessage(true);
-					setTimeout(() => {
-						closeModal();
-					}, 1500);
+					closeModal();
+					// setSentMessage(true);
+					// setTimeout(() => {
+					// 	setSentMessage(true);
+					// 	closeModal();
+					// }, 5000);
 				}
 			})
 			.catch((error) => {
@@ -79,7 +83,7 @@ const AddComment = ({ factory, closeModal }) => {
 			<div sx={{ paddingLeft: 5 }}>
 				<FontAwesomeIcon icon="check-circle" sx={{ color: 'primary', fontSize: 6 }} />
 				<Styled.h2>Congratulations</Styled.h2>
-				<Styled.p>Favtory has been added to your list</Styled.p>
+				<Styled.p>Factory has been added to your list</Styled.p>
 			</div>
 		);
 	} else {
@@ -104,25 +108,6 @@ const AddComment = ({ factory, closeModal }) => {
 		);
 	}
 
-	return (
-		<Fragment>
-			{content}
-			{/* <Styled.h2>{factory.name}</Styled.h2>
-			<Styled.p sx={{ padding: 4 }}>{datoCmsHelperText.addComment}</Styled.p>
-			<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" />
-			<div sx={{ padding: 3 }}>
-				<PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
-			</div>
-			{errors && (
-				<p
-					sx={{
-						color: '#f50057'
-					}}
-				>
-					{String(errors)}
-				</p>
-			)} */}
-		</Fragment>
-	);
+	return <Fragment>{content}</Fragment>;
 };
 export default AddComment;

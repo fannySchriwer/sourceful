@@ -24,11 +24,11 @@ const MyFactory = ({ factory }) => {
 		setModalOpen(true);
 	};
 
-	// const onEditFactory = () => {
-	// 	setDeleteFactory(false);
-	// 	setEditFactory(true);
-	// 	setModalOpen(true);
-	// };
+	const onEditFactory = () => {
+		setDeleteFactory(false);
+		setEditFactory(true);
+		setModalOpen(true);
+	};
 
 	const { datoCmsMyList } = useStaticQuery(
 		graphql`
@@ -62,17 +62,13 @@ const MyFactory = ({ factory }) => {
 				{/* <EditButton editFunction={onEditFactory} /> */}
 				<DeleteButton deleteFunction={onDeleteFactory} />
 			</div>
-			{/* {editFactory && <EditFactory modalOpen={modalOpen} closeModal={closeModal} factory={factory} />} */}
-			{deleteFactory && (
-				<ModalPortal>
-					<Modal
-						modalOpen={modalOpen}
-						closeModal={closeModal}
-						factory={factory}
-						deleteFactory={deleteFactory}
-					/>
-				</ModalPortal>
-			)}
+
+			<ModalPortal>
+				<Modal closeModal={closeModal} modalOpen={modalOpen}>
+					{deleteFactory && <DeleteFactory factory={factory} closeModal={closeModal} />}
+					{/* {editFactory && <EditFactory closeModal={closeModal} factory={factory} />} */}
+				</Modal>
+			</ModalPortal>
 			<div>
 				<Styled.h2 sx={{ marginBottom: 2, fontSize: 3 }}>{factory.name}</Styled.h2>
 				<Styled.p sx={{ fontStyle: 'italic' }}>{factory.address.country}</Styled.p>
