@@ -14,7 +14,6 @@ import { useAuth } from '../hooks/useAuth';
 const List = (props) => {
   const { myList } = useMyGetList();
   const auth = useAuth();
-  console.log(props);
 
 	function handleChange(event) {
 		event.preventDefault();
@@ -25,12 +24,10 @@ const List = (props) => {
   useEffect(() => {
     if(auth.currentUser) {
       if(`/${auth.currentUser.uid}` != props.path) {
-        console.log('no match');
         navigate('/');
       }
     } else {
       navigate('/');
-      console.log('no user');
     }
   }, [auth]);
 
