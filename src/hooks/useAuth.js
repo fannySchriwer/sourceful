@@ -44,7 +44,7 @@ function useProviderAuth() {
 				return response.user;
 			})
 			.catch((error) => {
-	      const errorMessage = error.message;
+	      		const errorMessage = error.message;
 				return errorMessage;
 			});
 
@@ -63,7 +63,7 @@ function useProviderAuth() {
 				return response.user;
 			})
 			.catch((error) => {
-	      const errorMessage = error.message;
+	      		const errorMessage = error.message;
 				return errorMessage;
 			});
 
