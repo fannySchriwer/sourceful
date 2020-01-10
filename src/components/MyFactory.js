@@ -9,26 +9,25 @@ import useModal from '../hooks/useModal';
 // import EditButton from './EditButton';
 import DeleteFactory from './DeleteFactory';
 import DeleteButton from './DeleteButton';
-import ModalPortal from './Modal/ModalPortal';
 import Modal from './Modal';
 
 const MyFactory = ({ factory }) => {
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
 	const [ modalOpen, setModalOpen, closeModal ] = useModal();
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
-	const [ editFactory, setEditFactory ] = useState(false);
+	// const [ editFactory, setEditFactory ] = useState(false);
 
 	const onDeleteFactory = () => {
-		setEditFactory(false);
+		// setEditFactory(false);
 		setDeleteFactory(true);
 		setModalOpen(true);
 	};
 
-	const onEditFactory = () => {
-		setDeleteFactory(false);
-		setEditFactory(true);
-		setModalOpen(true);
-	};
+	// const onEditFactory = () => {
+	// 	setDeleteFactory(false);
+	// 	setEditFactory(true);
+	// 	setModalOpen(true);
+	// };
 
 	const { datoCmsMyList } = useStaticQuery(
 		graphql`
@@ -63,12 +62,11 @@ const MyFactory = ({ factory }) => {
 				<DeleteButton deleteFunction={onDeleteFactory} />
 			</div>
 
-			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen}>
-					{deleteFactory && <DeleteFactory factory={factory} closeModal={closeModal} />}
-					{/* {editFactory && <EditFactory closeModal={closeModal} factory={factory} />} */}
-				</Modal>
-			</ModalPortal>
+			<Modal closeModal={closeModal} modalOpen={modalOpen}>
+				{deleteFactory && <DeleteFactory factory={factory} closeModal={closeModal} />}
+				{/* {editFactory && <EditFactory closeModal={closeModal} factory={factory} />} */}
+			</Modal>
+
 			<div>
 				<Styled.h2 sx={{ marginBottom: 2, fontSize: 3 }}>{factory.name}</Styled.h2>
 				<Styled.p sx={{ fontStyle: 'italic' }}>{factory.address.country}</Styled.p>

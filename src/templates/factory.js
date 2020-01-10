@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
 import useModal from '../hooks/useModal';
-import ModalPortal from '../components/Modal/ModalPortal';
+// import ModalPortal from '../components/Modal/ModalPortal';
 import Layout from '../components/Layout';
 import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
@@ -218,14 +218,14 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 			</section>
 
-			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen}>
-					{loadedUser &&
-					saved && <DeleteFactory factory={factory} closeModal={closeModal} modalOpen={modalOpen} />}
-					{loadedUser && !saved && <AddComment factory={factory} closeModal={closeModal} />}
-					{!loadedUser && <Login propFunction={closeModal} />}
-				</Modal>
-			</ModalPortal>
+			{/* <ModalPortal> */}
+			<Modal closeModal={closeModal} modalOpen={modalOpen}>
+				{loadedUser &&
+				saved && <DeleteFactory factory={factory} closeModal={closeModal} modalOpen={modalOpen} />}
+				{loadedUser && !saved && <AddComment factory={factory} closeModal={closeModal} />}
+				{!loadedUser && <Login propFunction={closeModal} />}
+			</Modal>
+			{/* </ModalPortal> */}
 		</Layout>
 	);
 };
