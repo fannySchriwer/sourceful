@@ -5,8 +5,8 @@ import { Link } from 'gatsby';
 import { graphql, useStaticQuery } from 'gatsby';
 import { useState } from 'react';
 import useModal from '../hooks/useModal';
-// import EditFactory from './EditFactory';
-// import EditButton from './EditButton';
+import EditFactory from './EditFactory';
+import EditButton from './EditButton ';
 import DeleteFactory from './DeleteFactory';
 import DeleteButton from './DeleteButton';
 import Modal from './Modal';
@@ -15,19 +15,19 @@ const MyFactory = ({ factory }) => {
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
 	const [ modalOpen, setModalOpen, closeModal ] = useModal();
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
-	// const [ editFactory, setEditFactory ] = useState(false);
+	const [ editFactory, setEditFactory ] = useState(false);
 
 	const onDeleteFactory = () => {
-		// setEditFactory(false);
+		setEditFactory(false);
 		setDeleteFactory(true);
 		setModalOpen(true);
 	};
 
-	// const onEditFactory = () => {
-	// 	setDeleteFactory(false);
-	// 	setEditFactory(true);
-	// 	setModalOpen(true);
-	// };
+	const onEditFactory = () => {
+		setDeleteFactory(false);
+		setEditFactory(true);
+		setModalOpen(true);
+	};
 
 	const { datoCmsMyList } = useStaticQuery(
 		graphql`
@@ -58,13 +58,13 @@ const MyFactory = ({ factory }) => {
 					justifyContent: 'flex-end'
 				}}
 			>
-				{/* <EditButton editFunction={onEditFactory} /> */}
+				<EditButton editFunction={onEditFactory} />
 				<DeleteButton deleteFunction={onDeleteFactory} />
 			</div>
 
 			<Modal closeModal={closeModal} modalOpen={modalOpen}>
 				{deleteFactory && <DeleteFactory factory={factory} closeModal={closeModal} />}
-				{/* {editFactory && <EditFactory closeModal={closeModal} factory={factory} />} */}
+				{editFactory && <EditFactory closeModal={closeModal} factory={factory} />}
 			</Modal>
 
 			<div>

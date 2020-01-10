@@ -33,7 +33,8 @@ const AddComment = ({ factory, closeModal }) => {
 			.collection('users')
 			.doc(auth.currentUser.uid)
 			.collection('myList')
-			.add({
+			.doc(factory.id)
+			.set({
 				comment: comment,
 				name: factory.name,
 				factoryID: factory.id,
@@ -62,14 +63,13 @@ const AddComment = ({ factory, closeModal }) => {
 					closeModal();
 					// setSentMessage(true);
 					// setTimeout(() => {
-					// 	setSentMessage(true);
-					// 	closeModal();
+					//  setSentMessage(true);
+					//  closeModal();
 					// }, 5000);
 				}
 			})
 			.catch((error) => {
 				setErrors(error.message);
-				return errorMessage;
 			});
 	}
 
