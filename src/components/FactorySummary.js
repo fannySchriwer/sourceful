@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 import SummaryCard from './SummaryCard';
+import { Link } from 'gatsby';
 
 const FactorySummary = ({ factory }) => (
 	<SummaryCard key={factory.id}>
@@ -17,8 +17,9 @@ const FactorySummary = ({ factory }) => (
 		</div>
 		<div>
 			<Styled.p sx={{ marginY: 3 }}>{factory.summary}</Styled.p>
-			<Link
-				to={factory.id}
+			<Styled.a
+				as={Link}
+				to={`/${factory.id}`}
 				sx={{
 					fontStyle: 'italic',
 					textDecoration: 'none',
@@ -28,7 +29,7 @@ const FactorySummary = ({ factory }) => (
 				}}
 			>
 				Read more...
-			</Link>
+			</Styled.a>
 		</div>
 	</SummaryCard>
 );

@@ -1,22 +1,28 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
 import useModal from '../hooks/useModal';
-import ModalPortal from '../components/Modal/ModalPortal';
 import Layout from '../components/Layout';
 import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
 import HeaderContainer from '../components/HeaderContainer';
 import Subheading from '../components/Subheading';
+import Login from '../components/Login';
+import AddComment from '../components/AddComment';
+import useGetMyList from '../hooks/useGetMyList';
+import DeleteFactory from '../components/DeleteFactory';
+import { SavedFactoryContext } from '../components/SavedFactoryContext';
 
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
 	const [ modalOpen, setModalOpen, closeModal ] = useModal();
 	const [ loadedUser, setLoadedUser ] = useState(false);
+	const [ saved, setSaved ] = useState(false);
+	// const { saved, toggleSaveBtn, unsaveFactory } = useContext(SavedFactoryContext);
 
 	useEffect(
 		() => {
@@ -26,6 +32,14 @@ const Factory = ({ data: { factory } }) => {
 		},
 		[ auth ]
 	);
+	//Find if this factory is saved in current logged in user's List
+	const { myList } = useGetMyList();
+	if (myList) {
+		const isSaved = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
+		if (saved !== isSaved) setSaved(isSaved);
+		console.log(saved);
+	}
+	console.log('factory is saved', saved);
 
 	const {
 		name,
@@ -129,7 +143,7 @@ const Factory = ({ data: { factory } }) => {
 							justifySelf: [ 'end' ]
 						}}
 					>
-						<LikeButton setModalOpen={setModalOpen} />
+						<LikeButton setModalOpen={setModalOpen} added={saved} />
 					</div>
 					<div
 						sx={{
@@ -203,9 +217,11 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 			</section>
 
-			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen} isLoaded={loadedUser} factory={factory} />
-			</ModalPortal>
+			<Modal closeModal={closeModal} modalOpen={modalOpen}>
+				{loadedUser && saved && <DeleteFactory factory={factory} closeModal={closeModal} />}
+				{loadedUser && !saved && <AddComment factory={factory} closeModal={closeModal} />}
+				{!loadedUser && <Login propFunction={closeModal} />}
+			</Modal>
 		</Layout>
 	);
 };

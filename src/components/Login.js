@@ -9,7 +9,6 @@ import PrimaryButton from './PrimaryButton';
 import { useAuth } from '../hooks/useAuth';
 import { ToggleContext } from './ToggleContext';
 import { graphql, useStaticQuery } from 'gatsby';
-import Signup from './Signup';
 import SignUp from './Signup';
 
 const Login = ({ propFunction }) => {
@@ -104,7 +103,7 @@ const Login = ({ propFunction }) => {
 								autoComplete="current-password"
 								onChange={handleChange}
 							/>
-							<PrimaryButton propFunction={handleSubmit}>Sign In</PrimaryButton>
+							<PrimaryButton propFunction={handleSubmit}>{signInBtnText}</PrimaryButton>
 						</form>
 						{errors && (
 							<p

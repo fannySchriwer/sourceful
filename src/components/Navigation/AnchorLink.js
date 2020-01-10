@@ -5,8 +5,7 @@ import { Link } from 'gatsby';
 
 const AnchorLink = ({ children, href, handleClick }) => (
 	<Styled.a
-		as={Link}
-		to={`#${href}`}
+		href={`#${href}`}
 		aria-label={`Scroll to ${href}`}
 		onClick={handleClick}
 		sx={{

@@ -11,9 +11,9 @@ import useGetAllFactories from '../hooks/useGetAllFactories';
 const FactoryList = ({ filters }) => {
 	const { factories } = useGetAllFactories(filters);
 	const nrOfFactories = Object.keys(factories).length;
-	const [currentPage, setCurrentPage] = useState(1);
+	const [ currentPage, setCurrentPage ] = useState(1);
 	const factoriesPerPage = 3;
-  const nrOfPages = Math.ceil(nrOfFactories / factoriesPerPage);
+	const nrOfPages = Math.ceil(nrOfFactories / factoriesPerPage);
 	const indexOfLastPost = currentPage * factoriesPerPage;
 	const indexOfFirstPost = indexOfLastPost - factoriesPerPage;
 	const currentFactories = factories.slice(indexOfFirstPost, indexOfLastPost);
@@ -47,5 +47,5 @@ const FactoryList = ({ filters }) => {
 
 export default FactoryList;
 FactoryList.propTypes = {
-	filters: PropTypes.instanceOf(Array).isRequired
+	filters: PropTypes.object.isRequired
 };

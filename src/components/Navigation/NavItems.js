@@ -7,8 +7,8 @@ import InternalLink from './InternalLink';
 import PrimaryButton from '../PrimaryButton';
 import Modal from '../Modal';
 import useModal from '../../hooks/useModal';
-import ModalPortal from '../Modal/ModalPortal';
 import { useAuth } from '../../hooks/useAuth';
+import Login from '../Login';
 
 import { ToggleContext } from '../ToggleContext';
 
@@ -97,9 +97,10 @@ const NavItems = () => {
 					{signInBtnText}
 				</PrimaryButton>
 			)}
-			<ModalPortal>
-				<Modal closeModal={closeModal} modalOpen={modalOpen} isLoaded={loadedUser} />
-			</ModalPortal>
+
+			<Modal closeModal={closeModal} modalOpen={modalOpen}>
+				<Login propFunction={closeModal} />
+			</Modal>
 		</Fragment>
 	);
 };
