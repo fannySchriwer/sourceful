@@ -10,7 +10,6 @@ import propTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { ProviderAuth } from './src/hooks/useAuth';
 import ReactBreakpoints from 'react-breakpoints';
-import { SavedFactoryContextProvider } from './src/components/SavedFactoryContext';
 
 library.add(fas, fab, far);
 
@@ -45,9 +44,7 @@ export const wrapRootElement = ({ element }) => {
 				`}
 			/>
 			<ReactBreakpoints breakpoints={breakpoints}>
-				<ProviderAuth>
-					<SavedFactoryContextProvider>{element}</SavedFactoryContextProvider>
-				</ProviderAuth>
+				<ProviderAuth>{element}</ProviderAuth>
 			</ReactBreakpoints>
 		</Fragment>
 	);

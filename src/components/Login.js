@@ -42,7 +42,6 @@ const Login = ({ propFunction }) => {
 	}
 
 	function showSignUpForm() {
-		console.log('whyyyy');
 		setOpenSignUp(true);
 	}
 

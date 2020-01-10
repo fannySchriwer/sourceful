@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
@@ -8,7 +8,6 @@ import TextArea from './TextArea';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Fragment } from 'react';
-import { SavedFactoryContext } from './SavedFactoryContext';
 
 const AddComment = ({ factory, closeModal }) => {
 	const [ comment, setComment ] = useState('');
@@ -16,7 +15,6 @@ const AddComment = ({ factory, closeModal }) => {
 	const [ sentMessage, setSentMessage ] = useState(false);
 	const db = firebase.firestore();
 	const auth = useAuth();
-	const { saved, toggleSaveBtn, unsaveFactory } = useContext(SavedFactoryContext);
 
 	const { datoCmsHelperText } = useStaticQuery(
 		graphql`
@@ -60,12 +58,11 @@ const AddComment = ({ factory, closeModal }) => {
 			.then((response) => {
 				if (response.id) {
 					console.log('succesfully added factory to my list');
-					closeModal();
-					// setSentMessage(true);
-					// setTimeout(() => {
-					//  setSentMessage(true);
-					//  closeModal();
-					// }, 5000);
+					// closeModal();
+					setSentMessage(true);
+					setTimeout(() => {
+						closeModal();
+					}, 5000);
 				}
 			})
 			.catch((error) => {

@@ -12,8 +12,6 @@ const DeleteFactory = ({ closeModal, factory }) => {
 
 	function deleteFactoryFromMyList() {
 		const userId = auth.currentUser.uid;
-		console.log(userId);
-		console.log(factory.id);
 		db
 			.collection('users')
 			.doc(userId)
