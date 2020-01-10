@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 
 const AnchorLink = ({ children, href, handleClick }) => (
 	<Styled.a
