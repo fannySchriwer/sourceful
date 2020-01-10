@@ -4,17 +4,18 @@ import firebase from '../services/firebase';
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
+  console.log(filters);
 
   const db = firebase.firestore();
 
   let query = db.collection('factories');
   if (filters.continent) {
     const continent = filters.continent.toLowerCase();
-    query = query.where('continent', '==', `${continent}`).orderBy('continent', 'asc');
+    query = query.where('continent', '==', `${continent}`);
   }
   if (filters.category) {
     const category = filters.category.toLowerCase();
-    query = query.where(`category.${category}`, '==', true).orderBy('category', 'asc');
+    query = query.where(`category.${category}`, '==', true);
   }
   if (filters.productType) {
     const productType = filters.productType.toLowerCase();
@@ -22,21 +23,21 @@ export default function useGetAllFactories(filters) {
       'producttype',
       'array-contains',
       `${productType}`,
-    ).orderBy('producttype', 'asc');
+    );
   }
   if (filters.quantity && filters.quantity !== "0") {
     const quantityFilter = parseInt(filters.quantity, 10);
-    query = query.where('quantity', '>=', quantityFilter).orderBy('quantity', 'asc');
+    query = query.where('quantity', '>=', quantityFilter);
   }
-  if (filters.certification) {
-    filters.certification.forEach((certificate) => {
+  if (filters.certificates) {
+    filters.certificates.forEach((certificate) => {
       if (certificate.isChecked) {
         const certField = certificate.value.toLowerCase();
         query = query.where(
           `certificates.${certField}.${certField}`,
           '==',
           true,
-        ).orderBy('certificates', 'asc');
+        );
       }
     });
   }
