@@ -113,7 +113,7 @@ const MyFactory = ({ factory }) => {
 					}}
 				>
 					<Styled.p sx={{ marginBottom: 0, fontWeight: 'heading' }}>{datoCmsMyList.categoriesTitle}</Styled.p>
-					{categories.map((category) => <Styled.p sx={{ fontStyle: 'italic' }}>{category}</Styled.p>)}
+					{categories.map((category, index) => <Styled.p key={index} sx={{ fontStyle: 'italic' }}>{category}</Styled.p>)}
 				</div>
 			</div>
 			<div>
@@ -122,8 +122,8 @@ const MyFactory = ({ factory }) => {
 				</Styled.p>
 				<Styled.p sx={{ fontStyle: 'italic', paddingBottom: 2, paddingY: 2 }}>{factory.comment}</Styled.p>
 			</div>
-			<Link
-				to={factory.factoryID}
+			<Styled.a
+				href={`/${factory.factoryID}`}
 				sx={{
 					fontStyle: 'italic',
 					textDecoration: 'none',
@@ -133,7 +133,7 @@ const MyFactory = ({ factory }) => {
 				}}
 			>
 				{datoCmsMyList.linkText}
-			</Link>
+			</Styled.a>
 		</article>
 	);
 };

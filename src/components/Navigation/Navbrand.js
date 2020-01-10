@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { jsx, Styled } from 'theme-ui';
+import { graphql, useStaticQuery } from 'gatsby';
 import { useContext, Fragment } from 'react';
 import LogoDesktop from '../LogoDesktop';
 import LogoMobile from '../LogoMobile';
@@ -23,7 +23,7 @@ const NavBrand = () => {
 	const brandName = companyName.toUpperCase();
 
 	return (
-		<Link
+		<Styled.a
 			onClick={closeNavigation}
 			sx={{
 				display: 'flex',
@@ -31,7 +31,7 @@ const NavBrand = () => {
 				zIndex: 4,
 				textDecoration: 'none'
 			}}
-			to="/"
+			href="/"
 		>
 			<Media>
 				{({ breakpoints, currentBreakpoint }) => {
@@ -76,7 +76,7 @@ const NavBrand = () => {
 					}
 				}}
 			</Media>
-		</Link>
+		</Styled.a>
 	);
 };
 
