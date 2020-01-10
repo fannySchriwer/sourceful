@@ -71,7 +71,7 @@ const Login = ({ propFunction }) => {
 						<Typography component="h1" variant="h5">
 							Sign in
 						</Typography>
-						<Typography component="p" variant="p">
+						<Typography component="p" variant="caption">
 							Log in to access our agenda-setting content. Don't have an account?
 							<span role="button" onClick={showSignUpForm} sx={{ color: 'primary', fontStyle: 'italic' }}>
 								Sign up here
