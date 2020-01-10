@@ -7,15 +7,32 @@ import BackgroundImg from '../components/BackgroundImg';
 import CardContainer from '../components/CardContainer';
 import InputField from '../components/InputField';
 import useMyGetList from '../hooks/useGetMylist';
+import { navigate } from "gatsby";
+import { useEffect } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
-const List = () => {
-	const { myList } = useMyGetList();
+const List = (props) => {
+  const { myList } = useMyGetList();
+  const auth = useAuth();
+  console.log(props);
 
 	function handleChange(event) {
 		event.preventDefault();
 		const { value } = event.target;
 		//handle free search here
-	}
+  }
+  
+  useEffect(() => {
+    if(auth.currentUser) {
+      if(`/${auth.currentUser.uid}` != props.path) {
+        console.log('no match');
+        navigate('/');
+      }
+    } else {
+      navigate('/');
+      console.log('no user');
+    }
+  }, [auth]);
 
 	return (
 		<Layout>
