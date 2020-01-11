@@ -44,7 +44,8 @@ const Factory = ({ data: { factory } }) => {
 		producttype,
 		certificates,
 		continent,
-		quantity
+		quantity,
+		segment
 	} = factory;
 	const { email, website } = contact;
 	const { city, country, postalcode, street } = address;
@@ -58,14 +59,41 @@ const Factory = ({ data: { factory } }) => {
 			))
 		: bsci;
 
+	let rds;
+	certificates.rds
+		? (rds = (
+				<div>
+					<img sx={{ width: '100px' }} src={certificates.rds.logo} alt="RDS logo" />
+				</div>
+			))
+		: rds;
+
+	let oeko;
+	certificates.oeko_tex
+		? (oeko = (
+				<div>
+					<img sx={{ width: '100px' }} src={certificates.oeko_tex.logo} alt="OEKO-TEX" />
+				</div>
+			))
+		: oeko;
+
 	let goretex;
 	certificates.gore_tex
 		? (goretex = (
 				<div>
-					<img sx={{ width: '100px' }} src={certificates.gore_tex.logo} alt="Goretex logo" />
+					<img sx={{ width: '100px' }} src={certificates.gore_tex.logo} alt="GORE-TEX logo" />
 				</div>
 			))
 		: goretex;
+
+	let bluesign;
+	certificates.blue_sign
+		? (bluesign = (
+				<div>
+					<img sx={{ width: '100px' }} src={certificates.blue_sign.logo} alt="Blue Sign" />
+				</div>
+			))
+		: bluesign;
 
 	let web;
 	website ? (web = <Styled.p>{website}</Styled.p>) : web;
@@ -198,6 +226,9 @@ const Factory = ({ data: { factory } }) => {
 				>
 					{bsci}
 					{goretex}
+					{oeko}
+					{rds}
+					{bluesign}
 				</div>
 			</section>
 			<section sx={{ backgroundColor: 'lightGrey', paddingX: [ 3, 5, 6 ], paddingY: 4 }}>
@@ -207,6 +238,16 @@ const Factory = ({ data: { factory } }) => {
 				<Styled.p>
 					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Categories: </span>
 					{categoryJersey} {categoryWoven} {categoryKnit} {categoryGoretex}
+				</Styled.p>
+				<Styled.p>
+					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Product Type: </span>
+					{producttype.map((product) => {
+						return <span>{product}</span>;
+					})}
+				</Styled.p>
+				<Styled.p>
+					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Segment: </span>
+					{segment}
 				</Styled.p>
 			</section>
 
@@ -223,6 +264,10 @@ export default Factory;
 
 Factory.defaultProps = {
 	certificates: PropTypes.shape({
+		oeko_tex: PropTypes.shape({
+			logo: 'https://i.ibb.co/TrDtYLr/BSCI.png',
+			name: ''
+		}),
 		bsci: PropTypes.shape({
 			logo: 'https://i.ibb.co/TrDtYLr/BSCI.png',
 			name: ''
@@ -316,6 +361,16 @@ export const pageQuery = graphql`
 					gore_tex
 					logo
 					name
+				}
+				oeko_tex {
+					logo
+					name
+					oeko_tex
+				}
+				rds {
+					logo
+					name
+					rds
 				}
 			}
 			contact {
