@@ -11,10 +11,8 @@ import PrimaryButton from './PrimaryButton';
 import { ToggleContext } from './ToggleContext';
 import { useAuth } from '../hooks/useAuth';
 
-const SignUp = () => {
+const SignUp = ({ closeNavigation, closeModal }) => {
 	const auth = useAuth();
-	const { closeNavigation } = useContext(ToggleContext);
-	const [ modalOpen, setModalOpen, closeModal ] = useModal();
 	const [ errors, setErrors ] = useState('');
 	const [ signupUser, setSignupUser ] = useState({
 		firstName: '',
@@ -34,14 +32,9 @@ const SignUp = () => {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		auth.signup(signupUser.email, signupUser.password).then((response) => {
-			if (response.uid) {
-				console.log('success, close modal or redirect');
-				closeModal();
-				setTimeout(closeNavigation, 500);
-			} else {
-				setErrors(response);
-			}
+		auth.signup(signupUser.email, signupUser.password).then(() => {
+			closeModal();
+			setTimeout(closeNavigation, 500);
 		});
 	}
 

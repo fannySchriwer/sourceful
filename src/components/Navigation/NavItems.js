@@ -47,7 +47,7 @@ const NavItems = () => {
 	const [ modalOpen, setModalOpen, closeModal ] = useModal();
 	const { closeNavigation } = useContext(ToggleContext);
 	const auth = useAuth();
-	const [ loadedUser, setLoadedUser ] = useState(false);
+  const [ loadedUser, setLoadedUser ] = useState(false);
 
 	function logOut(e) {
 		e.preventDefault();
@@ -99,7 +99,7 @@ const NavItems = () => {
 			)}
 
 			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				<Login propFunction={closeModal} />
+        <Login propFunction={closeModal} />
 			</Modal>
 		</Fragment>
 	);

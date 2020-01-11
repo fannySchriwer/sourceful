@@ -62,7 +62,7 @@ const Login = ({ propFunction }) => {
 	return (
 		<Fragment>
 			{openSignUp ? (
-				<SignUp />
+				<SignUp closeNavigation={closeNavigation} closeModal={propFunction} />
 			) : (
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />
