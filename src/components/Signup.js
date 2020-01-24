@@ -33,9 +33,9 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 	function handleSubmit(event) {
 		event.preventDefault();
 		auth.signup(signupUser.email, signupUser.password).then(() => {
-			closeModal();
 			setTimeout(closeNavigation, 500);
 		});
+		closeModal();
 	}
 
 	return (
