@@ -44,7 +44,7 @@ const NavItems = () => {
 
 	const { navItems } = datoCmsNavigation;
 	const { signInBtnText, signOutBtnText } = datoCmsHelperText;
-	const { modalOpen, setModalOpen, closeModal } = useModal();
+	const { modalOpen, openModal, closeModal } = useModal();
 	const { closeNavigation } = useContext(ToggleContext);
 	const auth = useAuth();
   	const [ loadedUser, setLoadedUser ] = useState(false);
@@ -93,7 +93,7 @@ const NavItems = () => {
 					</PrimaryButton>
 				</Fragment>
 			) : (
-				<PrimaryButton propFunction={setModalOpen} label={signInBtnText}>
+				<PrimaryButton propFunction={openModal} label={signInBtnText}>
 					{signInBtnText}
 				</PrimaryButton>
 			)}

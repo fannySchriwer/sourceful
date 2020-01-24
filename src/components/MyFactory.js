@@ -13,20 +13,20 @@ import Modal from './Modal';
 
 const MyFactory = ({ factory }) => {
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
-	const { modalOpen, setModalOpen, closeModal } = useModal();
+	const { modalOpen, openModal, closeModal } = useModal();
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
 	const [ editFactory, setEditFactory ] = useState(false);
 
 	const onDeleteFactory = () => {
 		setEditFactory(false);
 		setDeleteFactory(true);
-		setModalOpen(true);
+		openModal(true);
 	};
 
 	const onEditFactory = () => {
 		setDeleteFactory(false);
 		setEditFactory(true);
-		setModalOpen(true);
+		openModal(true);
 	};
 
 	const { datoCmsMyList } = useStaticQuery(

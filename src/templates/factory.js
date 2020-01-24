@@ -19,7 +19,7 @@ import DeleteFactory from '../components/DeleteFactory';
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
 	const currentUser = auth.currentUser;
-	const { modalOpen, setModalOpen, closeModal } = useModal();
+	const { modalOpen, openModal, closeModal } = useModal();
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
 
@@ -166,7 +166,7 @@ const Factory = ({ data: { factory } }) => {
 							justifySelf: [ 'end' ]
 						}}
 					>
-						<LikeButton setModalOpen={setModalOpen} added={isSaved && currentUser} />
+						<LikeButton openModal={openModal} added={isSaved && currentUser} />
 					</div>
 					<div
 						sx={{
