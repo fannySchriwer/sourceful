@@ -13,7 +13,7 @@ import Modal from './Modal';
 
 const MyFactory = ({ factory }) => {
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
-	const [ modalOpen, setModalOpen, closeModal ] = useModal();
+	const { modalOpen, setModalOpen, closeModal } = useModal();
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
 	const [ editFactory, setEditFactory ] = useState(false);
 

@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { useEffect } from 'react';
 
 const ModalPortal = ({ children }) => {
 	// React does *not* create a new div. It renders the children into `domNode`.
@@ -6,7 +7,12 @@ const ModalPortal = ({ children }) => {
 
 	const element = document.createElement('div');
 	element.id = 'modal-id';
-	document.body.appendChild(element);
+
+	useEffect(() => {
+		document.body.appendChild(element);
+		//cleans up modal when unmounts
+		return () => document.body.removeChild(element);
+	}, []);
 	return ReactDOM.createPortal(children, element);
 };
 

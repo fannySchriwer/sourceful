@@ -1,14 +1,12 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState, useContext } from 'react';
-import useModal from '../hooks/useModal';
+import { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PrimaryButton from './PrimaryButton';
-import { ToggleContext } from './ToggleContext';
 import { useAuth } from '../hooks/useAuth';
 
 const SignUp = ({ closeNavigation, closeModal }) => {
@@ -33,9 +31,11 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 	function handleSubmit(event) {
 		event.preventDefault();
 		auth.signup(signupUser.email, signupUser.password).then(() => {
+			closeModal();
 			setTimeout(closeNavigation, 500);
+		}).catch((e) => {
+			setErrors(e.message);
 		});
-		closeModal();
 	}
 
 	return (

@@ -12,7 +12,7 @@ const FactoryList = ({ filters }) => {
 	const { factories } = useGetAllFactories(filters);
 	const nrOfFactories = Object.keys(factories).length;
 	const [ currentPage, setCurrentPage ] = useState(1);
-	const factoriesPerPage = 3;
+	const factoriesPerPage = 6;
 	const nrOfPages = Math.ceil(nrOfFactories / factoriesPerPage);
 	const indexOfLastPost = currentPage * factoriesPerPage;
 	const indexOfFirstPost = indexOfLastPost - factoriesPerPage;

@@ -51,7 +51,9 @@ const Login = ({ propFunction }) => {
 		event.preventDefault();
 		auth.signin(loginUser.email, loginUser.password).then((response) => {
 			if (response.uid) {
-				propFunction();
+				if(propFunction) {
+					propFunction();
+				}
 				setTimeout(closeNavigation, 500);
 			} else {
 				setErrors(response);
