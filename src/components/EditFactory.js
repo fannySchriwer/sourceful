@@ -7,10 +7,10 @@ import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
 
 const EditFactory = ({ closeModal, factory }) => {
-    const [ comment, setComment ] = useState(factory.comment);
+	const [ comment, setComment ] = useState(factory.comment);
 	const [ errors, setErrors ] = useState('');
 	const db = firebase.firestore();
-    const auth = useAuth();
+	const auth = useAuth();
     
 	function updateFactory() {
 		const userId = auth.currentUser.uid;
