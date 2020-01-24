@@ -99,7 +99,7 @@ const NavItems = () => {
 			)}
 
 			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-        <Login propFunction={closeModal} />
+				<Login propFunction={closeModal} />
 			</Modal>
 		</Fragment>
 	);
