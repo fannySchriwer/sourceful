@@ -103,7 +103,6 @@ const Factory = ({ data: { factory } }) => {
 	//Check if factory has certain category or return empty string
 	let categoryJersey;
 	category.jersey ? (categoryJersey = <span>Jersey,</span>) : categoryJersey;
-
 	let categoryWoven;
 	category.woven ? (categoryWoven = <span>Woven,</span>) : categoryWoven;
 	let categoryKnit;

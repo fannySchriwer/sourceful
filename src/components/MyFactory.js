@@ -101,8 +101,8 @@ const MyFactory = ({ factory }) => {
 					<Styled.p sx={{ marginBottom: 0, fontWeight: 'heading' }}>
 						{datoCmsMyList.productTypeTitle}
 					</Styled.p>
-					{factory.producttype.map((type) => (
-						<Styled.p sx={{ fontStyle: 'italic', paddingRight: 1 }}>{type}</Styled.p>
+					{factory.producttype.map((type, i) => (
+						<Styled.p key={`${type} ${i}`} sx={{ fontStyle: 'italic', paddingRight: 1 }}>{type}</Styled.p>
 					))}
 				</div>
 				<div
