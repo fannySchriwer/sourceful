@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 
-export default function TextArea({ label, placeholder, onChange }) {
+export default function TextArea({ label, placeholder, onChange, value }) {
 	return (
 		<textarea
 			sx={{
@@ -19,6 +19,7 @@ export default function TextArea({ label, placeholder, onChange }) {
 			label={label}
 			onChange={onChange}
 			placeholder={placeholder}
+			value={value}
 		/>
 	);
 }

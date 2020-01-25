@@ -44,10 +44,10 @@ const NavItems = () => {
 
 	const { navItems } = datoCmsNavigation;
 	const { signInBtnText, signOutBtnText } = datoCmsHelperText;
-	const [ modalOpen, setModalOpen, closeModal ] = useModal();
+	const { modalOpen, openModal, closeModal } = useModal();
 	const { closeNavigation } = useContext(ToggleContext);
 	const auth = useAuth();
-	const [ loadedUser, setLoadedUser ] = useState(false);
+  	const [ loadedUser, setLoadedUser ] = useState(false);
 
 	function logOut(e) {
 		e.preventDefault();
@@ -68,16 +68,16 @@ const NavItems = () => {
 
 	return (
 		<Fragment>
-			{navItems.map((navitem) => {
+			{navItems.map((navitem, i) => {
 				if (navitem.link.slug) {
 					return (
-						<InternalLink key={navitem.link.id} href={navitem.link.slug} handleClick={closeNavigation}>
+						<InternalLink key={`${navitem.link.slug} ${i}`} href={navitem.link.slug} handleClick={closeNavigation}>
 							{navitem.text}
 						</InternalLink>
 					);
 				} else if (navitem.link.anchorPoint) {
 					return (
-						<AnchorLink key={navitem.link.id} href={navitem.link.anchorPoint} handleClick={closeNavigation}>
+						<AnchorLink key={`${navitem.link.anchorpoint} ${i}`} href={navitem.link.anchorPoint} handleClick={closeNavigation}>
 							{navitem.text}
 						</AnchorLink>
 					);
@@ -93,7 +93,7 @@ const NavItems = () => {
 					</PrimaryButton>
 				</Fragment>
 			) : (
-				<PrimaryButton propFunction={setModalOpen} label={signInBtnText}>
+				<PrimaryButton propFunction={openModal} label={signInBtnText}>
 					{signInBtnText}
 				</PrimaryButton>
 			)}

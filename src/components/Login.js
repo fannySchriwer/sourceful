@@ -51,7 +51,9 @@ const Login = ({ propFunction }) => {
 		event.preventDefault();
 		auth.signin(loginUser.email, loginUser.password).then((response) => {
 			if (response.uid) {
-				propFunction();
+				if(propFunction) {
+					propFunction();
+				}
 				setTimeout(closeNavigation, 500);
 			} else {
 				setErrors(response);
@@ -62,7 +64,7 @@ const Login = ({ propFunction }) => {
 	return (
 		<Fragment>
 			{openSignUp ? (
-				<SignUp />
+				<SignUp closeNavigation={closeNavigation} closeModal={propFunction} />
 			) : (
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />

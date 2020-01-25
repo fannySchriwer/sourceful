@@ -53,14 +53,11 @@ function useProviderAuth() {
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then((response) => {
+				setCurrentUser(response.user);
 				return firebase.firestore().collection('users').doc(response.user.uid).set({
 					userId: response.user.uid,
 					email: response.user.email
 				});
-			})
-			.then(() => {
-				setCurrentUser(response.user);
-				return response.user;
 			})
 			.catch((error) => {
 	      		const errorMessage = error.message;

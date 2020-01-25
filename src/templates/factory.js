@@ -18,20 +18,22 @@ import DeleteFactory from '../components/DeleteFactory';
 
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
-	const [ modalOpen, setModalOpen, closeModal ] = useModal();
+	const currentUser = auth.currentUser;
+	const { modalOpen, openModal, closeModal } = useModal();
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
 
 	useEffect(
 		() => {
 			if (myList) {
-				//Find if this factory is saved in current logged in user's List
-				const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
-				console.log('factory is saved', x);
-				setIsSaved(x);
+				if(currentUser) {
+					//Find if this factory is saved in current logged in user's List
+					const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
+					setIsSaved(x);
+				}
 			}
 		},
-		[ myList ]
+		[ myList, currentUser ]
 	);
 
 	const {
@@ -101,7 +103,6 @@ const Factory = ({ data: { factory } }) => {
 	//Check if factory has certain category or return empty string
 	let categoryJersey;
 	category.jersey ? (categoryJersey = <span>Jersey,</span>) : categoryJersey;
-
 	let categoryWoven;
 	category.woven ? (categoryWoven = <span>Woven,</span>) : categoryWoven;
 	let categoryKnit;
@@ -164,7 +165,7 @@ const Factory = ({ data: { factory } }) => {
 							justifySelf: [ 'end' ]
 						}}
 					>
-						<LikeButton setModalOpen={setModalOpen} added={isSaved} />
+						<LikeButton openModal={openModal} added={isSaved && currentUser} />
 					</div>
 					<div
 						sx={{
@@ -241,8 +242,8 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 				<Styled.p>
 					<span sx={{ fontStyle: 'italic', fontWeight: 'normal' }}>Product Type: </span>
-					{producttype.map((product) => {
-						return <span>{product}</span>;
+					{producttype.map((type) => {
+						return <span key={type}>{type}</span>;
 					})}
 				</Styled.p>
 				<Styled.p>
@@ -252,9 +253,9 @@ const Factory = ({ data: { factory } }) => {
 			</section>
 
 			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				{auth.currentUser && isSaved && <DeleteFactory factory={factory} closeModal={closeModal} />}
-				{auth.currentUser && !isSaved && <AddComment factory={factory} closeModal={closeModal} />}
-				{!auth.currentUser && <Login propFunction={closeModal} />}
+				{currentUser && isSaved && <DeleteFactory factory={factory} closeModal={closeModal} />}
+				{currentUser && !isSaved && <AddComment factory={factory} closeModal={closeModal} />}
+				{!currentUser && <Login />}
 			</Modal>
 		</Layout>
 	);

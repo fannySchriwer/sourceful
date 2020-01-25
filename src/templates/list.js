@@ -64,7 +64,7 @@ const List = (props) => {
 						{'title'}
 					</Styled.h1>
 					<div sx={{ width: '250px', marginRight: [ 'auto', null, 0 ], marginLeft: [ 'auto', null, 0 ] }}>
-						<InputField inputLabel={'filterTitle'} onChange={handleChange} placeholder="Search" />
+						<InputField inputLabel={'filterTitle'} onChange={handleChange} placeholderText="Search" />
 					</div>
 				</div>
 			</HeaderContainer>

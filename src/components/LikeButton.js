@@ -2,9 +2,9 @@
 import { jsx } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Fragment } from 'react';
-const LikeButton = ({ setModalOpen, added }) => {
+const LikeButton = ({ openModal, added }) => {
 	return (
-		<button sx={{ background: 'none', border: 'none' }} onClick={setModalOpen}>
+		<button sx={{ background: 'none', border: 'none' }} onClick={openModal}>
 			{added ? (
 				<Fragment>
 					<FontAwesomeIcon

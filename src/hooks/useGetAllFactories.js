@@ -4,7 +4,6 @@ import firebase from '../services/firebase';
 export default function useGetAllFactories(filters) {
   const [factories, setFactories] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
-  console.log(filters);
 
   const db = firebase.firestore();
 
