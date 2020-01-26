@@ -6,11 +6,11 @@ import AnchorLink from './AnchorLink';
 import InternalLink from './InternalLink';
 import PrimaryButton from '../PrimaryButton';
 import Modal from '../Modal';
-import useModal from '../../hooks/useModal';
 import { useAuth } from '../../hooks/useAuth';
 import Login from '../Login';
 
 import { ToggleContext } from '../ToggleContext';
+import { ModalContext } from '../ModalContext';
 
 const NavItems = () => {
 	const { datoCmsNavigation, datoCmsHelperText } = useStaticQuery(
@@ -44,10 +44,10 @@ const NavItems = () => {
 
 	const { navItems } = datoCmsNavigation;
 	const { signInBtnText, signOutBtnText } = datoCmsHelperText;
-	const { modalOpen, openModal, closeModal } = useModal();
+	const { openModal } = useContext(ModalContext);
 	const { closeNavigation } = useContext(ToggleContext);
 	const auth = useAuth();
-  	const [ loadedUser, setLoadedUser ] = useState(false);
+	const [ loadedUser, setLoadedUser ] = useState(false);
 
 	function logOut(e) {
 		e.preventDefault();
@@ -71,13 +71,21 @@ const NavItems = () => {
 			{navItems.map((navitem, i) => {
 				if (navitem.link.slug) {
 					return (
-						<InternalLink key={`${navitem.link.slug} ${i}`} href={navitem.link.slug} handleClick={closeNavigation}>
+						<InternalLink
+							key={`${navitem.link.slug} ${i}`}
+							href={navitem.link.slug}
+							handleClick={closeNavigation}
+						>
 							{navitem.text}
 						</InternalLink>
 					);
 				} else if (navitem.link.anchorPoint) {
 					return (
-						<AnchorLink key={`${navitem.link.anchorpoint} ${i}`} href={navitem.link.anchorPoint} handleClick={closeNavigation}>
+						<AnchorLink
+							key={`${navitem.link.anchorpoint} ${i}`}
+							href={navitem.link.anchorPoint}
+							handleClick={closeNavigation}
+						>
 							{navitem.text}
 						</AnchorLink>
 					);
@@ -98,8 +106,8 @@ const NavItems = () => {
 				</PrimaryButton>
 			)}
 
-			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				<Login propFunction={closeModal} />
+			<Modal>
+				<Login />
 			</Modal>
 		</Fragment>
 	);

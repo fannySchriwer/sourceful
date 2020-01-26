@@ -6,8 +6,13 @@ import DialogBoxWrapper from './DialogBoxWrapper';
 import Overlay from './Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ModalPortal from './ModalPortal';
+import { useContext } from 'react';
+import { ModalContext } from '../ModalContext';
 
-const Modal = ({ modalOpen, closeModal, isLoaded, factory, children }) => {
+const Modal = ({ children }) => {
+	const { modalOpen, closeModal } = useContext(ModalContext);
+	console.log('from modal is modal open', modalOpen);
+
 	if (!modalOpen) {
 		return null;
 	}

@@ -1,10 +1,14 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fragment } from 'react';
-const LikeButton = ({ openModal, added }) => {
+import { useContext, Fragment } from 'react';
+import { ModalContext } from './ModalContext';
+
+const LikeButton = ({ added }) => {
+	const { toggleModal } = useContext(ModalContext);
+
 	return (
-		<button sx={{ background: 'none', border: 'none' }} onClick={openModal}>
+		<button sx={{ background: 'none', border: 'none' }} onClick={toggleModal}>
 			{added ? (
 				<Fragment>
 					<FontAwesomeIcon

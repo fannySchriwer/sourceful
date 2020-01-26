@@ -5,7 +5,6 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
-import useModal from '../hooks/useModal';
 import Layout from '../components/Layout';
 import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
@@ -19,14 +18,13 @@ import DeleteFactory from '../components/DeleteFactory';
 const Factory = ({ data: { factory } }) => {
 	const auth = useAuth();
 	const currentUser = auth.currentUser;
-	const { modalOpen, openModal, closeModal } = useModal();
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
 
 	useEffect(
 		() => {
 			if (myList) {
-				if(currentUser) {
+				if (currentUser) {
 					//Find if this factory is saved in current logged in user's List
 					const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
 					setIsSaved(x);
@@ -165,7 +163,7 @@ const Factory = ({ data: { factory } }) => {
 							justifySelf: [ 'end' ]
 						}}
 					>
-						<LikeButton openModal={openModal} added={isSaved && currentUser} />
+						<LikeButton added={isSaved && currentUser} />
 					</div>
 					<div
 						sx={{
@@ -252,9 +250,9 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 			</section>
 
-			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				{currentUser && isSaved && <DeleteFactory factory={factory} closeModal={closeModal} />}
-				{currentUser && !isSaved && <AddComment factory={factory} closeModal={closeModal} />}
+			<Modal>
+				{currentUser && isSaved && <DeleteFactory factory={factory} />}
+				{currentUser && !isSaved && <AddComment factory={factory} />}
 				{!currentUser && <Login />}
 			</Modal>
 		</Layout>

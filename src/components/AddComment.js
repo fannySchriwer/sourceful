@@ -1,18 +1,19 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState } from 'react';
+import { useState, useContext, Fragment } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fragment } from 'react';
+import { ModalContext } from './ModalContext';
 
-const AddComment = ({ factory, closeModal }) => {
+const AddComment = ({ factory }) => {
 	const [ comment, setComment ] = useState('');
 	const [ errors, setErrors ] = useState('');
-	const [ sentMessage, setSentMessage ] = useState(false);
+	const { modalOpen, closeModal } = useContext(ModalContext);
+
 	const db = firebase.firestore();
 	const auth = useAuth();
 
@@ -56,14 +57,9 @@ const AddComment = ({ factory, closeModal }) => {
 				description: factory.description
 			})
 			.then((response) => {
-				if (response.id) {
-					console.log('succesfully added factory to my list');
-					// closeModal();
-					setSentMessage(true);
-					setTimeout(() => {
-						closeModal();
-					}, 5000);
-				}
+				console.log('succesfully added factory to my list');
+				closeModal();
+				console.log('is modal open from add factory', modalOpen);
 			})
 			.catch((error) => {
 				setErrors(error.message);
@@ -74,17 +70,8 @@ const AddComment = ({ factory, closeModal }) => {
 		setComment(e.target.value);
 	}
 
-	let content;
-	if (sentMessage) {
-		content = (
-			<div sx={{ paddingLeft: 5 }}>
-				<FontAwesomeIcon icon="check-circle" sx={{ color: 'primary', fontSize: 6 }} />
-				<Styled.h2>Congratulations</Styled.h2>
-				<Styled.p>Factory has been added to your list</Styled.p>
-			</div>
-		);
-	} else {
-		content = (
+	return (
+		<Fragment>
 			<div>
 				<Styled.h2>{factory.name}</Styled.h2>
 				<Styled.p sx={{ padding: 4 }}>{datoCmsHelperText.addComment}</Styled.p>
@@ -102,9 +89,7 @@ const AddComment = ({ factory, closeModal }) => {
 					</p>
 				)}
 			</div>
-		);
-	}
-
-	return <Fragment>{content}</Fragment>;
+		</Fragment>
+	);
 };
 export default AddComment;
