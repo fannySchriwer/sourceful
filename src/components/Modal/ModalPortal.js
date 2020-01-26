@@ -8,11 +8,14 @@ const ModalPortal = ({ children }) => {
 	const element = document.createElement('div');
 	element.id = 'modal-id';
 
-	useEffect(() => {
-		document.body.appendChild(element);
-		//cleans up modal when unmounts
-		return () => document.body.removeChild(element);
-	}, []);
+	useEffect(
+		() => {
+			document.body.appendChild(element);
+			//cleans up modal when unmounts
+			return () => document.body.removeChild(element);
+		},
+		[ element ]
+	);
 	return ReactDOM.createPortal(children, element);
 };
 

@@ -3,7 +3,8 @@ export default {
 		lightGrey: '#F2F2F2',
 		text: '#182628',
 		primary: '#005467',
-		secondary: '#B6D6CB'
+		secondary: '#B6D6CB',
+		dark: 'black'
 	},
 	fonts: {
 		body: 'Lato, sans-serif',
