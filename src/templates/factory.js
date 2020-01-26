@@ -42,7 +42,6 @@ const Factory = ({ data: { factory } }) => {
 		category,
 		address,
 		description,
-		employee,
 		producttype,
 		certificates,
 		continent,
@@ -142,7 +141,8 @@ const Factory = ({ data: { factory } }) => {
 								null,
 								'top/outer-start/midle-start/center'
 							],
-							paddingTop: 2
+							paddingTop: 2,
+							fontSize: ['24px', '32px', '32px']
 						}}
 					>
 						{name}
