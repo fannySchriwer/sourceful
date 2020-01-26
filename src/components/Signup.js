@@ -30,12 +30,15 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		auth.signup(signupUser.email, signupUser.password).then(() => {
-			closeModal();
-			setTimeout(closeNavigation, 500);
-		}).catch((e) => {
-			setErrors(e.message);
-		});
+		auth
+			.signup(signupUser.email, signupUser.password)
+			.then(() => {
+				closeModal();
+				setTimeout(closeNavigation, 500);
+			})
+			.catch((e) => {
+				setErrors(e.message);
+			});
 	}
 
 	return (
@@ -52,7 +55,6 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 								color="primary"
 								autoComplete="fname"
 								name="firstName"
-								variant="outlined"
 								required
 								fullWidth
 								id="firstName"
@@ -63,7 +65,6 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								id="lastName"
@@ -75,7 +76,6 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								id="email"
@@ -87,7 +87,6 @@ const SignUp = ({ closeNavigation, closeModal }) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								name="password"
