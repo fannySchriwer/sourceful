@@ -60,7 +60,7 @@ const Factory = ({ data: { factory } }) => {
 	let bsci;
 	certificates.bsci
 		? (bsci = (
-				<div sx={{ paddingRight: '2rem', paddingY: '1rem' }}>
+				<div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.bsci.logo} alt="BSCI logo" />
 				</div>
 			))
@@ -69,7 +69,7 @@ const Factory = ({ data: { factory } }) => {
 	let rds;
 	certificates.rds
 		? (rds = (
-			    <div sx={{ paddingRight: '2rem', paddingY: '1rem' }}>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.rds.logo} alt="RDS logo" />
 				</div>
 			))
@@ -78,7 +78,7 @@ const Factory = ({ data: { factory } }) => {
 	let oeko;
 	certificates.oeko_tex
 		? (oeko = (
-			    <div sx={{ paddingRight: '2rem', paddingY: '1rem' }}>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.oeko_tex.logo} alt="OEKO-TEX" />
 				</div>
 			))
@@ -87,7 +87,7 @@ const Factory = ({ data: { factory } }) => {
 	let goretex;
 	certificates.gore_tex
 		? (goretex = (
-			    <div sx={{ paddingRight: '2rem', paddingY: '1rem' }}>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.gore_tex.logo} alt="GORE-TEX logo" />
 				</div>
 			))
@@ -96,7 +96,7 @@ const Factory = ({ data: { factory } }) => {
 	let bluesign;
 	certificates.blue_sign
 		? (bluesign = (
-			    <div sx={{ paddingRight: '2rem', paddingY: '1rem' }}>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.blue_sign.logo} alt="Blue Sign" />
 				</div>
 			))
