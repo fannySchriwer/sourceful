@@ -28,8 +28,8 @@ const WaveAnimation = () => {
 					position: 'absolute',
 					width: [ '1200px', '1600px' ],
 					height: [ '1000px', '1300px' ],
-					marginLeft: '-450px',
-					marginTop: '-350px',
+					marginLeft: [ '-450px', '-650px' ],
+					marginTop: [ '-350px', '-500px' ],
 					borderRadius: '43%',
 					backgroundColor: 'primary'
 				}}
@@ -39,8 +39,8 @@ const WaveAnimation = () => {
 					position: 'absolute',
 					width: [ '1000px', '1200px' ],
 					height: '900px',
-					marginLeft: '-450px',
-					marginTop: '-350px',
+					marginLeft: [ '-450px', '-650px' ],
+					marginTop: [ '-350px', '-450px' ],
 					borderRadius: '43%',
 					animation: `${rotate} 3000ms infinite linear`,
 					opacity: '.1',
@@ -53,8 +53,8 @@ const WaveAnimation = () => {
 					opacity: '.4',
 					width: [ '1000px', '1200px' ],
 					height: [ '900px', '1200px' ],
-					marginLeft: '-450px',
-					marginTop: '-350px',
+					marginLeft: [ '-450px', '-650px' ],
+					marginTop: [ '-350px', '-450px' ],
 					borderRadius: '43%',
 					animation: `${rotate} 7500ms infinite linear`,
 					backgroundColor: 'secondary'
