@@ -1,11 +1,13 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
+import { ModalContext } from './ModalContext';
 
-const DeleteFactory = ({ closeModal, factory }) => {
+const DeleteFactory = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
+	const { closeModal } = useContext(ModalContext);
 	const [ errors, setErrors ] = useState('');
 	const db = firebase.firestore();
 	const auth = useAuth();
@@ -19,7 +21,8 @@ const DeleteFactory = ({ closeModal, factory }) => {
 			.doc(factory.id)
 			.delete()
 			.then(function() {
-				console.log('Document successfully deleted!');
+				setSnackbarMsg('Document successfully deleted!');
+				setOpenSnackbar(true);
 				closeModal();
 			})
 			.catch(function(error) {

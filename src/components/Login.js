@@ -10,8 +10,9 @@ import { useAuth } from '../hooks/useAuth';
 import { ToggleContext } from './ToggleContext';
 import { graphql, useStaticQuery } from 'gatsby';
 import SignUp from './Signup';
+import { ModalContext } from './ModalContext';
 
-const Login = ({ propFunction }) => {
+const Login = () => {
 	const { datoCmsHelperText } = useStaticQuery(
 		graphql`
 			query {
@@ -25,6 +26,7 @@ const Login = ({ propFunction }) => {
 	const { signInBtnText } = datoCmsHelperText;
 	const auth = useAuth();
 	const { closeNavigation } = useContext(ToggleContext);
+	const { closeModal } = useContext(ModalContext);
 	const [ openSignUp, setOpenSignUp ] = useState(false);
 	const [ errors, setErrors ] = useState('');
 	const [ loginUser, setLoginInfo ] = useState({
@@ -51,9 +53,7 @@ const Login = ({ propFunction }) => {
 		event.preventDefault();
 		auth.signin(loginUser.email, loginUser.password).then((response) => {
 			if (response.uid) {
-				if(propFunction) {
-					propFunction();
-				}
+				closeModal();
 				setTimeout(closeNavigation, 500);
 			} else {
 				setErrors(response);
@@ -64,7 +64,7 @@ const Login = ({ propFunction }) => {
 	return (
 		<Fragment>
 			{openSignUp ? (
-				<SignUp closeNavigation={closeNavigation} closeModal={propFunction} />
+				<SignUp closeNavigation={closeNavigation} closeModal={closeModal} />
 			) : (
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />
@@ -81,7 +81,6 @@ const Login = ({ propFunction }) => {
 
 						<form noValidate>
 							<TextField
-								variant="outlined"
 								margin="normal"
 								required
 								fullWidth
@@ -93,7 +92,6 @@ const Login = ({ propFunction }) => {
 								autoFocus
 							/>
 							<TextField
-								variant="outlined"
 								margin="normal"
 								required
 								fullWidth

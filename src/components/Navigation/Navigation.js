@@ -34,9 +34,7 @@ const Navigation = () => {
 				paddingY: 2,
 				alignItems: 'center',
 				display: shouldHideHeader ? 'none' : 'flex',
-				background: shouldShowBackgroundColor
-					? 'linear-gradient(0deg, rgba(182,214,203,1) 0%, rgba(0,84,103,1) 100%)'
-					: 'transperant'
+				background: shouldShowBackgroundColor ? (theme) => theme.colors.dark : 'transperant'
 			}}
 		>
 			<Media>

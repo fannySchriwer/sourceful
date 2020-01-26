@@ -2,7 +2,6 @@
 import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 import Ripples from 'react-ripples';
-import { Link } from 'gatsby';
 
 const LinkButton = ({ children, href }) => (
 	<div
