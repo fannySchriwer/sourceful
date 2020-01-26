@@ -6,13 +6,12 @@ import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
 import { graphql, useStaticQuery } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ModalContext } from './ModalContext';
 
-const AddComment = ({ factory }) => {
+const AddComment = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
 	const [ comment, setComment ] = useState('');
 	const [ errors, setErrors ] = useState('');
-	const { modalOpen, closeModal } = useContext(ModalContext);
+	const { closeModal } = useContext(ModalContext);
 
 	const db = firebase.firestore();
 	const auth = useAuth();
@@ -57,9 +56,9 @@ const AddComment = ({ factory }) => {
 				description: factory.description
 			})
 			.then((response) => {
-				console.log('succesfully added factory to my list');
+				setSnackbarMsg('succesfully added factory to my list');
+				setOpenSnackbar(true);
 				closeModal();
-				console.log('is modal open from add factory', modalOpen);
 			})
 			.catch((error) => {
 				setErrors(error.message);

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
@@ -14,12 +14,20 @@ import Login from '../components/Login';
 import AddComment from '../components/AddComment';
 import useGetMyList from '../hooks/useGetMyList';
 import DeleteFactory from '../components/DeleteFactory';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 const Factory = ({ data: { factory } }) => {
+	const [ openSnackbar, setOpenSnackbar ] = useState(false);
+	const [ snackbarMsg, setSnackbarMsg ] = useState(false);
 	const auth = useAuth();
 	const currentUser = auth.currentUser;
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
+
+	function handleClose() {
+		setOpenSnackbar(false);
+	}
 
 	useEffect(
 		() => {
@@ -200,7 +208,6 @@ const Factory = ({ data: { factory } }) => {
 							<Styled.p>{street},</Styled.p>
 							<Styled.p> {postalcode},</Styled.p>
 							<Styled.p>
-								{' '}
 								{city}, {country}
 							</Styled.p>
 							<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
@@ -251,10 +258,36 @@ const Factory = ({ data: { factory } }) => {
 			</section>
 
 			<Modal>
-				{currentUser && isSaved && <DeleteFactory factory={factory} />}
-				{currentUser && !isSaved && <AddComment factory={factory} />}
+				{currentUser &&
+				isSaved && (
+					<DeleteFactory
+						factory={factory}
+						setOpenSnackbar={setOpenSnackbar}
+						setSnackbarMsg={setSnackbarMsg}
+					/>
+				)}
+				{currentUser &&
+				!isSaved && (
+					<AddComment factory={factory} setOpenSnackbar={setOpenSnackbar} setSnackbarMsg={setSnackbarMsg} />
+				)}
 				{!currentUser && <Login />}
 			</Modal>
+			<Snackbar
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left'
+				}}
+				open={openSnackbar}
+				autoHideDuration={3000}
+				message={snackbarMsg}
+				action={
+					<Fragment>
+						<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+							x
+						</IconButton>
+					</Fragment>
+				}
+			/>
 		</Layout>
 	);
 };

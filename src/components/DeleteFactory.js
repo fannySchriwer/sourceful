@@ -6,7 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import { ModalContext } from './ModalContext';
 
-const DeleteFactory = ({ factory }) => {
+const DeleteFactory = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
 	const { closeModal } = useContext(ModalContext);
 	const [ errors, setErrors ] = useState('');
 	const db = firebase.firestore();
@@ -21,7 +21,8 @@ const DeleteFactory = ({ factory }) => {
 			.doc(factory.id)
 			.delete()
 			.then(function() {
-				console.log('Document successfully deleted!');
+				setSnackbarMsg('Document successfully deleted!');
+				setOpenSnackbar(true);
 				closeModal();
 			})
 			.catch(function(error) {

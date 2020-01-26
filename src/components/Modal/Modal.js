@@ -11,7 +11,6 @@ import { ModalContext } from '../ModalContext';
 
 const Modal = ({ children }) => {
 	const { modalOpen, closeModal } = useContext(ModalContext);
-	console.log('from modal is modal open', modalOpen);
 
 	if (!modalOpen) {
 		return null;
