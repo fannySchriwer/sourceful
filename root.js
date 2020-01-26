@@ -10,6 +10,7 @@ import propTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { ProviderAuth } from './src/hooks/useAuth';
 import ReactBreakpoints from 'react-breakpoints';
+import { ModalContextProvider } from './src/components/ModalContext';
 
 library.add(fas, fab, far);
 
@@ -44,7 +45,9 @@ export const wrapRootElement = ({ element }) => {
 				`}
 			/>
 			<ReactBreakpoints breakpoints={breakpoints}>
-				<ProviderAuth>{element}</ProviderAuth>
+				<ProviderAuth>
+					<ModalContextProvider>{element}</ModalContextProvider>
+				</ProviderAuth>
 			</ReactBreakpoints>
 		</Fragment>
 	);

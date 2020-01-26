@@ -1,11 +1,10 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
 import Modal from '../components/Modal';
-import useModal from '../hooks/useModal';
 import Layout from '../components/Layout';
 import BackgroundImg from '../components/BackgroundImg';
 import LikeButton from '../components/LikeButton';
@@ -15,18 +14,25 @@ import Login from '../components/Login';
 import AddComment from '../components/AddComment';
 import useGetMyList from '../hooks/useGetMyList';
 import DeleteFactory from '../components/DeleteFactory';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 const Factory = ({ data: { factory } }) => {
+	const [ openSnackbar, setOpenSnackbar ] = useState(false);
+	const [ snackbarMsg, setSnackbarMsg ] = useState(false);
 	const auth = useAuth();
 	const currentUser = auth.currentUser;
-	const { modalOpen, openModal, closeModal } = useModal();
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
+
+	function handleClose() {
+		setOpenSnackbar(false);
+	}
 
 	useEffect(
 		() => {
 			if (myList) {
-				if(currentUser) {
+				if (currentUser) {
 					//Find if this factory is saved in current logged in user's List
 					const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
 					setIsSaved(x);
@@ -165,7 +171,7 @@ const Factory = ({ data: { factory } }) => {
 							justifySelf: [ 'end' ]
 						}}
 					>
-						<LikeButton openModal={openModal} added={isSaved && currentUser} />
+						<LikeButton added={isSaved && currentUser} />
 					</div>
 					<div
 						sx={{
@@ -202,7 +208,6 @@ const Factory = ({ data: { factory } }) => {
 							<Styled.p>{street},</Styled.p>
 							<Styled.p> {postalcode},</Styled.p>
 							<Styled.p>
-								{' '}
 								{city}, {country}
 							</Styled.p>
 							<Styled.p sx={{ textTransform: 'capitalize' }}>{continent}</Styled.p>
@@ -252,11 +257,37 @@ const Factory = ({ data: { factory } }) => {
 				</Styled.p>
 			</section>
 
-			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				{currentUser && isSaved && <DeleteFactory factory={factory} closeModal={closeModal} />}
-				{currentUser && !isSaved && <AddComment factory={factory} closeModal={closeModal} />}
+			<Modal>
+				{currentUser &&
+				isSaved && (
+					<DeleteFactory
+						factory={factory}
+						setOpenSnackbar={setOpenSnackbar}
+						setSnackbarMsg={setSnackbarMsg}
+					/>
+				)}
+				{currentUser &&
+				!isSaved && (
+					<AddComment factory={factory} setOpenSnackbar={setOpenSnackbar} setSnackbarMsg={setSnackbarMsg} />
+				)}
 				{!currentUser && <Login />}
 			</Modal>
+			<Snackbar
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left'
+				}}
+				open={openSnackbar}
+				autoHideDuration={3000}
+				message={snackbarMsg}
+				action={
+					<Fragment>
+						<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+							x
+						</IconButton>
+					</Fragment>
+				}
+			/>
 		</Layout>
 	);
 };
