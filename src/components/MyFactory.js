@@ -1,32 +1,31 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useState } from 'react';
-import useModal from '../hooks/useModal';
+import { useState, useContext } from 'react';
 import EditFactory from './EditFactory';
 import EditButton from './EditButton ';
 import DeleteFactory from './DeleteFactory';
 import DeleteButton from './DeleteButton';
 import Modal from './Modal';
+import { ModalContext } from './ModalContext';
 
 const MyFactory = ({ factory }) => {
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
-	const { modalOpen, openModal, closeModal } = useModal();
+	const { toggleModal, openModal } = useContext(ModalContext);
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
 	const [ editFactory, setEditFactory ] = useState(false);
 
 	const onDeleteFactory = () => {
 		setEditFactory(false);
 		setDeleteFactory(true);
-		openModal(true);
+		openModal();
 	};
 
 	const onEditFactory = () => {
 		setDeleteFactory(false);
 		setEditFactory(true);
-		openModal(true);
+		openModal();
 	};
 
 	const { datoCmsMyList } = useStaticQuery(
@@ -62,9 +61,9 @@ const MyFactory = ({ factory }) => {
 				<DeleteButton deleteFunction={onDeleteFactory} />
 			</div>
 
-			<Modal closeModal={closeModal} modalOpen={modalOpen}>
-				{deleteFactory && <DeleteFactory factory={factory} closeModal={closeModal} />}
-				{editFactory && <EditFactory closeModal={closeModal} factory={factory} />}
+			<Modal>
+				{deleteFactory && <DeleteFactory factory={factory} />}
+				{editFactory && <EditFactory toggleModal={toggleModal} factory={factory} />}
 			</Modal>
 
 			<div>

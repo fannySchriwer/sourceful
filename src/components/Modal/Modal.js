@@ -28,7 +28,7 @@ const Modal = ({ children }) => {
 								top: 0,
 								position: 'absolute',
 								right: 0,
-								padding: 4,
+								padding: 3,
 								borderRadius: 4,
 								cursor: 'pointer'
 							}}
@@ -56,6 +56,4 @@ const Modal = ({ children }) => {
 export default Modal;
 Modal.propTypes = {
 	children: PropTypes.node.isRequired,
-	closeModal: PropTypes.func.isRequired,
-	modalOpen: PropTypes.bool.isRequired
 };

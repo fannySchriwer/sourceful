@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
+import { jsx, Styled } from 'theme-ui';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-import LogoMobile from './LogoMobile'
 
 const Footer = () => {
 	const { datoCmsFooter, datoCmsCompanyInfo } = useStaticQuery(
@@ -29,9 +28,12 @@ const Footer = () => {
     return(
 		<div sx={{
 			display: 'flex',
-			backgroundColor: 'primary',
-			height: '20vh',
-			justifyContent: 'space-around'
+			backgroundColor: 'black',
+			height: ['15vh', '15vh', '20vh'],
+			justifyContent: 'space-between',
+			paddingX: [ 4, 5, 6 ],
+			paddingY: [ 3, 4 ],
+			marginTop: 5
 		}}>
 		<div sx={{ display: 'flex', marginRight: 3, alignItems: 'center', justifyContent: 'center'  }}>
 			<div sx={{
@@ -58,7 +60,9 @@ const Footer = () => {
 			alignItems: 'center',
 			textAlign: 'center'
 		}}>
-			{copyright}
+			<Styled.h4 sx={{ color: 'lightGrey' }}>
+			    {copyright}
+			</Styled.h4>
 		</div>
     </div>);
 };

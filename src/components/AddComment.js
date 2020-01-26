@@ -72,7 +72,7 @@ const AddComment = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
 	return (
 		<Fragment>
 			<div>
-				<Styled.h2>{factory.name}</Styled.h2>
+				<Styled.h2 sx={{ padding: '1rem' }}>{factory.name}</Styled.h2>
 				<Styled.p sx={{ padding: 4 }}>{datoCmsHelperText.addComment}</Styled.p>
 				<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" />
 				<div sx={{ padding: 3 }}>
