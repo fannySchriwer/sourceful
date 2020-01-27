@@ -19,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 const Factory = ({ data: { factory } }) => {
 	const [ openSnackbar, setOpenSnackbar ] = useState(false);
-	const [ snackbarMsg, setSnackbarMsg ] = useState(false);
+	const [ snackbarMsg, setSnackbarMsg ] = useState(null);
 	const auth = useAuth();
 	const currentUser = auth.currentUser;
 	const [ isSaved, setIsSaved ] = useState(false);
@@ -48,7 +48,6 @@ const Factory = ({ data: { factory } }) => {
 		category,
 		address,
 		description,
-		employee,
 		producttype,
 		certificates,
 		continent,
@@ -61,7 +60,7 @@ const Factory = ({ data: { factory } }) => {
 	let bsci;
 	certificates.bsci
 		? (bsci = (
-				<div>
+				<div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.bsci.logo} alt="BSCI logo" />
 				</div>
 			))
@@ -70,7 +69,7 @@ const Factory = ({ data: { factory } }) => {
 	let rds;
 	certificates.rds
 		? (rds = (
-				<div>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.rds.logo} alt="RDS logo" />
 				</div>
 			))
@@ -79,7 +78,7 @@ const Factory = ({ data: { factory } }) => {
 	let oeko;
 	certificates.oeko_tex
 		? (oeko = (
-				<div>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.oeko_tex.logo} alt="OEKO-TEX" />
 				</div>
 			))
@@ -88,7 +87,7 @@ const Factory = ({ data: { factory } }) => {
 	let goretex;
 	certificates.gore_tex
 		? (goretex = (
-				<div>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.gore_tex.logo} alt="GORE-TEX logo" />
 				</div>
 			))
@@ -97,7 +96,7 @@ const Factory = ({ data: { factory } }) => {
 	let bluesign;
 	certificates.blue_sign
 		? (bluesign = (
-				<div>
+			    <div sx={{ paddingRight: 5, paddingY: 4 }}>
 					<img sx={{ width: '100px' }} src={certificates.blue_sign.logo} alt="Blue Sign" />
 				</div>
 			))
@@ -148,7 +147,8 @@ const Factory = ({ data: { factory } }) => {
 								null,
 								'top/outer-start/midle-start/center'
 							],
-							paddingTop: 2
+							paddingTop: 2,
+							fontSize: ['24px', '32px', '32px']
 						}}
 					>
 						{name}
@@ -227,7 +227,10 @@ const Factory = ({ data: { factory } }) => {
 				</article>
 				<div
 					sx={{
-						marginY: 4
+						marginY: 4,
+						display: 'flex',
+						flexDirection: 'row',
+						flexWrap: 'wrap'
 					}}
 				>
 					{bsci}

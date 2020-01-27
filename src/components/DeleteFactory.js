@@ -32,11 +32,15 @@ const DeleteFactory = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
 
 	return (
 		<div>
-			<Styled.h2>{factory.name}</Styled.h2>
+			<Styled.h2 sx={{ padding: 4 }}>{factory.name}</Styled.h2>
 			<Styled.p sx={{ padding: 4 }}>Do you want to delete this factory from your list?</Styled.p>
-			<div sx={{ padding: 3 }}>
-				<PrimaryButton propFunction={closeModal}>Cancel</PrimaryButton>
-				<PrimaryButton propFunction={deleteFactoryFromMyList}>Delete</PrimaryButton>
+			<div sx={{ padding: 3, display: 'flex', justifyContent: 'center' }}>
+				<div sx={{ flex: '1' }}>
+				    <PrimaryButton propFunction={closeModal}>Cancel</PrimaryButton>
+				</div>
+				<div  sx={{ flex: '1' }}>
+				    <PrimaryButton propFunction={deleteFactoryFromMyList}>Delete</PrimaryButton>
+				</div>
 			</div>
 			{errors && (
 				<p

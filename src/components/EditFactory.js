@@ -6,7 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
 
-const EditFactory = ({ closeModal, factory }) => {
+const EditFactory = ({ toggleModal, factory }) => {
 	const [ comment, setComment ] = useState(factory.comment);
 	const [ errors, setErrors ] = useState('');
 	const db = firebase.firestore();
@@ -22,7 +22,7 @@ const EditFactory = ({ closeModal, factory }) => {
 			.update({
 				comment: comment
 			})
-			.then(closeModal())
+			.then(toggleModal())
 			.catch((error) => {
 				setErrors(error.message);
 			});
@@ -40,7 +40,7 @@ const EditFactory = ({ closeModal, factory }) => {
 			</Styled.p>
 			<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" value={comment} />
 			<div sx={{ padding: 3 }}>
-				<PrimaryButton propFunction={closeModal}>Cancel</PrimaryButton>
+				<PrimaryButton propFunction={toggleModal}>Cancel</PrimaryButton>
 				<PrimaryButton propFunction={updateFactory}>Update</PrimaryButton>
 			</div>
 			{errors && (
