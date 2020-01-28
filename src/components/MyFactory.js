@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useContext } from 'react';
 import { ModalContext } from './ModalContext';
 import DeleteFactory from './DeleteFactory';
 import DeleteButton from './DeleteButton';
