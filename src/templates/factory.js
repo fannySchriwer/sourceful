@@ -21,16 +21,17 @@ const Factory = ({ data: { factory } }) => {
 	const [ openSnackbar, setOpenSnackbar ] = useState(false);
 	const [ snackbarMsg, setSnackbarMsg ] = useState(null);
 	const auth = useAuth();
-	const currentUser = auth.currentUser;
+	let currentUser;
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
-
+	
 	function handleClose() {
 		setOpenSnackbar(false);
 	}
-
+	
 	useEffect(
 		() => {
+			currentUser = auth.currentUser;
 			if (myList) {
 				if (currentUser) {
 					//Find if this factory is saved in current logged in user's List
