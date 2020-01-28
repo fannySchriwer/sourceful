@@ -1,34 +1,29 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
+import { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useState, useContext } from 'react';
-import EditFactory from './EditFactory';
-import EditButton from './EditButton ';
+import { useContext } from 'react';
+import { ModalContext } from './ModalContext';
 import DeleteFactory from './DeleteFactory';
 import DeleteButton from './DeleteButton';
 import Modal from './Modal';
-import { ModalContext } from './ModalContext';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 const MyFactory = ({ factory }) => {
+	const [ openSnackbar, setOpenSnackbar ] = useState(false);
+	const [ snackbarMsg, setSnackbarMsg ] = useState(null);
 	const categories = Object.keys(factory.category).filter((c) => factory.category[c]);
-	const { toggleModal, openModal } = useContext(ModalContext);
-	const [ deleteFactory, setDeleteFactory ] = useState(false);
-	const [ editFactory, setEditFactory ] = useState(false);
-	console.log('delete', deleteFactory);
-	console.log('edit', editFactory);
+	const { openModal } = useContext(ModalContext);
 
 	const onDeleteFactory = () => {
-		setEditFactory(false);
-		setDeleteFactory(true);
 		openModal();
 	};
 
-	const onEditFactory = () => {
-		setDeleteFactory(false);
-		setEditFactory(true);
-		openModal();
-	};
+	const handleClose = () => {
+		setOpenSnackbar(false);
+	}
 
 	const { datoCmsMyList } = useStaticQuery(
 		graphql`
@@ -59,13 +54,11 @@ const MyFactory = ({ factory }) => {
 					justifyContent: 'flex-end'
 				}}
 			>
-				<EditButton editFunction={onEditFactory} />
 				<DeleteButton deleteFunction={onDeleteFactory} />
 			</div>
 
 			<Modal>
-				{deleteFactory && <DeleteFactory factory={factory} />}
-				{editFactory && <EditFactory toggleModal={toggleModal} factory={factory} />}
+				<DeleteFactory setOpenSnackbar={setOpenSnackbar} setSnackbarMsg={setSnackbarMsg} factory={factory} />
 			</Modal>
 
 			<div>
@@ -103,7 +96,9 @@ const MyFactory = ({ factory }) => {
 						{datoCmsMyList.productTypeTitle}
 					</Styled.p>
 					{factory.producttype.map((type, i) => (
-						<Styled.p key={`${type} ${i}`} sx={{ fontStyle: 'italic', paddingRight: 1 }}>{type}</Styled.p>
+						<Styled.p key={`${type} ${i}`} sx={{ fontStyle: 'italic', paddingRight: 1 }}>
+							{type}
+						</Styled.p>
 					))}
 				</div>
 				<div
@@ -114,7 +109,11 @@ const MyFactory = ({ factory }) => {
 					}}
 				>
 					<Styled.p sx={{ marginBottom: 0, fontWeight: 'heading' }}>{datoCmsMyList.categoriesTitle}</Styled.p>
-					{categories.map((category, index) => <Styled.p key={index} sx={{ fontStyle: 'italic' }}>{category}</Styled.p>)}
+					{categories.map((category, index) => (
+						<Styled.p key={index} sx={{ fontStyle: 'italic' }}>
+							{category}
+						</Styled.p>
+					))}
 				</div>
 			</div>
 			<div>
@@ -135,6 +134,22 @@ const MyFactory = ({ factory }) => {
 			>
 				{datoCmsMyList.linkText}
 			</Styled.a>
+			<Snackbar
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left'
+				}}
+				open={openSnackbar}
+				autoHideDuration={3000}
+				message={snackbarMsg}
+				action={
+					<Fragment>
+						<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+							x
+						</IconButton>
+					</Fragment>
+				}
+			/>
 		</article>
 	);
 };
