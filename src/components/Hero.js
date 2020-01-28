@@ -50,15 +50,17 @@ const Hero = () => {
 			>
 				<div
 					sx={{
-						paddingX: [ 3, 5, 6 ],
-						paddingTop: [ 1, null, 5 ]
+						paddingX: [ 3, 4, 5 ],
+                        paddingTop: [ 1, null, 5 ],
+						marginTop: [7, 3],
+						maxWidth: [ '100%', '550px', '950px']
 					}}
 				>
 					<Styled.h1 sx={{ maxWidth: '500px' }}>{heroTitle}</Styled.h1>
 					<Styled.h3 sx={{ marginBottom: [ 4, 5 ], marginTop: [ 4, 5 ] }}>{heroText}</Styled.h3>
 					<LinkButton href={datoCmsSearchSection.slug}>{ctaText}</LinkButton>
 				</div>
-				<div sx={{ height: '100%', width: '100%', paddingTop: [ 0, null, 6 ] }}>
+				<div sx={{ height: '100%', width: ['100%', '80%', '100%'], paddingTop: [ 0, null, 6 ] }}>
 					<Img fluid={heroImg.fluid} />
 				</div>
 			</div>

@@ -2,7 +2,6 @@
 import { jsx } from 'theme-ui';
 import PropTypes from 'prop-types';
 import Ripples from 'react-ripples';
-import { Link } from 'gatsby';
 
 const LinkButton = ({ children, href }) => (
 	<div
@@ -22,8 +21,8 @@ const LinkButton = ({ children, href }) => (
 		}}
 	>
 		<Ripples color="#B6D6CB" during={1200}>
-			<Link
-				to={`#${href}`}
+			<a
+				href={`#${href}`}
 				aria-label={`Scroll to ${href}`}
 				sx={{
 					variant: 'buttons.primary',
@@ -31,7 +30,7 @@ const LinkButton = ({ children, href }) => (
 				}}
 			>
 				{children}
-			</Link>
+			</a>
 		</Ripples>
 	</div>
 );

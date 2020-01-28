@@ -34,6 +34,7 @@ module.exports = {
 							quantity: doc.quantity,
 							name: doc.name,
 							producttype: doc.producttype,
+							segment: doc.segment,
 							summary: doc.summary
 						})
 					},
@@ -49,8 +50,14 @@ module.exports = {
 								type: `List`,
 								collection: `myList`,
 								map: (doc) => ({
+									address: doc.address,
+									comment: doc.comment,
+									category: doc.category,
+									employee: doc.employee,
+									quantity: doc.quantity,
 									name: doc.name,
-									comment: doc.comment
+									producttype: doc.producttype,
+									factoryID: doc.factoryID
 								})
 							}
 						]

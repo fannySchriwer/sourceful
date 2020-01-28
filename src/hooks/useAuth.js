@@ -41,13 +41,11 @@ function useProviderAuth() {
 			.signInWithEmailAndPassword(email, password)
 			.then((response) => {
 				setCurrentUser(response.user);
-				console.log(response.user);
 				return response.user;
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorMessage, errorCode);
+	      		const errorMessage = error.message;
+				return errorMessage;
 			});
 
 	const signup = (email, password) =>
@@ -55,21 +53,15 @@ function useProviderAuth() {
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then((response) => {
-				console.log(response.user.uid);
+				setCurrentUser(response.user);
 				return firebase.firestore().collection('users').doc(response.user.uid).set({
 					userId: response.user.uid,
 					email: response.user.email
 				});
 			})
-			.then(() => {
-				console.log('Successfully created new user:', response.user.email);
-				setCurrentUser(response.user);
-				return response.user;
-			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorMessage, errorCode);
+	      		const errorMessage = error.message;
+				return errorMessage;
 			});
 
 	const signout = () =>

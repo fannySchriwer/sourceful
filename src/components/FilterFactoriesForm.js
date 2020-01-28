@@ -1,18 +1,18 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import Select from './SelectField';
 import RadioButtonGroup from './RadioButtonGroup';
 import CheckboxGroup from './CheckboxGroup';
 import PrimaryButton from './PrimaryButton';
 import useGetAllFactories from '../hooks/useGetAllFactories';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import FactoryList from './FactoryList';
 import SectionContainer from './SectionContainer';
 import SectionHeader from './SectionHeader';
 
-const continents = [ 'europe', 'asia' ];
 const minQuantity = [
 	{ value: '0', label: 'None' },
 	{ value: '100', label: '100' },
@@ -23,17 +23,34 @@ const minQuantity = [
 ];
 
 const FilterFactoriesForm = () => {
-	const { datoCmsCategoryFilter, datoCmsProductFilter, datoCmsSearchSection } = useStaticQuery(
+	const {
+		datoCmsCategoryFilter,
+		datoCmsSearchSection,
+		datoCmsContinentFilter,
+		datoCmsCertificateFilter,
+		datoCmsProductFilter
+	} = useStaticQuery(
 		graphql`
 			query {
 				datoCmsCategoryFilter {
 					filters {
-						categoryName
+						title
+					}
+				}
+				datoCmsContinentFilter {
+					continent {
+						id
+						continentName
 					}
 				}
 				datoCmsProductFilter {
-					productFilters {
+					productFilter {
 						productName
+					}
+				}
+				datoCmsCertificateFilter {
+					certificateFilters {
+						certificateName
 					}
 				}
 				datoCmsSearchSection {
@@ -45,41 +62,43 @@ const FilterFactoriesForm = () => {
 	);
 
 	const { slug, text } = datoCmsSearchSection;
-
-	let categories = [];
-	datoCmsCategoryFilter.filters.map(({ categoryName }) => {
-		categories.push(categoryName);
+	const certificateNames = [];
+	datoCmsCertificateFilter.certificateFilters.map(({ certificateName }) => {
+		const certificateStatus = { isChecked: false };
+		const certificate = { ...certificateStatus, value: `${certificateName}` };
+		certificateNames.push(certificate);
 	});
 
-	let productTypes = [];
-	datoCmsProductFilter.productFilters.map(({ productName }) => {
+	const continents = [];
+	datoCmsContinentFilter.continent.map(({ continentName }) => {
+		continents.push(continentName);
+	});
+	const categories = [];
+	datoCmsCategoryFilter.filters.map(({ title }) => {
+		categories.push(title);
+	});
+
+	const productTypes = [];
+	datoCmsProductFilter.productFilter.map(({ productName }) => {
 		productTypes.push(productName);
 	});
 
-	const [ filters, setFilters ] = useState({
+	const [ filters, setFilters ] = useLocalStorage('filters', {
 		productType: '',
 		category: '',
 		continent: '',
 		quantity: '0',
-		certification: [
-			{ value: 'Oeko-tex', isChecked: false },
-			{ value: 'BCI', isChecked: false },
-			{ value: 'Gortex', isChecked: false },
-			{ value: 'Blue-sign', isChecked: false },
-			{ value: 'HIGS-index', isChecked: false },
-			{ value: 'RDS', isChecked: false },
-			{ value: 'BSCI', isChecked: false }
-		]
+		certificates: certificateNames
 	});
 
 	function handleCheckbox(event) {
-		const certifications = filters.certification;
+		const certifications = filters.certificates;
 		certifications.forEach((c) => {
 			if (c.value === event.target.value) {
 				c.isChecked = event.target.checked;
 			}
 		});
-		setFilters({ ...filters, certification: certifications });
+		setFilters({ ...filters, certificates: certifications });
 	}
 
 	function handleChange(event) {
@@ -97,26 +116,18 @@ const FilterFactoriesForm = () => {
 			category: '',
 			continent: '',
 			quantity: '0',
-			certification: [
-				{ value: 'Oeko-tex', isChecked: false },
-				{ value: 'BCI', isChecked: false },
-				{ value: 'Gortex', isChecked: false },
-				{ value: 'Blue-sign', isChecked: false },
-				{ value: 'HIGS-index', isChecked: false },
-				{ value: 'RDS', isChecked: false },
-				{ value: 'BSCI', isChecked: false }
-			]
+			certificates: certificateNames
 		});
 	}
 
-	const { factories } = useGetAllFactories(filters);
 	return (
 		<Fragment>
 			<section
 				id={slug}
 				sx={{
 					backgroundColor: 'lightGrey',
-					paddingY: 4
+					marginTop: 6,
+					paddingY: [ 4, 5 ]
 				}}
 			>
 				<SectionHeader>{text}</SectionHeader>
@@ -166,7 +177,7 @@ const FilterFactoriesForm = () => {
 						<CheckboxGroup
 							name="certification"
 							onChange={handleCheckbox}
-							checkBoxStateValues={filters.certification}
+							checkBoxStateValues={filters.certificates}
 						/>
 					</div>
 				</SectionContainer>
@@ -182,7 +193,7 @@ const FilterFactoriesForm = () => {
 					</PrimaryButton>
 				</div>
 			</section>
-			<FactoryList factories={factories} />
+			<FactoryList filters={filters} />
 		</Fragment>
 	);
 };

@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { jsx, Styled } from 'theme-ui';
+import { graphql, useStaticQuery } from 'gatsby';
 import { useContext, Fragment } from 'react';
 import LogoDesktop from '../LogoDesktop';
 import LogoMobile from '../LogoMobile';
@@ -23,7 +23,7 @@ const NavBrand = () => {
 	const brandName = companyName.toUpperCase();
 
 	return (
-		<Link
+		<Styled.a
 			onClick={closeNavigation}
 			sx={{
 				display: 'flex',
@@ -31,7 +31,7 @@ const NavBrand = () => {
 				zIndex: 4,
 				textDecoration: 'none'
 			}}
-			to="/"
+			href="/"
 		>
 			<Media>
 				{({ breakpoints, currentBreakpoint }) => {
@@ -39,7 +39,7 @@ const NavBrand = () => {
 						case breakpoints[currentBreakpoint] > breakpoints.tabletLandscape:
 							return (
 								<Fragment>
-									<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+									<div sx={{ width: '35px', marginRight: 3 }}>
 										<LogoDesktop />
 									</div>
 									<span
@@ -59,14 +59,14 @@ const NavBrand = () => {
 							break;
 						case breakpoints[currentBreakpoint] > breakpoints.mobile:
 							return (
-								<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+								<div sx={{ width: '35px', marginRight: 3 }}>
 									<LogoDesktop />
 								</div>
 							);
 							break;
 						case breakpoints[currentBreakpoint] <= breakpoints.mobile:
 							return (
-								<div sx={{ width: [ '50px', '60px', '70px' ], marginRight: 3 }}>
+								<div sx={{ width: '35px', marginRight: 3 }}>
 									<LogoMobile />
 								</div>
 							);
@@ -76,7 +76,7 @@ const NavBrand = () => {
 					}
 				}}
 			</Media>
-		</Link>
+		</Styled.a>
 	);
 };
 

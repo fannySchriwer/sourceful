@@ -1,43 +1,94 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx, Styled } from 'theme-ui';
+import { useState, useContext, Fragment } from 'react';
 import firebase from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import PrimaryButton from './PrimaryButton';
 import TextArea from './TextArea';
+import { graphql, useStaticQuery } from 'gatsby';
+import { ModalContext } from './ModalContext';
 
-const AddComment = ({ factory }) => {
+const AddComment = ({ factory, setOpenSnackbar, setSnackbarMsg }) => {
 	const [ comment, setComment ] = useState('');
+	const [ errors, setErrors ] = useState('');
+	const { closeModal } = useContext(ModalContext);
+
 	const db = firebase.firestore();
 	const auth = useAuth();
 
-  function addFactoryToMyList() {
-	  db.collection('users').doc(auth.currentUser.uid).collection('myList').add({
-			comment: comment,
-			name: factory.name,
-		  factoryID: factory.id,
-		  userID: auth.currentUser.uid,
-			employee: factory.employee,
-		  quantity: factory.quantity,
-			producttype: factory.producttype,
-			category: factory.category,
-			country: factory.address.country,
+	const { datoCmsHelperText } = useStaticQuery(
+		graphql`
+			query {
+				datoCmsHelperText {
+					addComment
+				}
+			}
+		`
+	);
 
-	  }).then((response) => {
-		  if(response.id) {
-			  console.log('succesfully added factory to my list');
-		  }
-	  });
-  }
+	function addFactoryToMyList() {
+		db
+			.collection('users')
+			.doc(auth.currentUser.uid)
+			.collection('myList')
+			.doc(factory.id)
+			.set({
+				comment: comment,
+				name: factory.name,
+				factoryID: factory.id,
+				userID: auth.currentUser.uid,
+				employee: factory.employee,
+				quantity: factory.quantity,
+				producttype: factory.producttype,
+				address: {
+					city: factory.address.city,
+					country: factory.address.country,
+					street: factory.address.street,
+					postalcode: factory.address.postalcode
+				},
+				category: factory.category,
+				certificates: factory.certificates,
+				contact: {
+					email: factory.contact.email,
+					website: factory.contact.website
+				},
+				continent: factory.continent,
+				description: factory.description
+			})
+			.then((response) => {
+				setSnackbarMsg('succesfully added factory to my list');
+				setOpenSnackbar(true);
+				closeModal();
+			})
+			.catch((error) => {
+				setErrors(error.message);
+			});
+	}
 
 	function handleChange(e) {
 		setComment(e.target.value);
 	}
+
 	return (
-		<div>
-			<h1>Add factory</h1>
-			<h2>{factory.name}</h2>
-			<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" />
-			<PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
-		</div>
+		<Fragment>
+			<div>
+				<Styled.h2 sx={{ padding: 4 }}>{factory.name}</Styled.h2>
+				<Styled.p sx={{ padding: 4 }}>{datoCmsHelperText.addComment}</Styled.p>
+				<TextArea onChange={handleChange} label="Comment" placeholder="Add your personal comment" />
+				<div sx={{ padding: 3 }}>
+					<PrimaryButton propFunction={addFactoryToMyList}>Add factory</PrimaryButton>
+				</div>
+				{errors && (
+					<p
+						sx={{
+							color: '#f50057'
+						}}
+					>
+						{String(errors)}
+					</p>
+				)}
+			</div>
+		</Fragment>
 	);
 };
 export default AddComment;

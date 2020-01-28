@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -7,8 +9,9 @@ import Container from '@material-ui/core/Container';
 import PrimaryButton from './PrimaryButton';
 import { useAuth } from '../hooks/useAuth';
 
-function SignUp() {
+const SignUp = ({ closeNavigation, closeModal }) => {
 	const auth = useAuth();
+	const [ errors, setErrors ] = useState('');
 	const [ signupUser, setSignupUser ] = useState({
 		firstName: '',
 		lastName: '',
@@ -27,7 +30,15 @@ function SignUp() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		auth.signup(signupUser.email, signupUser.password);
+		auth
+			.signup(signupUser.email, signupUser.password)
+			.then(() => {
+				closeModal();
+				setTimeout(closeNavigation, 500);
+			})
+			.catch((e) => {
+				setErrors(e.message);
+			});
 	}
 
 	return (
@@ -41,9 +52,9 @@ function SignUp() {
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
+								color="primary"
 								autoComplete="fname"
 								name="firstName"
-								variant="outlined"
 								required
 								fullWidth
 								id="firstName"
@@ -54,7 +65,6 @@ function SignUp() {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								id="lastName"
@@ -66,7 +76,6 @@ function SignUp() {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								id="email"
@@ -78,7 +87,6 @@ function SignUp() {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
 								required
 								fullWidth
 								name="password"
@@ -90,11 +98,26 @@ function SignUp() {
 							/>
 						</Grid>
 					</Grid>
-					<PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
+					<div
+						sx={{
+							marginTop: [ 3, 4 ]
+						}}
+					>
+						<PrimaryButton propFunction={handleSubmit}>Sign up</PrimaryButton>
+					</div>
+					{errors && (
+						<p
+							sx={{
+								color: '#f50057'
+							}}
+						>
+							{String(errors)}
+						</p>
+					)}
 				</form>
 			</div>
 		</Container>
 	);
-}
+};
 
 export default SignUp;

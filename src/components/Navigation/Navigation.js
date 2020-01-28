@@ -31,21 +31,15 @@ const Navigation = () => {
 				width: '100%',
 				boxSizing: 'border-box',
 				paddingX: 3,
-				paddingY: 3,
+				paddingY: 2,
 				alignItems: 'center',
 				display: shouldHideHeader ? 'none' : 'flex',
-				background: shouldShowBackgroundColor
-					? 'linear-gradient(0deg, rgba(182,214,203,1) 0%, rgba(0,84,103,1) 100%)'
-					: 'transperant'
+				background: shouldShowBackgroundColor ? (theme) => theme.colors.dark : 'transperant'
 			}}
 		>
 			<Media>
 				{({ breakpoints, currentBreakpoint }) =>
-					breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
-						<NavigationDesktop />
-					) : (
-						<NavigationMobile />
-					)}
+					breakpoints[currentBreakpoint] > breakpoints.tablet ? <NavigationDesktop /> : <NavigationMobile />}
 			</Media>
 		</nav>
 	);

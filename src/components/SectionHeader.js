@@ -13,15 +13,6 @@ const SectionHeader = ({ children }) => (
 		>
 			{children}
 		</Styled.h3>
-		<div
-			sx={{
-				marginX: 'auto',
-				marginTop: 1,
-				width: 4,
-				border: (t) => `2px solid ${t.colors.primary}`,
-				borderRadius: 0
-			}}
-		/>
 	</Fragment>
 );
 
