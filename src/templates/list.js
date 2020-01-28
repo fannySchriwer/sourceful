@@ -7,7 +7,7 @@ import BackgroundImg from '../components/BackgroundImg';
 import CardContainer from '../components/CardContainer';
 import InputField from '../components/InputField';
 import useMyGetList from '../hooks/useGetMylist';
-import { navigate } from "gatsby";
+import { navigate, useStaticQuery, graphql } from "gatsby";
 import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 
@@ -30,6 +30,17 @@ const List = (props) => {
       navigate('/');
     }
   }, [auth]);
+
+  const { datoCmsMyList } = useStaticQuery(
+	graphql`
+		query {
+			datoCmsMyList {
+				filterTitle
+				title
+			}
+		}
+	`
+);
 
 	return (
 		<Layout>
@@ -61,10 +72,10 @@ const List = (props) => {
 							textAlign: 'center'
 						}}
 					>
-						{'title'}
+						{datoCmsMyList.title}
 					</Styled.h1>
 					<div sx={{ width: '250px', marginRight: [ 'auto', null, 0 ], marginLeft: [ 'auto', null, 0 ] }}>
-						<InputField inputLabel={'filterTitle'} onChange={handleChange} placeholderText="Search" />
+						<InputField inputLabel={datoCmsMyList.filterTitle} onChange={handleChange} placeholderText="Search" />
 					</div>
 				</div>
 			</HeaderContainer>
