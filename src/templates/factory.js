@@ -21,7 +21,7 @@ const Factory = ({ data: { factory } }) => {
 	const [ openSnackbar, setOpenSnackbar ] = useState(false);
 	const [ snackbarMsg, setSnackbarMsg ] = useState(null);
 	const auth = useAuth();
-	let currentUser;
+	const currentUser = auth.currentUser;
 	const [ isSaved, setIsSaved ] = useState(false);
 	const { myList } = useGetMyList();
 	
@@ -31,13 +31,10 @@ const Factory = ({ data: { factory } }) => {
 	
 	useEffect(
 		() => {
-			currentUser = auth.currentUser;
 			if (myList) {
-				if (currentUser) {
-					//Find if this factory is saved in current logged in user's List
-					const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
-					setIsSaved(x);
-				}
+				//Find if this factory is saved in current logged in user's List
+				const x = myList.some((savedFactory) => savedFactory.factoryID === factory.id);
+				setIsSaved(x);
 			}
 		},
 		[ myList, currentUser ]
