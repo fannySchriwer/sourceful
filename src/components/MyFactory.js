@@ -15,6 +15,8 @@ const MyFactory = ({ factory }) => {
 	const { toggleModal, openModal } = useContext(ModalContext);
 	const [ deleteFactory, setDeleteFactory ] = useState(false);
 	const [ editFactory, setEditFactory ] = useState(false);
+	console.log('delete', deleteFactory);
+	console.log('edit', editFactory);
 
 	const onDeleteFactory = () => {
 		setEditFactory(false);
